@@ -9,13 +9,15 @@ import {
     SHOW_DELETE_POPUP_TRUCK,
     CREATE_TRUCK,
     SET_ID_SELECTED_TRUCK,
-    UPDATE_LIST_TRUCKS_FILTER
+    UPDATE_LIST_TRUCKS_FILTER,
+    SHOW_POPUP_TRUCKS_FILTER
 } from '../Types';
 
 //cada reducer tiene su state 
 const initialState = {
      EditTruckpopup:false,
      DeleteTruckpopup:false,
+     PopupFilter:false,
      ListTrucks:[],
      ListTrucks2:[],
      idTruckSelected:0
@@ -68,6 +70,11 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 DeleteTruckpopup:true
+            }
+        case SHOW_POPUP_TRUCKS_FILTER:
+            return {
+                ...state,
+                PopupFilter:action.payload
             }
         case CREATE_TRUCK:
             return {

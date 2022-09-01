@@ -5,6 +5,7 @@ import { FaTrashAlt,FaEdit } from 'react-icons/fa';
 import {useDispatch,useSelector} from 'react-redux';
 import EditTruck from '../Trucks/EditTruck';
 import DeleteTruck from '../Trucks/DeleteTruck';
+import FiltersTruck from '../Trucks/FiltersTruck';
 import {ShowEditPopupTruck,GetlistTrucks,ShowDeletePopupTruck,SetIdTruckselected} from '../../actions/TruckActions'
 
 const DataTable = () => {
@@ -133,6 +134,8 @@ const DataTable = () => {
                  currentPage={currentPage}
                  setCurrentPage={setCurrentPage}
                 />
+
+
             </div>
           
         </>

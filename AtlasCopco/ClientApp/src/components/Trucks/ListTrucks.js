@@ -6,9 +6,7 @@ const ListTrucks = () => {
     return (
         <Fragment>
         <div class="container">    
-          <DataTable
-           data={ListTrucks}
-          ></DataTable>
+          <DataTable></DataTable>
         </div>
         </Fragment>
     );

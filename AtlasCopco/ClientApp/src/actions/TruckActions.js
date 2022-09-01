@@ -8,7 +8,8 @@ import {
     SHOW_DELETE_POPUP_TRUCK,
     CREATE_TRUCK,
     SET_ID_SELECTED_TRUCK,
-    UPDATE_LIST_TRUCKS_FILTER
+    UPDATE_LIST_TRUCKS_FILTER,
+    SHOW_POPUP_TRUCKS_FILTER
 } from '../Types';
 
 import TruckService from '../Services/TruckService';
@@ -179,6 +180,17 @@ export function DeleteTrucks(id,currentPage,setCurrentPage,{t}){
      payload:listTrucks
  });
 
+ export function PopupFilterTruck (open){
+    return (dispatch) =>{
+        dispatch(popupFilterTruck(open))
+ 
+    }
+ }
+ 
+ const popupFilterTruck  = open =>({
+     type:SHOW_POPUP_TRUCKS_FILTER,
+     payload:open
+ });
 
 
 
