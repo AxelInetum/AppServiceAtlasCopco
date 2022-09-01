@@ -15,8 +15,8 @@ const Header = ({ headers, onSorting }) => {
     };
 
     return (
-        <thead class="thead-dark ">
-            <tr>
+        <thead class="table-dark">
+            <tr class="fs-3">
                 {headers.map(({ name, field, sortable }) => (
                     <th class="text-center" scope="col"
                         key={name}

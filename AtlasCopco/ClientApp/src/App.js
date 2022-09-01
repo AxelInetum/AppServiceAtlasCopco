@@ -13,6 +13,7 @@ import Navbars from './components/NavBar/NavBars';
 import history from './components/history/history';
 import {Provider} from 'react-redux';
 import store from './store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App(){
     return(
         <Router>  

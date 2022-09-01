@@ -42,15 +42,15 @@ const FiltersTruck= () => {
         <div class="container">
             <div class="row">
                 <div class="col-sx-12 col-sm-3 mb-4">
-                    <Link to={'/CreateTrucks'} className="btn btn-primary bt-lg mb-2 ">{t('CrearCamion')}</Link>    
+                    <Link to={'/CreateTrucks'} className="btn btn-primary bt-lg mb-2 fs-3">{t('CrearCamion')}</Link>    
                 </div>
-                    <div class="col-sx-12 col-sm-3 mb-3 d-flex align-items-start p-0">
+                    <div class="col-sx-12 col-sm-3 mb-3 d-flex justify-content-between p-0">
                         <div class="col-12">
-                            <label class="d-inline">{t('Matricula')}</label>
+                            <label class="d-inline fs-3">{t('Matricula')}</label>
                             <input 
                             type="text" 
                             name="matriculafiltro"
-                            class="form-control" 
+                            class="form-control fs-3" 
                             id="matricula" 
                             placeholder={t('IntroducirMatricula')}
                             value={FiltersTruck.matriculafiltro}
@@ -58,9 +58,9 @@ const FiltersTruck= () => {
                         />
                         </div>	
                         <div class="col-12">
-                            <label>{t('Modelo')}</label>
+                            <label class="d-inline fs-3">{t('Modelo')}</label>
                             <input type="text"
-                            class="form-control" 
+                            class="form-control fs-3" 
                             name="modelofiltro"
                             id="modelo" 
                             placeholder={t('IntroducirModelo')}

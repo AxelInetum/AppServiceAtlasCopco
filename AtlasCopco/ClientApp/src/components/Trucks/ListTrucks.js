@@ -1,6 +1,5 @@
 import React,{Fragment,useEffect} from 'react';
 import DataTable from '../DataTable/DataTable';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ListTrucks = () => {
   debugger;

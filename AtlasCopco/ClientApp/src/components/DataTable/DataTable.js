@@ -96,7 +96,7 @@ const DataTable = () => {
                         />
                         <tbody>
                             {commentsData.map(comment => (
-                            <tr>
+                            <tr class="fs-3">
                                     <td>
                                         {comment.nombre}
                                     </td>
