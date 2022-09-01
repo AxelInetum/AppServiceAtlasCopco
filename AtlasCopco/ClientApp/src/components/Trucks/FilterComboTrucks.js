@@ -60,27 +60,46 @@ const FilterComboTrucks= () => {
             <div class="row">
                   <div class="col-12">
                    <div class="row">
-                        <div class="col-4">  
-                            <p>Filtro</p>
-                            <select onChange={handleChange}>
-                                    {Combovalues.map((option, index) =>
-                                    <option key={index} value={option.value}>
-                                        {option.text}
-                                    </option>
-                                    )}
-                                </select>
+                        <div class="col-4"> 
+                           <div class="row" >
+                                <div class="col-12 filterTextPopupTruckFilter"> 
+                                    <p>Filtro</p>
+                                </div>
+                                <div class="col-12"> 
+                                    <div class="row">
+                                        <div class="col-1"> 
+                                            <a onClick={() => ClosePopupFilter()}>x</a>
+                                        </div>
+                                        <div class="col-10"> 
+                                        <select class="form-select" onChange={handleChange}>
+                                                {Combovalues.map((option, index) =>
+                                                <option key={index} value={option.value}>
+                                                    {option.text}
+                                                </option>
+                                                )}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <label htmlFor="marca">Valor</label>
-                            <input
-                                type="text"
-                                id="marca"
-                                name="marca"
-                                class="form-control"
-                                placeholder={t('IntroducirMarca')}
-                                value={""}
-                                onChange={handleChange}
-                            />
+                        <div class="col-8">
+                            <div class="row" >
+                                <div class="col-12"> 
+                                    <p>Valor</p>
+                                </div>
+                                <div class="col-12"> 
+                                    <input
+                                        type="text"
+                                        id="marca"
+                                        name="marca"
+                                        class="form-control"
+                                        placeholder={t('IntroducirMarca')}
+                                        value={""}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                  </div>                                 
