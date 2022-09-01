@@ -35,8 +35,8 @@ const FilterComboTrucks= () => {
     const modalStyle=
     {
         position:"absolute",
-        top: '10%',
-        left: '30%'       
+        top: '25%',
+        left: '15%'       
     }
 
     const Combovalues = [
@@ -57,28 +57,33 @@ const FilterComboTrucks= () => {
         <ModalHeader ><a class="mover" onClick={() => ClosePopupFilter()}>x</a></ModalHeader>
         <ModalBody>
         <div >
-            <div >
-            <br></br>
-                   <h1>Filtro</h1>
-                   <select onChange={handleChange}>
-                        {Combovalues.map((option, index) =>
-                        <option key={index} value={option.value}>
-                            {option.text}
-                        </option>
-                        )}
-                    </select>
-                    <div className="campo-form">
-                        <label htmlFor="marca">Filtro</label>
-                        <input
-                            type="text"
-                            id="marca"
-                            name="marca"
-                            class="form-control"
-                            placeholder={t('IntroducirMarca')}
-                            value={""}
-                            onChange={handleChange}
-                        />
-                    </div>                                    
+            <div class="row">
+                  <div class="col-12">
+                   <div class="row">
+                        <div class="col-4">  
+                            <p>Filtro</p>
+                            <select onChange={handleChange}>
+                                    {Combovalues.map((option, index) =>
+                                    <option key={index} value={option.value}>
+                                        {option.text}
+                                    </option>
+                                    )}
+                                </select>
+                        </div>
+                        <div class="col-6">
+                            <label htmlFor="marca">Valor</label>
+                            <input
+                                type="text"
+                                id="marca"
+                                name="marca"
+                                class="form-control"
+                                placeholder={t('IntroducirMarca')}
+                                value={""}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                 </div>                                 
             </div>
         </div>
         </ModalBody>
