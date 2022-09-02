@@ -80,6 +80,14 @@ const FilterComboTrucks= () => {
         { text: t('Administrar'), value: "AD" }
     ];
 
+    const CrossPopupFilter = () => 
+    {
+        setFiltersTruck({
+            ...FilterTruck,
+            'valueFilter' : ''
+        }) 
+    }
+
     const ClosePopupFilter=() => 
     {
         dispatch(PopupFilterTruck(false)); 
@@ -90,7 +98,6 @@ const FilterComboTrucks= () => {
         dispatch(PopupFilterTruck(true)); 
     } 
     
-
     return (
         <div class="container">
             <div class="row">
@@ -116,20 +123,20 @@ const FilterComboTrucks= () => {
                                         <div class="col-12"> 
                                             <div class="row">
                                                 <div class="col-1"> 
-                                                    <a onClick={() => ClosePopupFilter()}>x</a>
+                                                    <a onClick={() => CrossPopupFilter()}>x</a>
                                                 </div>
                                                 <div class="col-10"> 
                                                 <select class="form-select" 
-                                                name="valueComboFilterTruck"
-                                                defaultValue={FilterTruck.valueComboFilterTruck}
-                                                id="comboTruckFilter"
-                                                onChange={handleChange}>                                       
-                                                        {Combovalues.map((option, index) =>
-                                                        <option key={index} value={option.value}>
-                                                            {option.text}
-                                                        </option>
-                                                        )}
-                                                    </select>
+                                                    name="valueComboFilterTruck"
+                                                    defaultValue={FilterTruck.valueComboFilterTruck}
+                                                    id="comboTruckFilter"
+                                                    onChange={handleChange}>                                       
+                                                            {Combovalues.map((option, index) =>
+                                                            <option key={index} value={option.value}>
+                                                                {option.text}
+                                                            </option>
+                                                            )}
+                                                </select>
                                                 </div>
                                             </div>
                                         </div> 
