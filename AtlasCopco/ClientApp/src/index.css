@@ -469,3 +469,7 @@ aside  {
 .filterTextPopupTruckFilter{
   margin-left:18px;
 }
+
+.displayinlineblock{
+  display:inline-block;
+}
