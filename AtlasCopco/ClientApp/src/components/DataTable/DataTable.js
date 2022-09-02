@@ -47,42 +47,44 @@ const DataTable = () => {
             
                         </div>
                     </div>
-
+                    <div class="scrolldataTable">
                     <table class="table table-hover table-responsive-sm">
-                    <thead class="thead-dark bg-dark text-white">
-                        <tr >
-                            {headers.map(({ name}) => (
-                                <th key={name}>
-                                    {name}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                            {ListTrucks.map(truck => (
-                            <tr class="fs-3">
-                                    <td>
-                                        {truck.nombre}
-                                    </td>
-                                    <td>
-                                        {truck.marca}
-                                    </td>
-                                    <td>
-                                        {truck.modelo}
-                                    </td>
-                                    <td>
-                                        {truck.matricula}
-                                    </td>
-                                    <td>
+                        <thead class="thead-dark bg-dark text-white">
+                            <tr >
+                                {headers.map(({ name}) => (
+                                    <th key={name}>
+                                        {name}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+             
+                        <tbody>
+                                {ListTrucks.map(truck => (
+                                <tr class="fs-3">
+                                        <td>
+                                            {truck.nombre}
+                                        </td>
+                                        <td>
+                                            {truck.marca}
+                                        </td>
+                                        <td>
+                                            {truck.modelo}
+                                        </td>
+                                        <td>
+                                            {truck.matricula}
+                                        </td>
+                                        <td>
+                                        
+                                            <button class="btn btn-primary mr-1" onClick={() => AbrirModal(truck.id)}><FaEdit /></button>              
+                                            <button class="btn btn-danger mr-1" onClick={() => AbrilModalDelete(truck.id)}><FaTrashAlt /></button>
                                     
-                                        <button class="btn btn-primary mr-1" onClick={() => AbrirModal(truck.id)}><FaEdit /></button>              
-                                        <button class="btn btn-danger mr-1" onClick={() => AbrilModalDelete(truck.id)}><FaTrashAlt /></button>
-                                
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                     </table>
+                </div>   
                 </div>         
                 <EditTruck listTrucks={ListTrucks}/> 
                 <DeleteTruck />

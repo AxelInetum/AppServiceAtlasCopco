@@ -476,6 +476,16 @@ aside  {
 
 .scrolldataTable{
   width:100%;
-  overflow:auto; 
-  max-height:1px;
+  height:300px;
+  overflow-y: scroll;
+}
+
+table,tr,th,td{
+  border:1px solid #dddddd;
+  border-collapse:collapse;
+}
+.tbl-header{
+  width:calc(100% - 17px);
+  width:-webkit-calc(100% - 17px);
+  width:-moz-calc(100% - 17px);
 }
