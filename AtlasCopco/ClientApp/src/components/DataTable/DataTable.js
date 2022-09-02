@@ -1,11 +1,9 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { TableHeader, Pagination } from "../DataTable/index";
+import React, { useEffect} from "react";
 import { useTranslation } from 'react-i18next';
 import { FaTrashAlt,FaEdit } from 'react-icons/fa';
 import {useDispatch,useSelector} from 'react-redux';
 import EditTruck from '../Trucks/EditTruck';
 import DeleteTruck from '../Trucks/DeleteTruck';
-import FiltersTruck from '../Trucks/FiltersTruck';
 import {ShowEditPopupTruck,GetlistTrucks,ShowDeletePopupTruck,SetIdTruckselected} from '../../actions/TruckActions'
 
 const DataTable = () => {
@@ -13,7 +11,7 @@ const DataTable = () => {
     const { t} = useTranslation();
     const dispatch = useDispatch();
     const ListTrucks = useSelector(state => state.TrucksReducers.ListTrucks);
-    const [comments, setComments] = useState([]);
+
 
     const AbrirModal=(id)=> {
         dispatch(ShowEditPopupTruck(true));
@@ -24,15 +22,6 @@ const DataTable = () => {
         dispatch(ShowDeletePopupTruck(true));
         dispatch(SetIdTruckselected(id));
     }
-
-    
-   // const [loader, showLoader, hideLoader] = useFullPageLoader();
-    const [totalItems, setTotalItems] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [search, setSearch] = useState("");
-    const [sorting, setSorting] = useState({ field: "", order: "" });
-
-    const ITEMS_PER_PAGE = 2;
 
     const headers = [
         { name: t('Camiones'), field: t('Camiones'), sortable: true },
@@ -47,35 +36,6 @@ const DataTable = () => {
    },[]);
 
 
-    const commentsData = useMemo(() => {
-        let computedComments = ListTrucks;
-
-        if (search) {
-            computedComments = computedComments.filter(
-                comment =>
-                    comment.name.toLowerCase().includes(search.toLowerCase()) ||
-                    comment.email.toLowerCase().includes(search.toLowerCase())
-            );
-        }
-
-        setTotalItems(computedComments.length);
-
-        //Sorting comments
-        if (sorting.field) {
-            const reversed = sorting.order === "asc" ? 1 : -1;
-            computedComments = computedComments.sort(
-                (a, b) =>
-                    reversed * a[sorting.field].localeCompare(b[sorting.field])
-            );
-        }
-
-        //Current Page slice
-        return computedComments.slice(
-            (currentPage - 1) * ITEMS_PER_PAGE,
-            (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-        );
-    }, [ListTrucks, currentPage, search, sorting]);
-
     return (
         <>
             <div className="row w-100">
@@ -89,53 +49,43 @@ const DataTable = () => {
                     </div>
 
                     <table class="table table-hover table-responsive-sm">
-                        <TableHeader
-                            headers={headers}
-                            onSorting={(field, order) =>
-                                setSorting({ field, order })
-                            }
-                        />
-                        <tbody>
-                            {commentsData.map(comment => (
+                    <thead class="thead-dark bg-dark text-white">
+                        <tr >
+                            {headers.map(({ name}) => (
+                                <th key={name}>
+                                    {name}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {ListTrucks.map(truck => (
                             <tr class="fs-3">
                                     <td>
-                                        {comment.nombre}
+                                        {truck.nombre}
                                     </td>
                                     <td>
-                                        {comment.marca}
+                                        {truck.marca}
                                     </td>
                                     <td>
-                                        {comment.modelo}
+                                        {truck.modelo}
                                     </td>
                                     <td>
-                                        {comment.matricula}
+                                        {truck.matricula}
                                     </td>
                                     <td>
                                     
-                                        <button class="btn btn-primary mr-1" onClick={() => AbrirModal(comment.id)}><FaEdit /></button>              
-                                        <button class="btn btn-danger mr-1" onClick={() => AbrilModalDelete(comment.id)}><FaTrashAlt /></button>
+                                        <button class="btn btn-primary mr-1" onClick={() => AbrirModal(truck.id)}><FaEdit /></button>              
+                                        <button class="btn btn-danger mr-1" onClick={() => AbrilModalDelete(truck.id)}><FaTrashAlt /></button>
                                 
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <div>
-                            <Pagination
-                                total={totalItems}
-                                itemsPerPage={ITEMS_PER_PAGE}
-                                currentPage={currentPage}
-                                onPageChange={page => setCurrentPage(page)}
-                            />
-                    </div>
-                </div>
+                </div>         
                 <EditTruck listTrucks={ListTrucks}/> 
-                <DeleteTruck 
-                 currentPage={currentPage}
-                 setCurrentPage={setCurrentPage}
-                />
-
-
+                <DeleteTruck />
             </div>
           
         </>

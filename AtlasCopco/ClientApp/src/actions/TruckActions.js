@@ -106,16 +106,15 @@ const editTruck = TruckSelected =>({
     payload:TruckSelected
 });
 
-export function DeleteTrucks(id,currentPage,setCurrentPage,{t}){
+export function DeleteTrucks(id,{t}){
     debugger;
     return async (dispatch) =>{   
         debugger;   
          const p = Promise.resolve( new TruckService().deleteTruck(id));
          p.then(response => {
              if (response)
-             {
+             {    
                  dispatch(deleteTruck(id));
-                 setCurrentPage(currentPage-1);
                  Alert(t('eliminadocorrectamente'),'El registro ha sido eliminado con exito.','success'); 
              }
              else{

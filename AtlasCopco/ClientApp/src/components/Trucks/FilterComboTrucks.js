@@ -39,7 +39,7 @@ const FilterComboTrucks= () => {
     const SwitchFilterTrucks=(FilterTruck,ListTrucksInit) => 
     {
         const ListTrucks = ListTrucksInit;
-
+debugger;
         if (FilterTruck.valueFilter !="")
         {
             switch (FilterTruck.valueComboFilterTruck) {

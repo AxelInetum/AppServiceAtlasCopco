@@ -2,8 +2,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import {DeleteTrucks,HiddenDeletePopupTruck} from '../../actions/TruckActions';
 import {Button,ModalHeader,Modal,ModalBody,ModalFooter,FormGroup,Input,Label} from 'reactstrap';
 import { useTranslation } from 'react-i18next';
-const DeleteTruck = ({currentPage, setCurrentPage}) => {
-
+const DeleteTruck = () => {
     const stateDeletePopup = useSelector(state => state.TrucksReducers.DeleteTruckpopup);
     const idTrucksDeleted = useSelector(state => state.TrucksReducers.idTruckSelected);
     const { t} = useTranslation();
@@ -20,7 +19,8 @@ const DeleteTruck = ({currentPage, setCurrentPage}) => {
     }
     async function Delete()
     {
-        dispatch(DeleteTrucks(idTrucksDeleted,currentPage,setCurrentPage,{t}));                 
+        debugger;
+        dispatch(DeleteTrucks(idTrucksDeleted,{t}));                 
     }
     return (
         <Modal isOpen={stateDeletePopup} fade={false} style={modalStyle}>

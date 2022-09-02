@@ -473,3 +473,9 @@ aside  {
 .displayinlineblock{
   display:inline-block;
 }
+
+.scrolldataTable{
+  width:100%;
+  overflow:auto; 
+  max-height:1px;
+}
