@@ -84,65 +84,85 @@ const FilterComboTrucks= () => {
     {
         dispatch(PopupFilterTruck(false)); 
     }
+
+    const OpenPopupFilter=() => 
+    {
+        dispatch(PopupFilterTruck(true)); 
+    } 
     
+
     return (
-        <Modal isOpen={showFilterTruckpopup} fade={false} style={modalStyle}>
-        <ModalHeader ><a class="mover" onClick={() => ClosePopupFilter()}>x</a></ModalHeader>
-        <ModalBody>
-        <div >
+        <div class="container">
             <div class="row">
-                  <div class="col-12">
-                   <div class="row">
-                        <div class="col-4"> 
-                           <div class="row" >
-                                <div class="col-12 filterTextPopupTruckFilter"> 
-                                    <p>Filtro</p>
-                                </div>
-                                <div class="col-12"> 
-                                    <div class="row">
-                                        <div class="col-1"> 
-                                            <a onClick={() => ClosePopupFilter()}>x</a>
+                    <div class="col-sx-12 col-sm-3 mb-4">
+                        <Link to={'/CreateTrucks'} className="btn btn-primary bt-lg mb-2 fs-3">{t('CrearCamion')}</Link>    
+                    </div>
+                    <div class="col-sx-12 col-sm-3 mb-4">
+                        <button class="btn btn-primary mr-1" onClick={() => OpenPopupFilter()}>hola</button> 
+                    <div>
+        
+                <Modal isOpen={showFilterTruckpopup} fade={false} style={modalStyle}>
+                <ModalHeader ><a class="mover" onClick={() => ClosePopupFilter()}>x</a></ModalHeader>
+                <ModalBody>
+                <div >
+                    <div class="row">
+                        <div class="col-12">
+                        <div class="row">
+                                <div class="col-4"> 
+                                <div class="row" >
+                                        <div class="col-12 filterTextPopupTruckFilter"> 
+                                            <p>Filtro</p>
                                         </div>
-                                        <div class="col-10"> 
-                                        <select class="form-select" 
-                                        name="valueComboFilterTruck"
-                                        id="comboTruckFilter"
-                                        onChange={handleChange}>                                       
-                                                {Combovalues.map((option, index) =>
-                                                <option key={index} value={option.value}>
-                                                    {option.text}
-                                                </option>
-                                                )}
-                                            </select>
+                                        <div class="col-12"> 
+                                            <div class="row">
+                                                <div class="col-1"> 
+                                                    <a onClick={() => ClosePopupFilter()}>x</a>
+                                                </div>
+                                                <div class="col-10"> 
+                                                <select class="form-select" 
+                                                name="valueComboFilterTruck"
+                                                defaultValue={FilterTruck.valueComboFilterTruck}
+                                                id="comboTruckFilter"
+                                                onChange={handleChange}>                                       
+                                                        {Combovalues.map((option, index) =>
+                                                        <option key={index} value={option.value}>
+                                                            {option.text}
+                                                        </option>
+                                                        )}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="row" >
+                                        <div class="col-12"> 
+                                            <p>Valor</p>
+                                        </div>
+                                        <div class="col-12"> 
+                                            <input
+                                                type="text"
+                                                id="valueFilter"
+                                                name="valueFilter"
+                                                class="form-control"
+                                                placeholder={t('IntroducirMarca')}
+                                                value={FilterTruck == undefined ? "" : FilterTruck.valueFilter}
+                                                onChange={handleChange}
+                                            />
                                         </div>
                                     </div>
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="col-8">
-                            <div class="row" >
-                                <div class="col-12"> 
-                                    <p>Valor</p>
-                                </div>
-                                <div class="col-12"> 
-                                    <input
-                                        type="text"
-                                        id="valueFilter"
-                                        name="valueFilter"
-                                        class="form-control"
-                                        placeholder={t('IntroducirMarca')}
-                                        value={FilterTruck == undefined ? "" : FilterTruck.valueFilter}
-                                        onChange={handleChange}
-                                    />
                                 </div>
                             </div>
-                        </div>
+                        </div>                                 
                     </div>
-                 </div>                                 
+                </div>
+                </ModalBody>
+                </Modal>  
+            </div>
+            </div>
             </div>
         </div>
-        </ModalBody>
-        </Modal>  
     );
 }
 

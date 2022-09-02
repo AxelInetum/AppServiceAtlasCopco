@@ -1,6 +1,6 @@
 import React,{Fragment} from 'react';
 import ListTruck from './ListTrucks';
-import FiltersTruck from './FiltersTruck';
+import FilterComboTrucks from './FilterComboTrucks';
 import NavBars from '../NavBar/NavBars';
 
 const TrucksPage = ({history}) => {
@@ -8,7 +8,7 @@ const TrucksPage = ({history}) => {
   return (
     <Fragment>
       <NavBars > </NavBars>
-      <FiltersTruck/>
+      <FilterComboTrucks></FilterComboTrucks>
       <ListTruck/>
     </Fragment>
   );
