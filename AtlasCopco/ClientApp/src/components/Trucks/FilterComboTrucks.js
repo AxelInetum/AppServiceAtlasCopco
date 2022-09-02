@@ -3,7 +3,7 @@ import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {useDispatch,useSelector} from 'react-redux';
-import {PopupFilterTruck} from '../../actions/TruckActions';
+import {PopupFilterTruck,UpdateListTrucks} from '../../actions/TruckActions';
 import {Button,ModalHeader,Modal,ModalBody,ModalFooter,FormGroup,Input,Label} from 'reactstrap';
 
 const FilterComboTrucks= () => {
@@ -11,26 +11,60 @@ const FilterComboTrucks= () => {
     const dispatch = useDispatch();
     const ListTrucksInit = useSelector(state => state.TrucksReducers.ListTrucks2);
     const showFilterTruckpopup = useSelector(state => state.TrucksReducers.PopupFilter);
+    
+    const [FilterTruck,setFiltersTruck] = useState({
+        valueComboFilterTruck:'',
+        valueFilter:''
+    });
+
     useEffect(() => 
     {  
+        FilterTrucks();
+    },[FilterTruck]);
+    
 
-        /*
-         let ListTrucksfilter =ListTrucksInit;
-         if (FiltersTruck.matriculafiltro !='')
-         {
-            ListTrucksfilter = ListTrucksfilter.filter(truck => truck.matricula == FiltersTruck.matriculafiltro)
-         }
-         if (FiltersTruck.modelofiltro !='')
-         {
-            ListTrucksfilter = ListTrucksfilter.filter(truck => truck.modelo == FiltersTruck.modelofiltro)
-         }
-         dispatch(UpdateListTrucks(ListTrucksfilter));   
-         */ 
-    },[]);
+    const FilterTrucks=() => 
+    {
+        const selectedTruckFilter = document.getElementById("comboTruckFilter"); // or this if only called onchange
+        const intputTruckFilter = document.getElementById("valueFilter");
+        if (selectedTruckFilter != undefined && intputTruckFilter !=undefined)
+        {
+            let value = selectedTruckFilter.options[selectedTruckFilter.selectedIndex].value;
+            FilterTruck.valueComboFilterTruck = value;      
+            FilterTruck.valueFilter = intputTruckFilter.value;
+            dispatch(UpdateListTrucks(SwitchFilterTrucks(FilterTruck,ListTrucksInit)));
+        } 
+    }
+
+    const SwitchFilterTrucks=(FilterTruck,ListTrucksInit) => 
+    {
+        const ListTrucks = ListTrucksInit;
+
+        if (FilterTruck.valueFilter !="")
+        {
+            switch (FilterTruck.valueComboFilterTruck) {
+            case 'M':
+                return  ListTrucksInit.filter(truck => truck.marca ==FilterTruck.valueFilter);
+                break
+            case 'MO':
+                return ListTrucksInit.filter(truck => truck.modelo ==FilterTruck.valueFilter);
+                break
+            case 'MA':
+                return ListTrucksInit.filter(truck => truck.matricula ==FilterTruck.valueFilter);
+                break
+            default:
+                return ListTrucksInit;
+            }
+        }
+        return ListTrucksInit;
+    }
 
     const handleChange = e => 
     {
-     
+        setFiltersTruck({
+            ...FilterTruck,
+            [e.target.name] : e.target.value
+        }) 
     }
     const modalStyle=
     {
@@ -40,7 +74,6 @@ const FilterComboTrucks= () => {
     }
 
     const Combovalues = [
-        { text: t('Camiones'), value: "C" },
         { text: t('Marca'), value: "M"},
         { text: t('Modelo'), value: "MO"},
         { text: t('Matricula'), value:"MA" },
@@ -71,7 +104,10 @@ const FilterComboTrucks= () => {
                                             <a onClick={() => ClosePopupFilter()}>x</a>
                                         </div>
                                         <div class="col-10"> 
-                                        <select class="form-select" onChange={handleChange}>
+                                        <select class="form-select" 
+                                        name="valueComboFilterTruck"
+                                        id="comboTruckFilter"
+                                        onChange={handleChange}>                                       
                                                 {Combovalues.map((option, index) =>
                                                 <option key={index} value={option.value}>
                                                     {option.text}
@@ -91,11 +127,11 @@ const FilterComboTrucks= () => {
                                 <div class="col-12"> 
                                     <input
                                         type="text"
-                                        id="marca"
-                                        name="marca"
+                                        id="valueFilter"
+                                        name="valueFilter"
                                         class="form-control"
                                         placeholder={t('IntroducirMarca')}
-                                        value={""}
+                                        value={FilterTruck == undefined ? "" : FilterTruck.valueFilter}
                                         onChange={handleChange}
                                     />
                                 </div>

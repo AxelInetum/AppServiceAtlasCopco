@@ -88,6 +88,7 @@ export default function (state = initialState, action){
                     idTruckSelected: action.payload
                 }
         case UPDATE_LIST_TRUCKS_FILTER:
+            debugger;
             return {
                 ...state,
                 ListTrucks:action.payload
@@ -96,3 +97,4 @@ export default function (state = initialState, action){
              return state;
     }
 }
+
