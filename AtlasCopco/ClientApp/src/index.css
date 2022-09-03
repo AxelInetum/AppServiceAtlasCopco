@@ -489,3 +489,11 @@ table,tr,th,td{
   width:-webkit-calc(100% - 17px);
   width:-moz-calc(100% - 17px);
 }
+
+
+.sticky-top{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
