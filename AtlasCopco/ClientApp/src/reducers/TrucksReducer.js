@@ -10,7 +10,8 @@ import {
     CREATE_TRUCK,
     SET_ID_SELECTED_TRUCK,
     UPDATE_LIST_TRUCKS_FILTER,
-    SHOW_POPUP_TRUCKS_FILTER
+    SHOW_POPUP_TRUCKS_FILTER,
+    UPDATE_OBJECT_FILTER_TRUCK
 } from '../Types';
 
 //cada reducer tiene su state 
@@ -18,6 +19,10 @@ const initialState = {
      EditTruckpopup:false,
      DeleteTruckpopup:false,
      PopupFilter:false,
+     FilterTruck: {
+        valueComboFilterTruck:'',
+        valueFilter:''
+      },
      ListTrucks:[],
      ListTrucks2:[],
      idTruckSelected:0
@@ -93,7 +98,20 @@ export default function (state = initialState, action){
                 ...state,
                 ListTrucks:action.payload
             }
-         default:
+            case UPDATE_OBJECT_FILTER_TRUCK:
+                debugger;
+                return {
+                    // Copy the whole state
+                    ...state,
+                    // Overwrite the filters value
+                    FilterTruck: {
+                      // copy the other filter fields
+                      ...state.filters,
+                      // And replace the status field with the new value
+                      [action.payload.fieldName]:action.payload.value,
+                    }
+                }
+            default:
              return state;
     }
 }

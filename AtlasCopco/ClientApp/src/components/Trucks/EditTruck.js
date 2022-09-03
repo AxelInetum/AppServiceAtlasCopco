@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
-import {HiddenEditPopupTruck,EditTrucks} from '../../actions/TruckActions';
+import {HiddenEditPopupTruck,EditTrucks,UpdateListTrucks} from '../../actions/TruckActions';
 import {Button,ModalHeader,Modal,ModalBody,ModalFooter,FormGroup,Input,Label} from 'reactstrap';
 import Alert from '../Alert/Alert';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +10,9 @@ const EditTruck = ({listTrucks }) => {
     const showEditTruckpopup = useSelector(state => state.TrucksReducers.EditTruckpopup);
     const dispatch = useDispatch();
     const idTrucksselected = useSelector(state => state.TrucksReducers.idTruckSelected);
+    
+    const ListTrucksInit = useSelector(state => state.TrucksReducers.ListTrucks2);
+    const FilterTruck = useSelector(state => state.TrucksReducers.FilterTruck);
    
     //state Iniciar Sesión
     const [EditarCamion,SetEditarCamion] = useState({
@@ -41,6 +44,15 @@ const EditTruck = ({listTrucks }) => {
      
     },[idTrucksselected]);
 
+    useEffect (() =>
+    {
+        debugger;
+        dispatch(UpdateListTrucks(SwitchFilterTrucks(FilterTruck,ListTrucksInit))); 
+    },[ListTrucksInit]);
+
+
+
+
     const OnChange = e => 
     {
         SetEditarCamion({
@@ -59,9 +71,37 @@ const EditTruck = ({listTrucks }) => {
         }
         else
         { 
-            dispatch(EditTrucks(EditarCamion,{t}));                                        
+            debugger;
+            dispatch(EditTrucks(EditarCamion,{t})); 
+            debugger;
+                                   
         }
     }
+    
+    const SwitchFilterTrucks=(FilterTruck,ListTrucksInit) => 
+    {
+        const ListTrucks = ListTrucksInit;
+         debugger;
+        if (FilterTruck.valueFilter !="")
+        {
+            switch (FilterTruck.valueComboFilterTruck) {
+            case 'M':
+                return  ListTrucksInit.filter(truck => truck.marca ==FilterTruck.valueFilter);
+                break
+            case 'MO':
+                return ListTrucksInit.filter(truck => truck.modelo ==FilterTruck.valueFilter);
+                break
+            case 'MA':
+                return ListTrucksInit.filter(truck => truck.matricula ==FilterTruck.valueFilter);
+                break
+            default:
+                return ListTrucksInit;
+            }
+        }
+        return ListTrucksInit;
+    }
+
+
     
     return (
         <Modal isOpen={showEditTruckpopup} fade={false} style={modalStyle}>

@@ -9,7 +9,8 @@ import {
     CREATE_TRUCK,
     SET_ID_SELECTED_TRUCK,
     UPDATE_LIST_TRUCKS_FILTER,
-    SHOW_POPUP_TRUCKS_FILTER
+    SHOW_POPUP_TRUCKS_FILTER,
+    UPDATE_OBJECT_FILTER_TRUCK
 } from '../Types';
 
 import TruckService from '../Services/TruckService';
@@ -191,6 +192,23 @@ export function DeleteTrucks(id,{t}){
      payload:open
  });
 
+
+ export function UpdateObjectFilterTruck (objectfilter){
+    return (dispatch) =>{
+        dispatch(updateObjectFilterTruck(objectfilter))
+ 
+    }
+ }
+ 
+ const updateObjectFilterTruck  = objectfilter =>({
+     type:UPDATE_OBJECT_FILTER_TRUCK,
+     payload:objectfilter
+ });
+
+
+ 
+
+ 
 
 
 

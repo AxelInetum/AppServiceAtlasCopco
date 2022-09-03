@@ -3,7 +3,7 @@ import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {useDispatch,useSelector} from 'react-redux';
-import {PopupFilterTruck,UpdateListTrucks} from '../../actions/TruckActions';
+import {PopupFilterTruck,UpdateListTrucks,UpdateObjectFilterTruck} from '../../actions/TruckActions';
 import {Button,ModalHeader,Modal,ModalBody,ModalFooter,FormGroup,Input,Label} from 'reactstrap';
 
 const FilterComboTrucks= () => {
@@ -11,12 +11,8 @@ const FilterComboTrucks= () => {
     const dispatch = useDispatch();
     const ListTrucksInit = useSelector(state => state.TrucksReducers.ListTrucks2);
     const showFilterTruckpopup = useSelector(state => state.TrucksReducers.PopupFilter);
+    const FilterTruck = useSelector(state => state.TrucksReducers.FilterTruck);
     
-    const [FilterTruck,setFiltersTruck] = useState({
-        valueComboFilterTruck:'',
-        valueFilter:''
-    });
-
     useEffect(() => 
     {  
         FilterTrucks();
@@ -39,7 +35,7 @@ const FilterComboTrucks= () => {
     const SwitchFilterTrucks=(FilterTruck,ListTrucksInit) => 
     {
         const ListTrucks = ListTrucksInit;
-debugger;
+         debugger;
         if (FilterTruck.valueFilter !="")
         {
             switch (FilterTruck.valueComboFilterTruck) {
@@ -59,12 +55,18 @@ debugger;
         return ListTrucksInit;
     }
 
+    
+
+    const objecttruck = {
+        fieldName: '',
+        value: '',
+        };
+
     const handleChange = e => 
     {
-        setFiltersTruck({
-            ...FilterTruck,
-            [e.target.name] : e.target.value
-        }) 
+        objecttruck.fieldName=  e.target.name;
+        objecttruck.value = e.target.value;
+        dispatch(UpdateObjectFilterTruck(objecttruck));
     }
     const modalStyle=
     {
@@ -82,10 +84,7 @@ debugger;
 
     const CrossPopupFilter = () => 
     {
-        setFiltersTruck({
-            ...FilterTruck,
-            'valueFilter' : ''
-        }) 
+     
     }
 
     const ClosePopupFilter=() => 
