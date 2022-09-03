@@ -1,6 +1,6 @@
 import React,{Fragment} from 'react';
 import ListTruck from './ListTrucks';
-import FilterComboTrucks from './FilterComboTrucks';
+import FilterComboTrucks from '../Trucks/FilterComboTrucks';
 import NavBars from '../NavBar/NavBars';
 
 const TrucksPage = ({history}) => {
