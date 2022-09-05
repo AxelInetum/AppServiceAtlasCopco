@@ -4,6 +4,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import {LoginUserLdap} from '../../actions/UsersActions';
 import Alert from '../Alert/Alert';
 import { useTranslation } from 'react-i18next';
+import { NavigationBar } from '../auth/NavigationBar';
 
 const Login = ({history}) => {
     const dispatch = useDispatch();
@@ -44,7 +45,10 @@ const Login = ({history}) => {
         }
     }
     return (
+   
         <div className ="form-usuario ImageBackgroundLogin">
+               <p>axel</p>
+              <NavigationBar></NavigationBar>
             <div className="contenedor-form sombra-dark">       
                     <h1>{t('iniciarsesion')}</h1>
                     <form

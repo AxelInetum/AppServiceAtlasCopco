@@ -13,24 +13,28 @@ import Navbars from './Components/NavBar/NavBars';
 import history from './Components/history/history';
 import {Provider} from 'react-redux';
 import store from './store';
+import { MsalProvider } from "@azure/msal-react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-function App(){
+function App({ instance }){
     return(
         <Router>  
-                <Provider store ={store}>        
-                    <Routes>
-                        <Route exact path="/" component ={Login} history={history}/>
-                        <Route exact path="/Nueva-Cuenta-Usuario" component ={NuevaCuentaUsuario}  />
-                        <Route exact path="/MenuInicial" component ={MenuInicial}  />
-                        <Route exact path="/Cars" component ={Cars}  />
-                        <Route exact path="/TrucksPage" component ={TrucksPage}  />
-                        <Route exact path="/CalendarPage" component ={CalendarPage}  />
-                        <Route exact path="/CreateTrucks" component ={CreateTrucks}  />
-                        <Route exact path="/EditTruck/:id" component ={EditTruck}  />
-                        <Route component ={Navbars}  />
-                        <Route component ={ListTrucks}  />
-                    </Routes>
-                </Provider> 
+                <MsalProvider instance={instance}>
+                    <Provider store ={store}> 
+                    <Login></Login>       
+                        <Routes>
+                            <Route exact path="/" component ={Login} history={history}/>
+                            <Route exact path="/Nueva-Cuenta-Usuario" component ={NuevaCuentaUsuario}  />
+                            <Route exact path="/MenuInicial" component ={MenuInicial}  />
+                            <Route exact path="/Cars" component ={Cars}  />
+                            <Route exact path="/TrucksPage" component ={TrucksPage}  />
+                            <Route exact path="/CalendarPage" component ={CalendarPage}  />
+                            <Route exact path="/CreateTrucks" component ={CreateTrucks}  />
+                            <Route exact path="/EditTruck/:id" component ={EditTruck}  />
+                            <Route component ={Navbars}  />
+                            <Route component ={ListTrucks}  />
+                        </Routes>
+                    </Provider> 
+                </MsalProvider>
         </Router>
     )
 }
