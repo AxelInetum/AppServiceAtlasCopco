@@ -2,11 +2,14 @@ import { useState,useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux';
 import {LoginUserLdap} from '../../actions/UsersActions';
+import { loginRequest } from "../auth/authConfig";
 import Alert from '../Alert/Alert';
 import { useTranslation } from 'react-i18next';
 import { NavigationBar } from '../auth/NavigationBar';
+import {useMsal } from "@azure/msal-react";
 
 const Login = ({history}) => {
+    const { instance } = useMsal();
     const dispatch = useDispatch();
     const {t,i18n} = useTranslation();
     function OnLanguageChanged(e) {
@@ -34,15 +37,7 @@ const Login = ({history}) => {
     const onSubmit = e =>
     {
         e.preventDefault();
-        debugger;
-        if(emailUser === '' || password ===  '' )
-        {
-            Alert(t("camposobligatorios"),t("credencialesIncorrectas"),"error");
-        }
-        else
-        {       
-            dispatch(LoginUserLdap(Usuario,history,{t}));                              
-        }
+  
     }
     return (
    
@@ -53,31 +48,6 @@ const Login = ({history}) => {
                     <h1>{t('iniciarsesion')}</h1>
                     <form
                       onSubmit={onSubmit}>
-                        <div className="campo-form">
-                            <label htmlFor="emailUser">{t('Email')}</label>
-                            <input
-                                type="string"
-                                id="emailUser"
-                                name="emailUser"
-                                class="form-control"
-                                placeholder={t('TuEmail')}
-                                value={emailUser}
-                                onChange={OnChange}
-                             />
-                        </div>
-                        
-                        <div className="campo-form">
-                            <label htmlFor="password">{t('Password')}</label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                class="form-control"
-                                placeholder={t('TuPassword')}
-                                value={password}
-                                onChange={OnChange}
-                             />
-                        </div>
                         <div className="campo-form form-select">
                             <select id="selectedLenguage" onChange={OnLanguageChanged}>                           
                                     <option value='fa'>فارسی</option>  
@@ -88,12 +58,9 @@ const Login = ({history}) => {
                          </div>
 
                         <div className="campo-form">
-                            <input type="submit" className="btn btn-primary btn-block btn-lg" value={t('iniciarsesion')}/>
+                            <input type="submit"  onClick={() => instance.loginRedirect(loginRequest)} className="btn btn-primary btn-block btn-lg" value={t('iniciarsesion')}/>
                         </div>
                     </form>
-                    <Link hidden={true} to={'/Nueva-Cuenta-Usuario'} className="enlace-cuenta">
-                     Crear nueva cuenta usuario
-                    </Link>
             </div>
         </div>
     );
