@@ -1,7 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router ,Routes ,Route} from 'react-router-dom';
 import Login from './components/auth/Login';
-import NuevaCuentaUsuario from './components/auth/NuevaCuentaUsuario';
 import MenuInicial from './components/menu/MenuInicial';
 import Cars from './components/Cars/Cars';
 import TrucksPage from './components/Trucks/TrucksPage';
@@ -22,7 +21,6 @@ function App({instance}){
                     <Provider store ={store}>        
                         <Routes>
                             <Route exact path="/" element ={<Login></Login>} history={history}/>
-                            <Route exact path="/Nueva-Cuenta-Usuario" element ={<NuevaCuentaUsuario></NuevaCuentaUsuario>}  />
                             <Route exact path="/MenuInicial" element ={<MenuInicial></MenuInicial>}  />
                             <Route exact path="/Cars" element ={<Cars></Cars>}  />
                             <Route exact path="/TrucksPage" element ={<TrucksPage></TrucksPage>}  />

@@ -2,6 +2,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import {DeleteTrucks,HiddenDeletePopupTruck} from '../../actions/TruckActions';
 import {Button,ModalHeader,Modal,ModalBody,ModalFooter,FormGroup,Input,Label} from 'reactstrap';
 import { useTranslation } from 'react-i18next';
+import React from 'react';
 const DeleteTruck = () => {
     const stateDeletePopup = useSelector(state => state.TrucksReducers.DeleteTruckpopup);
     const idTrucksDeleted = useSelector(state => state.TrucksReducers.idTruckSelected);

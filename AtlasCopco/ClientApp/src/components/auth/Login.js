@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect }  from 'react';
 import { loginRequest } from "../auth/authConfig";
 import { useTranslation } from 'react-i18next';
 import {useMsal } from "@azure/msal-react";

@@ -1,6 +1,6 @@
 
-import { protectedResources } from "../auth/authConfig";
-
+import { protectedResources } from "./authConfig";
+import React   from 'react';
 export const ProfileData = (props) => {
     const tableRows = Object.entries(props.graphData).map((entry, index) => {
         return (<tr key={index}>
