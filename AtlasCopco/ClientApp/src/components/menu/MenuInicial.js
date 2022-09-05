@@ -8,6 +8,7 @@ import { InteractionRequiredAuthError, InteractionType } from "@azure/msal-brows
 import { loginRequest, protectedResources } from "../auth/authConfig";
 import { callApiWithToken } from "../auth/fetch";
 import { ProfileData } from "../auth/DataDisplay";
+import jwt_decode from "jwt-decode";
 
 
 const MenuInicial = () => {
@@ -25,6 +26,8 @@ const MenuInicial = () => {
                 scopes: protectedResources.graphMe.scopes,
                 account: account
             }).then((response) => {
+                const user = jwt_decode(response.accessToken); // decode your token here
+                console.log(user);
                 callApiWithToken(response.accessToken, protectedResources.graphMe.endpoint)
                     .then(response => setGraphData(response));
             }).catch((error) => {
