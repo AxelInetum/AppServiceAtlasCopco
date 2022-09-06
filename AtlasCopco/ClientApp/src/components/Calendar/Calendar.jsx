@@ -7,6 +7,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 export default class Calendar extends React.Component {
   
   constructor(props) {
+    debugger;
     super(props)
   }
   
