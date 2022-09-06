@@ -4,7 +4,7 @@ import {
 
 //cada reducer tiene su state 
 const initialState = {
-     GraphDataUser:{},
+     GraphDataUser:null,
 }
 
 export default function (state = initialState, action){

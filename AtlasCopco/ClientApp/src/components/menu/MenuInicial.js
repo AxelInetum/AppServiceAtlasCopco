@@ -29,10 +29,7 @@ const MenuInicial = () => {
                 scopes: protectedResources.graphMe.scopes,
                 account: account
             }).then((response) => {  
-                debugger;           
-                dispatch(Fillgraphdatauser(jwtDecode(response.accessToken)));
-                callApiWithToken(response.accessToken, protectedResources.graphMe.endpoint)
-                    .then(response => dispatch(Fillgraphdatauser(response)));
+                dispatch(Fillgraphdatauser(response));
             }).catch((error) => {
                 // in case if silent token acquisition fails, fallback to an interactive method
                 if (error instanceof InteractionRequiredAuthError) {
@@ -40,8 +37,7 @@ const MenuInicial = () => {
                         instance.acquireTokenPopup({
                             scopes: protectedResources.graphMe.scopes,
                         }).then((response) => {
-                            callApiWithToken(response.accessToken, protectedResources.graphMe.endpoint)
-                                .then(response => dispatch(Fillgraphdatauser(response)));
+                            dispatch(Fillgraphdatauser(response));
                         }).catch(error => console.log(error));
                     }
                 }
@@ -54,9 +50,9 @@ const MenuInicial = () => {
         <Fragment>
             <div>
              <NavBars></NavBars>
-                { GraphDataUser ? <ProfileData graphData={GraphDataUser} /> : null }
+             { GraphDataUser ?  <h1>{GraphDataUser.tokenType}</h1>: null }
                
-             </div>ng
+             </div>
 
         </Fragment>
     );
