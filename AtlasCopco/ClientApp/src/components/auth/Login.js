@@ -7,13 +7,27 @@ const Login = () => {
     const { instance } = useMsal();
     const {t,i18n} = useTranslation();
     function OnLanguageChanged(e) {
+        localStorage.setItem("lenguage", e.target.value);
         i18n.changeLanguage(e.target.value)
     }
    
     useEffect(() => {
-        i18n.changeLanguage(document.getElementById("selectedLenguage").value)
+        putLenguage();   
     },[]);
      
+    const putLenguage = () =>
+    {   if (localStorage.getItem("lenguage") =="")
+        {
+            i18n.changeLanguage(document.getElementById("selectedLenguage").value)
+        }
+        else
+        {
+            document.getElementById("selectedLenguage").value = localStorage.getItem("lenguage");
+            i18n.changeLanguage(localStorage.getItem("lenguage"))
+        }
+    }
+
+
     const onSubmit = e =>
     {
         e.preventDefault(); 
@@ -28,7 +42,7 @@ const Login = () => {
                         <div className="campo-form form-select">
                             <select id="selectedLenguage" onChange={OnLanguageChanged}>                           
                                     <option value='fa'>فارسی</option>  
-                                    <option value='es' selected>Español</option>                                  
+                                    <option value='es'>Español</option>                                  
                                     <option value='en'>English</option>
                                     <option value='fr'>French</option>                                  
                             </select>

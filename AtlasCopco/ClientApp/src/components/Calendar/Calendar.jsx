@@ -6,7 +6,9 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 export default class Calendar extends React.Component {
   
-  
+  constructor(props) {
+    super(props)
+  }
   
   render() {
     return (
@@ -25,11 +27,14 @@ export default class Calendar extends React.Component {
           alert(arg.event.title)
         }
       }
-      events={[
+      events={this.props.Orders}
+      />
+      /*
+      [
         { title: 'event 1', date:'2022-08-01' },
         { title: 'event 2', date: '2022-08-03' }
-      ]}
-      />
+      ]*7
+      */
       
     )
   }

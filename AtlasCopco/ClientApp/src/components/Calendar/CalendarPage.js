@@ -1,8 +1,19 @@
 import Calendar from '../Calendar/Calendar';
 import React,{Fragment} from 'react';
+import { useEffect } from "react";
+import {GetlistOrders} from '../../actions/OrderActions';
+import {useDispatch,useSelector} from 'react-redux';
+import { useTranslation } from 'react-i18next';
+const CalendarPage = () => {
+debugger;
+    const dispatch = useDispatch();
+    const {t} = useTranslation();
+    const Orders = useSelector(state => state.OrdersReducer.ListOrders); 
+    useEffect(() => { 
+        debugger;
+        dispatch(GetlistOrders({t}));
+      },[]);
 
-
-const CalendarPage = ({history}) => {
   return (
     <Fragment>
         <div id='external-events'>
@@ -35,11 +46,7 @@ const CalendarPage = ({history}) => {
             <div id='calendar'></div>
             </div>
         <div>
-            <Calendar
-              
-            >
-
-            </Calendar>
+            <Calendar Orders ={Orders}></Calendar>
         </div>
     </Fragment>
   );
