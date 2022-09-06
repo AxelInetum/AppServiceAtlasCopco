@@ -2,20 +2,23 @@ import React, { Fragment } from 'react';
 import NavBars from '../NavBar/NavBars';
 import {useDispatch,useSelector} from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from "react";
-import { MsalAuthenticationTemplate, useMsal, useAccount } from "@azure/msal-react";
+import { useEffect } from "react";
+import { useMsal, useAccount } from "@azure/msal-react";
 import { InteractionRequiredAuthError, InteractionType } from "@azure/msal-browser";
-import { loginRequest, protectedResources } from "../auth/authConfig";
+import { protectedResources } from "../auth/authConfig";
 import {Fillgraphdatauser} from '../../actions/UsersActions';
 
 const MenuInicial = () => {
-    const { t} = useTranslation();
-    const dispatch = useDispatch()
-    const GraphDataUser = useSelector(state => state.UsersReducer.GraphDataUser);
-     
+    const {t,i18n} = useTranslation();
+    const dispatch = useDispatch();
+    const GraphDataUser = useSelector(state => state.UsersReducer.GraphDataUser);    
     document.body.className = "ImageBackgroundspages";
     const { instance, accounts, inProgress } = useMsal();
     const account = useAccount(accounts[0] || {});
+
+    useEffect(() => { 
+        i18n.changeLanguage(localStorage.getItem("lenguage"));
+    },[]);
 
     useEffect(() => {
         if (account && inProgress === "none") {
@@ -39,7 +42,6 @@ const MenuInicial = () => {
         }
     }, [account, inProgress, instance]);
 
-
     return (
         <Fragment>
             <div>
@@ -54,18 +56,3 @@ const MenuInicial = () => {
 }
 
 export default MenuInicial;
-
-export const Profile = () => {
-    const authRequest = {
-        ...loginRequest
-    };
-
-    return (
-        <MsalAuthenticationTemplate 
-            interactionType={InteractionType.Redirect} 
-            authenticationRequest={authRequest}
-        >
-            <MenuInicial />
-        </MsalAuthenticationTemplate>
-      )
-};
