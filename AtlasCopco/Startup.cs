@@ -28,6 +28,8 @@ namespace AtlasCopco
             services.AddMvc();
             services.AddScoped<IAccessMethodsSql, AccesDataBaseSql>();
             services.AddScoped<ITruckService, TruckServices>();
+            services.AddScoped<IOrderService, OrderServices>();
+  
             services.AddAuthorization();
  
             services.AddCors();
