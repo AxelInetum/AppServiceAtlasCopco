@@ -49,7 +49,7 @@ const DataTable = () => {
                     </div>
                     <div class="scrolldataTable">
                     <table class="table table-hover table-responsive-sm">
-                        <thead class="thead-dark bg-dark text-white">
+                        <thead class="sticky-top thead-dark bg-dark text-white">
                             <tr >
                                 {headers.map(({ name}) => (
                                     <th key={name}>

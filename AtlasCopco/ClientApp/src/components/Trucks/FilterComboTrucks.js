@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {useDispatch,useSelector} from 'react-redux';
 import {PopupFilterTruck,UpdateListTrucks,UpdateObjectFilterTruck} from '../../actions/TruckActions';
-import {Button,ModalHeader,Modal,ModalBody,ModalFooter,FormGroup,Input,Label} from 'reactstrap';
+import {ModalHeader,Modal,ModalBody} from 'reactstrap';
 
 const FilterComboTrucks= () => {
     const { t} = useTranslation();
@@ -23,6 +23,7 @@ const FilterComboTrucks= () => {
     {
         const selectedTruckFilter = document.getElementById("comboTruckFilter"); // or this if only called onchange
         const intputTruckFilter = document.getElementById("valueFilter");
+        debugger;
         if (selectedTruckFilter != undefined && intputTruckFilter !=undefined)
         {
             let value = selectedTruckFilter.options[selectedTruckFilter.selectedIndex].value;
@@ -55,8 +56,6 @@ const FilterComboTrucks= () => {
         return ListTrucksInit;
     }
 
-    
-
     const objecttruck = {
         fieldName: '',
         value: '',
@@ -84,7 +83,10 @@ const FilterComboTrucks= () => {
 
     const CrossPopupFilter = () => 
     {
-     
+        document.getElementById("valueFilter").value='';
+        objecttruck.fieldName=  'valueFilter';
+        objecttruck.value = '';
+        dispatch(UpdateObjectFilterTruck(objecttruck));
     }
 
     const ClosePopupFilter=() => 
@@ -109,8 +111,7 @@ const FilterComboTrucks= () => {
                                 <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
                         </svg>
                         <p  class="fs-3 displayinlineblock">Filtros</p>
-                    <div>
-        
+                    <div>      
                 <Modal isOpen={showFilterTruckpopup} fade={false} style={modalStyle}>
                 <ModalHeader ><a class="mover" onClick={() => ClosePopupFilter()}>x</a></ModalHeader>
                 <ModalBody>
