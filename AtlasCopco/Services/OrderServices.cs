@@ -56,7 +56,7 @@ namespace AtlasCopco.Services
         public async Task<List<OrderDatasDto>> GetListOrders()
         {
             List<OrderDatasDto> listOrdersDatasDto = new List<OrderDatasDto>();
-            this.query = String.Format("SELECT [id],[nombre],[FechaInicio],[FechaFinal] FROM Pedido");
+            this.query = String.Format("SELECT [id],[nombre] as Title ,[FechaInicio] as date FROM Pedido");
             try
             {
                 listOrdersDatasDto =  _AccessMethodsSql.GetListDatasFromSQL<OrderDatasDto>(this.query);

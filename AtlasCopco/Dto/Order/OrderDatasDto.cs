@@ -9,8 +9,8 @@ namespace AtlasCopco.Dto.Order
     public  class OrderDatasDto
     {
         public int id { get; set; }
-        public string nombre { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
+        public string title { get; set; }
+        public DateTime date { get; set; }
+        //public DateTime FechaFin { get; set; }
     }
 }
