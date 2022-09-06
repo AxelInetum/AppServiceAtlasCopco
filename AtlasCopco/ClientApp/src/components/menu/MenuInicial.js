@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import NavBars from '../NavBar/NavBars';
-import {useSelector} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from "react";
 import { MsalAuthenticationTemplate, useMsal, useAccount } from "@azure/msal-react";
@@ -8,28 +8,31 @@ import { InteractionRequiredAuthError, InteractionType } from "@azure/msal-brows
 import { loginRequest, protectedResources } from "../auth/authConfig";
 import { callApiWithToken } from "../auth/fetch";
 import { ProfileData } from "../auth/DataDisplay";
-import jwt_decode from "jwt-decode";
+import {Fillgraphdatauser} from '../../actions/UsersActions';
+import jwtDecode from 'jwt-decode';
 
 
 const MenuInicial = () => {
     const { t} = useTranslation();
-    const datauserloginLdpa = useSelector(state => state.UsersReducer.dataUserLoginldpa);
+    const dispatch = useDispatch()
+    const GraphDataUser = useSelector(state => state.UsersReducer.GraphDataUser);
+     
     document.body.className = "ImageBackgroundspages";
     const { instance, accounts, inProgress } = useMsal();
     const account = useAccount(accounts[0] || {});
-    const [graphData, setGraphData] = useState(null);
+
+
     
     useEffect(() => {
-        debugger;
-        if (account && inProgress === "none" && !graphData) {
+        if (account && inProgress === "none") {
             instance.acquireTokenSilent({
                 scopes: protectedResources.graphMe.scopes,
                 account: account
-            }).then((response) => {
-                const user = jwt_decode(response.accessToken); // decode your token here
-                console.log(user);
+            }).then((response) => {  
+                debugger;           
+                dispatch(Fillgraphdatauser(jwtDecode(response.accessToken)));
                 callApiWithToken(response.accessToken, protectedResources.graphMe.endpoint)
-                    .then(response => setGraphData(response));
+                    .then(response => dispatch(Fillgraphdatauser(response)));
             }).catch((error) => {
                 // in case if silent token acquisition fails, fallback to an interactive method
                 if (error instanceof InteractionRequiredAuthError) {
@@ -38,7 +41,7 @@ const MenuInicial = () => {
                             scopes: protectedResources.graphMe.scopes,
                         }).then((response) => {
                             callApiWithToken(response.accessToken, protectedResources.graphMe.endpoint)
-                                .then(response => setGraphData(response));
+                                .then(response => dispatch(Fillgraphdatauser(response)));
                         }).catch(error => console.log(error));
                     }
                 }
@@ -51,8 +54,8 @@ const MenuInicial = () => {
         <Fragment>
             <div>
              <NavBars></NavBars>
-                { graphData ? <ProfileData graphData={graphData} /> : null }
-                {datauserloginLdpa.permisions.indexOf("Admin") > -1 ? (<h1 class="centertext entertextsize">Test Inetum eres administrador</h1>) : (<h1 class="centertext entertextsize">Test Inetum no eres administrador</h1>)}
+                { GraphDataUser ? <ProfileData graphData={GraphDataUser} /> : null }
+               
              </div>ng
 
         </Fragment>
