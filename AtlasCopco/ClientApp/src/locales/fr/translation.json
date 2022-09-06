@@ -30,6 +30,7 @@
     "noseactulizado": "Le journal no est correctement actualisée. !",
     "nosehaeliminado":" Le journal no est correctement effacé. !",
     "eliminadocorrectamente":"Supprimé avec succès!!",
-    "credencialesIncorrectas":"Mauvaises identifiants,Error!"
+    "credencialesIncorrectas":"Mauvaises identifiants,Error!",
+    "calendarioPedidoMenu": "calendrier des commandes"
 
 }

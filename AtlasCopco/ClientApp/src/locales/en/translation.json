@@ -30,7 +30,8 @@
     "noseactulizado": "The register hasn't been updated correctly !",
     "nosehaeliminado":" The register hasn't been delete correctly !",
     "eliminadocorrectamente":"Delete correctly!!",
-    "credencialesIncorrectas":"Credentials incorrects,Error!"
+    "credencialesIncorrectas":"Credentials incorrects,Error!",
+    "calendarioPedidoMenu": "Calendar Order"
     
     
 }

@@ -30,5 +30,7 @@
     "noseactulizado": "El registro no ha sido actualizado correctamente!",
     "nosehaeliminado":" El registro no ha sido borrado correctamente !",
     "eliminadocorrectamente":"Eliminado correctamente !!",
-    "credencialesIncorrectas":"Credenciales incorrectas ,Error!"
+    "credencialesIncorrectas":"Credenciales incorrectas ,Error!",
+    "calendarioPedidoMenu": "Calendario Pedido"
+    
 }

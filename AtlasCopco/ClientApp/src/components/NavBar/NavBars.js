@@ -21,6 +21,9 @@ const Navbars = () => {
                         <li class="nav-item">
                           <Link to={'/Cars'} className="nav-link active fs-3">{t('Coches')}</Link>
                         </li>
+                        <li class="nav-item">
+                           <Link to={'/CalendarPage'} className="nav-link active fs-3">{t('calendarioPedidoMenu')}</Link>
+                        </li>
                       </ul>
               </div>
               <div class="col-lg-2 mt-4"> 
