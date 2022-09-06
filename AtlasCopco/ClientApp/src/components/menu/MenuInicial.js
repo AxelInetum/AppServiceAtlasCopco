@@ -6,11 +6,7 @@ import { useEffect, useState } from "react";
 import { MsalAuthenticationTemplate, useMsal, useAccount } from "@azure/msal-react";
 import { InteractionRequiredAuthError, InteractionType } from "@azure/msal-browser";
 import { loginRequest, protectedResources } from "../auth/authConfig";
-import { callApiWithToken } from "../auth/fetch";
-import { ProfileData } from "../auth/DataDisplay";
 import {Fillgraphdatauser} from '../../actions/UsersActions';
-import jwtDecode from 'jwt-decode';
-
 
 const MenuInicial = () => {
     const { t} = useTranslation();
@@ -21,8 +17,6 @@ const MenuInicial = () => {
     const { instance, accounts, inProgress } = useMsal();
     const account = useAccount(accounts[0] || {});
 
-
-    
     useEffect(() => {
         if (account && inProgress === "none") {
             instance.acquireTokenSilent({
@@ -49,9 +43,10 @@ const MenuInicial = () => {
     return (
         <Fragment>
             <div>
-             <NavBars></NavBars>
-             { GraphDataUser ?  <h1>{GraphDataUser.tokenType}</h1>: null }
-               
+             <NavBars></NavBars>         
+             { GraphDataUser ?  <h1>rol1: {GraphDataUser.idTokenClaims.roles[0]}</h1>:null}
+             { GraphDataUser ?  <h1>rol2: {GraphDataUser.idTokenClaims.roles[1]}</h1>:null}
+            
              </div>
 
         </Fragment>
