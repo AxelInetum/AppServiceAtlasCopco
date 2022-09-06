@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {useDispatch,useSelector} from 'react-redux';
 import {PopupFilterTruck,UpdateListTrucks,UpdateObjectFilterTruck} from '../../actions/TruckActions';
-import {Button,ModalHeader,Modal,ModalBody,ModalFooter,FormGroup,Input,Label} from 'reactstrap';
+import {ModalHeader,Modal,ModalBody} from 'reactstrap';
 
 const FilterComboTrucks= () => {
     const { t} = useTranslation();
@@ -23,6 +23,7 @@ const FilterComboTrucks= () => {
     {
         const selectedTruckFilter = document.getElementById("comboTruckFilter"); // or this if only called onchange
         const intputTruckFilter = document.getElementById("valueFilter");
+        debugger;
         if (selectedTruckFilter != undefined && intputTruckFilter !=undefined)
         {
             let value = selectedTruckFilter.options[selectedTruckFilter.selectedIndex].value;
@@ -55,8 +56,6 @@ const FilterComboTrucks= () => {
         return ListTrucksInit;
     }
 
-    
-
     const objecttruck = {
         fieldName: '',
         value: '',
@@ -84,7 +83,10 @@ const FilterComboTrucks= () => {
 
     const CrossPopupFilter = () => 
     {
-     
+        document.getElementById("valueFilter").value='';
+        objecttruck.fieldName=  'valueFilter';
+        objecttruck.value = '';
+        dispatch(UpdateObjectFilterTruck(objecttruck));
     }
 
     const ClosePopupFilter=() => 
