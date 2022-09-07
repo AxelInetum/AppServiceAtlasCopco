@@ -31,6 +31,9 @@
     "nosehaeliminado":" Le journal no est correctement effacé. !",
     "eliminadocorrectamente":"Supprimé avec succès!!",
     "credencialesIncorrectas":"Mauvaises identifiants,Error!",
-    "calendarioPedidoMenu": "calendrier des commandes"
+    "calendarioPedidoMenu": "calendrier des commandes",
+    "crearPedido": "Créer une commande",
+    "actualizarPedido": "Mise à jour de la commande",
+    "borrarPedido": "Supprimer la commande"
 
 }

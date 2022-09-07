@@ -10,7 +10,9 @@ namespace AtlasCopco.Dto.Order
     {
         public int id { get; set; }
         public string title { get; set; }
-        public string date { get; set; }
+        public string start  { get; set; }
+
+        public string end { get; set; }
         //public DateTime FechaFin { get; set; }
     }
 }

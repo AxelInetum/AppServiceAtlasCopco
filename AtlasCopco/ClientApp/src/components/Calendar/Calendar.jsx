@@ -3,6 +3,9 @@ import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import Createorder from '../Order/CreateOrder';
+
+
 
 export default class Calendar extends React.Component {
   
@@ -13,23 +16,25 @@ export default class Calendar extends React.Component {
   
   render() {
     return (
-      <FullCalendar defaultView="dayGridMonth" 
-      headerToolbar={{ left: 'prev,next,today', 
-      center: 'title',
-      right: 'timeGridDay,timeGridWeek,dayGridMonth' }}
-      plugins={[dayGridPlugin,timeGridPlugin,interactionPlugin]}
-      dateClick={this.handleDateClick}
-      editable= {true}
-      selectable={true}
-      droppable={true}
-      eventDrop={(info)=>this.moveEventdropCalendar(info)}
-      eventClick={
-        function(arg){
-          alert(arg.event.title)
+      <>
+        <FullCalendar defaultView="dayGridMonth" 
+        headerToolbar={{ left: 'prev,next,today', 
+        center: 'title',
+        right: 'timeGridDay,timeGridWeek,dayGridMonth' }}
+        plugins={[dayGridPlugin,timeGridPlugin,interactionPlugin]}
+        dateClick={this.handleDateClick}
+        editable= {true}
+        selectable={true}
+        droppable={true}
+        eventDrop={(info)=>this.moveEventdropCalendar(info)}
+        eventClick={
+          function(arg){
+            alert(arg.event.title)
+          }
         }
-      }
-      events={this.props.Orders}
-      />
+        events={this.props.Orders}/>
+        <Createorder show={this.props.show}  setshow={this.props.setshow} ></Createorder>
+      </>
       /*
       [
         { title: 'event 1', date:'2022-08-01' },
@@ -39,7 +44,7 @@ export default class Calendar extends React.Component {
       
     )
   }
-
+  
 
   moveEventdropCalendar = (info) => {
     debugger;
@@ -50,7 +55,9 @@ export default class Calendar extends React.Component {
    
 
   handleDateClick = (arg) => { // bind with an arrow function
-    alert(arg);
+    ///alert(arg);
+    this.props.setshow(true);
   }
 }
+
 

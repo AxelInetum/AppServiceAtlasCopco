@@ -31,7 +31,10 @@
     "nosehaeliminado":" The register hasn't been delete correctly !",
     "eliminadocorrectamente":"Delete correctly!!",
     "credencialesIncorrectas":"Credentials incorrects,Error!",
-    "calendarioPedidoMenu": "Calendar Order"
+    "calendarioPedidoMenu": "Calendar Order",
+    "crearPedido": "Create Order",
+    "actualizarPedido": "Update Order",
+    "borrarPedido": "Delete Order"
     
     
 }

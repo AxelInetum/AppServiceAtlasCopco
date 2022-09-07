@@ -11,7 +11,8 @@ import {
     UPDATE_LIST_TRUCKS_FILTER,
     SHOW_POPUP_TRUCKS_FILTER,
     UPDATE_OBJECT_FILTER_TRUCK*/
-    GET_LIST_ORDERS
+    GET_LIST_ORDERS,
+    SHOW_POPUP_CREATE_ORDER
 } from '../Types';
 
 import Orderservice from '../Services/OrderService';
@@ -40,19 +41,20 @@ export function GetlistOrders ({t}){
  });
 
 
-
-/*
-export function ShowEditPopupTruck(alerta)
+export function ShowCreatePopupOrder(show)
 {
     return (dispatch) => {
-        dispatch(showEditPopupTruck(alerta))
+        dispatch(showCreatePopupOrder(show))
     }
 }
 
-const showEditPopupTruck= alerta =>({
-    type:SHOW_EDIT_POPUP_TRUCK,
-    payload:alerta 
+const showCreatePopupOrder= show =>({
+    type:SHOW_POPUP_CREATE_ORDER,
+    payload:show 
 })
+
+
+/*
 
 export function ShowDeletePopupTruck(alerta)
 {

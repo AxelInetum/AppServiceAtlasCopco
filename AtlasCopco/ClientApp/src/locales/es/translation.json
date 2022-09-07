@@ -31,6 +31,9 @@
     "nosehaeliminado":" El registro no ha sido borrado correctamente !",
     "eliminadocorrectamente":"Eliminado correctamente !!",
     "credencialesIncorrectas":"Credenciales incorrectas ,Error!",
-    "calendarioPedidoMenu": "Calendario Pedido"
+    "calendarioPedidoMenu": "Calendario Pedido",
+    "crearPedido": "Crear Pedido",
+    "actualizarPedido": "Actualizar Pedido",
+    "borrarPedido": "Borrar Pedido"
     
 }
