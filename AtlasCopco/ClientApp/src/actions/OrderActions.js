@@ -11,8 +11,7 @@ import {
     UPDATE_LIST_TRUCKS_FILTER,
     SHOW_POPUP_TRUCKS_FILTER,
     UPDATE_OBJECT_FILTER_TRUCK*/
-    GET_LIST_ORDERS,
-    SHOW_POPUP_CREATE_ORDER
+    GET_LIST_ORDERS
 } from '../Types';
 
 import Orderservice from '../Services/OrderService';
@@ -41,17 +40,6 @@ export function GetlistOrders ({t}){
  });
 
 
-export function ShowCreatePopupOrder(show)
-{
-    return (dispatch) => {
-        dispatch(showCreatePopupOrder(show))
-    }
-}
-
-const showCreatePopupOrder= show =>({
-    type:SHOW_POPUP_CREATE_ORDER,
-    payload:show 
-})
 
 
 /*

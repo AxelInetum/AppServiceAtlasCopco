@@ -2,7 +2,6 @@ import {
     //SHOW_EDIT_POPUP_TRUCK,
     //HIDDEN_EDIT_POPUP_TRUCK,
     GET_LIST_ORDERS,
-    SHOW_POPUP_CREATE_ORDER
     //EDIT_TRUCK,
     //ERROR_EDIT_TRUCK,
     //DELETE_TRUCK,
@@ -24,7 +23,6 @@ const initialState = {
         valueComboFilterTruck:'',
         valueFilter:''
       },*/
-     showcreateorderpopup:false,
      ListOrders:[],
      ListOrders2:[],
      idOrderSelected:0
@@ -41,12 +39,6 @@ export default function (state = initialState, action){
                 ...state,
                 ListOrders:action.payload,
                 ListOrders2:action.payload
-            }
-        case SHOW_POPUP_CREATE_ORDER:
-            debugger;
-                return {
-                ...state,
-                showcreatepopup:action.payload
             }
          /*case SHOW_EDIT_POPUP_TRUCK:
             return {

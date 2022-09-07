@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {ModalHeader,Modal,ModalBody} from 'reactstrap';
 
-const CreateOrder = ({show,setshow}) => {
+const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
     debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
@@ -21,7 +21,7 @@ const CreateOrder = ({show,setshow}) => {
     }
     const ClosePopup=() => 
     {
-        setshow(false);
+        setshowCreatePopup(false);
     }
     const modalStyle=
     {
@@ -45,7 +45,7 @@ const CreateOrder = ({show,setshow}) => {
         */
     }
     return (
-        <Modal isOpen={show} fade={false} style={modalStyle}>
+        <Modal isOpen={showCreatePopup} fade={false} style={modalStyle}>
         <ModalHeader ><a class="mover" onClick={() => ClosePopup()}>x</a></ModalHeader>
         <ModalBody>
         <div >

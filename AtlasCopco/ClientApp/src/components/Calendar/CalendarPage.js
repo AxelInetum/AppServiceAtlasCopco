@@ -10,7 +10,8 @@ const CalendarPage = () => {
 debugger;
     const dispatch = useDispatch();
     const {t} = useTranslation();
-    const [show,setshow] = useState(false);
+    const [showCreatePopup,setshowCreatePopup] = useState(false);
+    const [showEditPopup,setshowEditPopup] = useState(false);
     const Orders = useSelector(state => state.OrdersReducer.ListOrders); 
 
     useEffect(() => { 
@@ -53,8 +54,12 @@ debugger;
             <div id='calendar'></div>
             </div>
         <div>
-            <Calendar Orders ={Orders} setshow={setshow} show={show}></Calendar>
-            
+            <Calendar Orders ={Orders} 
+            showEditPopup={showEditPopup} 
+            setshowEditPopup={setshowEditPopup} 
+            setshowCreatePopup={setshowCreatePopup} 
+            showCreatePopup={showCreatePopup}></Calendar>
+             
         </div>
     
         
