@@ -7,18 +7,13 @@ import { useTranslation } from 'react-i18next';
 
 
 const CalendarPage = () => {
-debugger;
     const dispatch = useDispatch();
     const {t} = useTranslation();
     const [showCreatePopup,setshowCreatePopup] = useState(false);
     const [showEditPopup,setshowEditPopup] = useState(false);
     const Orders = useSelector(state => state.OrdersReducer.ListOrders); 
 
-    useEffect(() => { 
-        debugger;
-        
-
-
+    useEffect(() => {  
         dispatch(GetlistOrders({t}));
       },[]);
 

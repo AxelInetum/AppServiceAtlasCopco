@@ -22,10 +22,10 @@ namespace AtlasCopco.Services
 
         public async Task<CreateOrderDto> CreateOrder(CreateOrderDto createOrderdto)
         {
-            this.query = String.Format("INSERT INTO Pedido (nombre, FechaInicio,FechaFinal) VALUES('{0}','{1}','{2}')", createOrderdto.nombre, createOrderdto.FechaInicio, createOrderdto.FechaFin);
+            this.query = String.Format("INSERT INTO Pedido (nombre, FechaInicio,FechaFinal) VALUES('{0}','{1}','{2}')", createOrderdto.title, createOrderdto.start, createOrderdto.End);
             try
             {
-                createOrderdto.PedidoCreado = Convert.ToInt32(_AccessMethodsSql.CrudDataToSql(this.query).Result);
+                createOrderdto.createdOrder = Convert.ToInt32(_AccessMethodsSql.CrudDataToSql(this.query).Result);
             }
             catch (Exception ex)
             {
@@ -56,7 +56,7 @@ namespace AtlasCopco.Services
         public async Task<List<OrderDatasDto>> GetListOrders()
         {
             List<OrderDatasDto> listOrdersDatasDto = new List<OrderDatasDto>();
-            this.query = String.Format("SELECT [id],[nombre] as title , FORMAT([FechaInicio],'yyyy-MM-dd HH:MM:ss') as 'start'  , FORMAT([FechaFinal],'yyyy-MM-dd HH:MM:ss') as 'end' FROM Pedido");
+            this.query = String.Format("SELECT [id],[nombre] as title , FORMAT([FechaInicio],'yyyy-MM-dd HH:MM:ss') as 'start'  , FORMAT([FechaFinal],'yyyy-MM-dd HH:MM:ss') as 'end' ,'red' as backGroundColor FROM Pedido");
             try
             {
                 listOrdersDatasDto =  _AccessMethodsSql.GetListDatasFromSQL<OrderDatasDto>(this.query);

@@ -25,8 +25,8 @@ export default class Calendar extends React.Component {
         editable= {true}
         selectable={true}
         droppable={true}
-        eventDrop={(info)=>this.moveEventdropCalendar(info)}
-        eventClick={this.HandleEditPopupClick}
+        eventDrop={(event,info)=>this.moveEventdropCalendar(event ,info)}
+        eventClick={(info) => this.HandleEditPopupClick(info)}
         
 
         events={this.props.Orders}/>
@@ -36,34 +36,28 @@ export default class Calendar extends React.Component {
         <EditOrder showEditPopup={this.props.showEditPopup} 
          setshowEditPopup={this.props.setshowEditPopup} ></ EditOrder>
       </>
-      /*
-      [
-        { title: 'event 1', date:'2022-08-01' },
-        { title: 'event 2', date: '2022-08-03' }
-      ]*7
-*/
     )
   }
   
+    moveEventdropCalendar = (event,info) => {
+      debugger;
+      var pepe = event;
+      var jose = info;
+      //información del titulo y del id
+      //event.event._def
 
-  moveEventdropCalendar = (info) => {
-    debugger;
-    var axe="";
-    //modificamos la fecha en base de datos
+      //modificamos la fecha en base de datos
 
- }
-   
+  }
 
   handleDateClick = (arg) => { // bind with an arrow function
     ///alert(arg);
     this.props.setshowCreatePopup(true);
   }
-  HandleEditPopupClick = () => {
+  HandleEditPopupClick = (calEvent, jsEvent, view) => {
+    debugger;
     this.props.setshowEditPopup(true);
   }
-
-
-
 }
 
 

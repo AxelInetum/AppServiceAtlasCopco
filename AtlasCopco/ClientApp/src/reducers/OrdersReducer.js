@@ -2,6 +2,7 @@ import {
     //SHOW_EDIT_POPUP_TRUCK,
     //HIDDEN_EDIT_POPUP_TRUCK,
     GET_LIST_ORDERS,
+    CREATE_ORDER
     //EDIT_TRUCK,
     //ERROR_EDIT_TRUCK,
     //DELETE_TRUCK,
@@ -33,12 +34,17 @@ export default function (state = initialState, action){
     debugger;
     switch(action.type)
     {
-
         case GET_LIST_ORDERS:
             return {
                 ...state,
                 ListOrders:action.payload,
                 ListOrders2:action.payload
+            }
+        case CREATE_ORDER:
+            return {
+                ...state,
+                ListOrders: [...state.ListOrders,action.payload],
+                ListOrders2: [...state.ListOrders2,action.payload]
             }
          /*case SHOW_EDIT_POPUP_TRUCK:
             return {

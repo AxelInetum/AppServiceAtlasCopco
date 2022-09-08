@@ -13,6 +13,8 @@ namespace AtlasCopco.Dto.Order
         public string start  { get; set; }
 
         public string end { get; set; }
+
+        public string backGroundColor  { get; set; }
         //public DateTime FechaFin { get; set; }
     }
 }

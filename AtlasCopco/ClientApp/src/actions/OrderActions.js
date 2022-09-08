@@ -11,6 +11,7 @@ import {
     UPDATE_LIST_TRUCKS_FILTER,
     SHOW_POPUP_TRUCKS_FILTER,
     UPDATE_OBJECT_FILTER_TRUCK*/
+    CREATE_ORDER,
     GET_LIST_ORDERS
 } from '../Types';
 
@@ -38,6 +39,34 @@ export function GetlistOrders ({t}){
      type:GET_LIST_ORDERS,
      payload:listOrders
  });
+
+
+ export function CreateOrders(Order,{t}){
+    return async (dispatch) =>{  
+        debugger;  
+         const p = Promise.resolve( new Orderservice ().createOrder(Order));
+         p.then(response => {
+             if (response)
+             {
+                 dispatch(createOrder(Order));
+                 dispatch(GetlistOrders({t}));
+                 Alert('pedido creado correctamente','El registro ha sido creado con exito.','success');
+             }
+             else{
+                 Alert(t('nosehaeliminado'),t('contacteadministrador'),"error");
+             }    
+         });                     
+    }
+ }
+ 
+ const createOrder = order =>({
+     type:CREATE_ORDER,
+     payload:order
+ });
+
+
+
+
 
 
 

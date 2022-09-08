@@ -1,23 +1,31 @@
-import React ,{useState,useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import {CreateTruck} from '../../actions/TruckActions';
-import {useDispatch,useSelector} from 'react-redux';
-import Alert from '../Alert/Alert';
+import React ,{useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {useDispatch} from 'react-redux';
+import Alert from '../Alert/Alert';
+import {CreateOrders} from '../../actions/OrderActions';
 import {ModalHeader,Modal,ModalBody} from 'reactstrap';
 
 const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
-    debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
-    const [startDate, setStartDate] = useState(new Date());  
+    const [CreateOrder,SetOrder] = useState({
+        title:'',
+        Start:'',
+        End:'',
+        createdOrder:0
+    });
+    const [startDateStart, setStartDateStart] = useState(new Date());  
+    const [startDateEnd, setStartDateEnd] = useState(new Date());  
     
-    //cada cambio seteamos el objeto usuario 
     const OnChange = e => 
     {
-      
+        debugger;
+        SetOrder({
+            ...CreateOrder,
+            [e.target.name] : e.target.value
+        })
     }
     const ClosePopup=() => 
     {
@@ -29,20 +37,22 @@ const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
         top: '10%',
         left: '30%'       
     }
+    
    
     const onSubmit = e =>
-    {
-        /*
+    {    
         e.preventDefault();
-        if(nombre.trim() === '' )       
+        if(CreateOrder.title.trim() === '' )       
         {
             Alert(t('camposobligatorios'),t('nosehainsertado'),"error");
         }
         else
         {      
-            dispatch(CreateTruck(NuevoCamion,history,{t}));                                             
-        }
-        */
+            CreateOrder.Start = startDateStart //'06-09-2022 12:52:18.000';
+            CreateOrder.End = startDateEnd //'07-09-2022 12:52:18.000';
+            debugger;
+            dispatch(CreateOrders(CreateOrder,{t}));                                             
+        }    
     }
     return (
         <Modal isOpen={showCreatePopup} fade={false} style={modalStyle}>
@@ -54,18 +64,35 @@ const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
                     <h1>{t('crearPedido')}</h1>
                     <form onSubmit={onSubmit}>                   
                     <div className="campo-form">
-                        <label htmlFor="nombre">{t('Nombre')}</label>
+                        <label htmlFor="nombre">{t('tituloPedido')}</label>
                         <input
                             type="text"
-                            id="nombre"
-                            name="nombre"
+                            id="title"
+                            name="title"
                             class="form-control"
                             placeholder={t('TuNombre')}
-                            value={''}
+                            value={CreateOrder.title}
                             onChange={OnChange}
                         />
                     </div>
-                    <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+                    <div className="campo-form">
+                        <label>{t('fechaInicio')}: </label>
+                        <DatePicker 
+                            showTimeSelect
+                            dateFormat="dd/mm/yyyy hh:mm:ss"
+                            timeIntervals={15}
+                            selected={startDateStart} 
+                            onChange={date => setStartDateStart(date)} />
+                    </div>
+                    <div className="campo-form">
+                        <label>{t('fechaFin')}: </label>
+                        <DatePicker 
+                            showTimeSelect
+                            dateFormat="dd/mm/yyyy hh:mm:ss"
+                            timeIntervals={15}
+                            selected={startDateEnd} 
+                            onChange={date => setStartDateEnd(date)} />
+                    </div>                    
                     <div className="campo-form">
                         <input type="submit" className="btn btn-success btn-block btn-lg" value={t('crearPedido')}/>
                     </div>

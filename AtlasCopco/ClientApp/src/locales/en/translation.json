@@ -34,7 +34,10 @@
     "calendarioPedidoMenu": "Calendar Order",
     "crearPedido": "Create Order",
     "actualizarPedido": "Update Order",
-    "borrarPedido": "Delete Order"
+    "borrarPedido": "Delete Order",
+    "tituloPedido": "Title Order",
+    "fechaInicio": "Date Start",
+    "fechaFin": "Date End"
     
     
 }

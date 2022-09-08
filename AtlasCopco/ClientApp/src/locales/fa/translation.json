@@ -34,6 +34,9 @@
     "calendarioPedidoMenu": "calendrier des commandes",
     "crearPedido": "Créer une commande",
     "actualizarPedido": "Mise à jour de la commande",
-    "borrarPedido": "Supprimer la commande"
+    "borrarPedido": "Supprimer la commande",
+    "tituloPedido": "Titre demandé",
+    "fechaInicio": "Date de début",
+    "fechaFin": "date finale"
 
 }
