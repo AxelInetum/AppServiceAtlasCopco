@@ -51,7 +51,8 @@ export default class Calendar extends React.Component {
       this.state.Start =  event.event._instance.range.start;
       this.state.End =  event.event._instance.range.end;
       this.state.UpdateOrder = 0;     
-      this.props.dispatch(EditOrders(this.state,this.props.t));
+      var t = this.props.t;
+      this.props.dispatch(EditOrders(this.state,{t}));
 
   }
 
