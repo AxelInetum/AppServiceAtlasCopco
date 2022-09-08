@@ -9,8 +9,8 @@ namespace AtlasCopco.Dto.Order
     public class UpdateOrderdto
     {
        public int id { get; set; }
-        public string nombre { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
+        public string Title { get; set; }
+        public string Start { get; set; }
+        public string End { get; set; }
     }
 }

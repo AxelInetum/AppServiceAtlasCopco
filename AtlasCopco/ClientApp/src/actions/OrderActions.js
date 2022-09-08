@@ -12,6 +12,7 @@ import {
     SHOW_POPUP_TRUCKS_FILTER,
     UPDATE_OBJECT_FILTER_TRUCK*/
     CREATE_ORDER,
+    EDIT_ORDER,
     GET_LIST_ORDERS
 } from '../Types';
 
@@ -64,6 +65,32 @@ export function GetlistOrders ({t}){
      payload:order
  });
 
+
+ export function EditOrders(Order,{t}){
+    debugger;
+    Order.title = Order.title + "s";
+   return async (dispatch) =>{    
+        const p = Promise.resolve( new Orderservice().updateOrder(Order));
+        p.then(response => {
+            if (response)
+            {
+                debugger;
+                dispatch(editOrder(Order));
+                dispatch(GetlistOrders({t}));
+                Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
+            }
+            else{
+              
+                Alert(t('noseactulizado'),t('contacteadministrador'),'error');
+            }    
+        });                     
+   }
+}
+
+const editOrder= order =>({
+    type:EDIT_ORDER,
+    payload:order
+});
 
 
 

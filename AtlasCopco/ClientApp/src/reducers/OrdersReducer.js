@@ -2,7 +2,8 @@ import {
     //SHOW_EDIT_POPUP_TRUCK,
     //HIDDEN_EDIT_POPUP_TRUCK,
     GET_LIST_ORDERS,
-    CREATE_ORDER
+    CREATE_ORDER,
+    EDIT_ORDER
     //EDIT_TRUCK,
     //ERROR_EDIT_TRUCK,
     //DELETE_TRUCK,
@@ -45,7 +46,19 @@ export default function (state = initialState, action){
                 ...state,
                 ListOrders: [...state.ListOrders,action.payload],
                 ListOrders2: [...state.ListOrders2,action.payload]
-            }
+            }     
+        case EDIT_ORDER:
+            debugger;
+                return {
+                    ...state,
+                    ListOrders: state.ListOrders.map(order => 
+                        order.id === action.payload.id ? order = action.payload : order
+                    ),
+                    ListOrders2: state.ListOrders2.map(order => 
+                        order.id === action.payload.id ? order = action.payload : order
+                    ),
+                    EditTruckpopup:false
+                }
          /*case SHOW_EDIT_POPUP_TRUCK:
             return {
                 ...state,

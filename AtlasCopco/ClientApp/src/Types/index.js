@@ -14,4 +14,5 @@ export const UPDATE_OBJECT_FILTER_TRUCK = 'UPDATE_OBJECT_FILTER_TRUCK';
 export const FILL_GRAPHDATA_USER = 'FILL_GRAPHDATA_USER';
 export const GET_LIST_ORDERS = 'GET_LIST_ORDERS';
 export const CREATE_ORDER = 'CREATE_ORDER';
+export const EDIT_ORDER = 'EDIT_ORDER';
 //tabla de camiones 

@@ -3,6 +3,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import {ModalHeader,Modal,ModalBody} from 'reactstrap';
 import Alert from '../Alert/Alert';
 import { useTranslation } from 'react-i18next';
+import {EditOrders} from '../../actions/OrderActions';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -27,22 +28,21 @@ const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
 
     const OnChange = e => 
     {
-    
+        
     }
    
     const onSubmit = e =>
     { 
-         /*
+        debugger;
         e.preventDefault();
-        if(CreateOrder.title.trim() === '' || CreateOrder.Start.trim() ===  '' || 
-        CreateOrder.End.trim() === ''  )
+        if(loadDatas.title.trim() === '' )
         {
             Alert(t('camposobligatorios') ,t('nosehainsertado'),"error");
         }
         else
         {
-            //dispatch(EditTrucks(EditarCamion,{t}));                               
-        }*/
+            dispatch(EditOrders(loadDatas,{t}));                               
+        }
     }
     
     
@@ -86,7 +86,7 @@ const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
                             onChange={date => setStartDateEnd(date)} />
                     </div>                    
                     <div className="campo-form">
-                        <input type="submit" className="btn btn-success btn-block btn-lg" value={t('crearPedido')}/>
+                        <input type="submit" className="btn btn-success btn-block btn-lg" value={t('editarPedido')}/>
                     </div>
                 </form>                                       
             </div>

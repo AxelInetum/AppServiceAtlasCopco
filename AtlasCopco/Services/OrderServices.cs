@@ -71,7 +71,7 @@ namespace AtlasCopco.Services
         public async Task<bool> UpdateOrder(UpdateOrderdto updateOrderDto)
         {
             bool correctUpdateOrder = false;
-            this.query = String.Format("UPDATE PedidO SET nombre = '{0}',FechaInicio = '{1}', FechaFinal = '{2}' where id = {3}", updateOrderDto.nombre, updateOrderDto.FechaInicio, updateOrderDto.FechaFin , updateOrderDto.id);
+            this.query = String.Format("UPDATE PedidO SET nombre = '{0}',FechaInicio = '{1}', FechaFinal = '{2}' where id = {3}", updateOrderDto.Title, updateOrderDto.Start, updateOrderDto.End , updateOrderDto.id);
             try
             {
                 if (Convert.ToInt32(_AccessMethodsSql.CrudDataToSql(this.query).Result) >0)
