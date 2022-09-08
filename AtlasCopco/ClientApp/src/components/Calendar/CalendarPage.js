@@ -53,7 +53,9 @@ const CalendarPage = () => {
             showEditPopup={showEditPopup} 
             setshowEditPopup={setshowEditPopup} 
             setshowCreatePopup={setshowCreatePopup} 
-            showCreatePopup={showCreatePopup}></Calendar>
+            showCreatePopup={showCreatePopup}
+            dispatch={dispatch}
+            t={t}></Calendar>
              
         </div>
     

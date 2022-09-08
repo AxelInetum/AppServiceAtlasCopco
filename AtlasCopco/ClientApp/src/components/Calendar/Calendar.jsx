@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Createorder from '../Order/CreateOrder';
 import EditOrder from '../Order/EditOrder';
-
+import {EditOrders} from '../../actions/OrderActions';
 
 export default class Calendar extends React.Component {
   
@@ -16,7 +16,7 @@ export default class Calendar extends React.Component {
       title:'',
       Start:'',
       End:'',
-      UpdateOrder:0  
+      UpdateOrder:0 ,
     };
   }
   
@@ -41,14 +41,17 @@ export default class Calendar extends React.Component {
         <EditOrder loadDatas={this.state} showEditPopup={this.props.showEditPopup} 
          setshowEditPopup={this.props.setshowEditPopup} ></ EditOrder>
       </>
-    )
-  }
+     )
+   }
   
-    moveEventdropCalendar = (event,info) => {
-      //información del titulo y del id
-      //event.event._def
-  
-      //modificamos la fecha en base de datos
+    moveEventdropCalendar = (event,info) => 
+    {
+      this.state.id = event.event._def.publicId;
+      this.state.title = event.event.title;
+      this.state.Start =  event.event._instance.range.start;
+      this.state.End =  event.event._instance.range.end;
+      this.state.UpdateOrder = 0;     
+      this.props.dispatch(EditOrders(this.state,this.props.t));
 
   }
 
@@ -56,6 +59,8 @@ export default class Calendar extends React.Component {
     ///alert(arg);
     this.props.setshowCreatePopup(true);
   }
+
+
   HandleEditPopupClick = (event) => {
     debugger;
     this.state.id = event.event._def.publicId;
@@ -63,9 +68,6 @@ export default class Calendar extends React.Component {
     this.state.Start =  event.event._instance.range.start;
     this.state.End =  event.event._instance.range.end;
     this.state.UpdateOrder = 0;
-
-
-
     this.props.setshowEditPopup(true);
   }
 }
