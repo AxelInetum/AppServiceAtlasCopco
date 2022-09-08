@@ -50,7 +50,7 @@ export function GetlistOrders ({t}){
              {
                  dispatch(createOrder(Order));
                  dispatch(GetlistOrders({t}));
-                 Alert('pedido creado correctamente','El registro ha sido creado con exito.','success');
+                 Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
              }
              else{
                  Alert(t('nosehaeliminado'),t('contacteadministrador'),"error");

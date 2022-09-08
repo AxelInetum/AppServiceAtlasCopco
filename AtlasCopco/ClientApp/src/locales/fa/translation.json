@@ -33,10 +33,13 @@
     "credencialesIncorrectas":"Credentials incorrects,Error!",
     "calendarioPedidoMenu": "calendrier des commandes",
     "crearPedido": "Créer une commande",
+    "editarPedido": "Modifier la commande",
     "actualizarPedido": "Mise à jour de la commande",
     "borrarPedido": "Supprimer la commande",
     "tituloPedido": "Titre demandé",
     "fechaInicio": "Date de début",
-    "fechaFin": "date finale"
+    "fechaFin": "date finale",
+    "pedidoCreado": "commande créée avec succès",
+    "registrocreato": "L'enregistrement a été créé avec succès"
 
 }

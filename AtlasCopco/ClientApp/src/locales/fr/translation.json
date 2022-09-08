@@ -37,8 +37,8 @@
     "borrarPedido": "Supprimer la commande",
     "tituloPedido": "Titre demandé",
     "fechaInicio": "Date de début",
-    "fechaFin": "Date finale"
-
+    "fechaFin": "Date finale",
+    "registrocreato": "L'enregistrement a été créé avec succès"
     
 
 }
