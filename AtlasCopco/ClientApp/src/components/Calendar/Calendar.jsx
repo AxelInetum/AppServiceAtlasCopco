@@ -6,7 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Createorder from '../Order/CreateOrder';
 import EditOrder from '../Order/EditOrder';
 import {EditOrders} from '../../actions/OrderActions';
-
+import Moment from 'moment';
 export default class Calendar extends React.Component {
   
   constructor(props) {
@@ -32,6 +32,7 @@ export default class Calendar extends React.Component {
         editable= {true}
         selectable={true}
         droppable={true}
+        eventResize={(event)=>this.eventResize(event)}  
         eventDrop={(event,info)=>this.moveEventdropCalendar(event ,info)}
         eventClick={(info) => this.HandleEditPopupClick(info)}   
         events={this.props.Orders}/>
@@ -46,6 +47,7 @@ export default class Calendar extends React.Component {
   
     moveEventdropCalendar = (event,info) => 
     {
+      debugger;
       this.state.id = event.event._def.publicId;
       this.state.title = event.event.title;
       this.state.Start =  event.event._instance.range.start;
@@ -56,21 +58,39 @@ export default class Calendar extends React.Component {
 
   }
 
-  handleDateClick = (arg) => { // bind with an arrow function
-    ///alert(arg);
+  //when click for new order (out events)
+  handleDateClick = (arg) => { 
     this.props.setshowCreatePopup(true);
   }
 
-
-  HandleEditPopupClick = (event) => {
-    debugger;
+  //when resize event 
+  eventResize = (event) => {
+   
     this.state.id = event.event._def.publicId;
     this.state.title = event.event.title;
     this.state.Start =  event.event._instance.range.start;
     this.state.End =  event.event._instance.range.end;
+    this.state.UpdateOrder = 0;     
+    var t = this.props.t;
+    this.props.dispatch(EditOrders(this.state,{t}));
+  }
+
+  //when click event open popup edit 
+  HandleEditPopupClick = (event) => {
+    debugger;
+    this.state.id = event.event._def.publicId;
+    this.state.title = event.event.title;
+    this.state.Start = event.event._instance.range.start;
+    this.state.End =  event.event._instance.range.end;
     this.state.UpdateOrder = 0;
+    var axel = Moment('Fri Sep 09 2022 04:09:18 GMT+0200').format("dd/MM/yyyy hh:mm:ss");
+          //loadDatas.End = Moment(loadDatas.End).format("dd/MM/yyyy hh:mm:ss");
+      //loadDatas.Start = Moment(loadDatas.Start).format("dd/MM/yyyy hh:mm:ss");
+
     this.props.setshowEditPopup(true);
   }
+
+ 
 }
 
 

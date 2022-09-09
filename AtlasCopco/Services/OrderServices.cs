@@ -81,7 +81,7 @@ namespace AtlasCopco.Services
             }
             catch (Exception ex)
             {
-
+                string exception = ex.ToString();
             }
             return correctUpdateOrder;
         }

@@ -7,11 +7,11 @@ import {EditOrders} from '../../actions/OrderActions';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+
 const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
     debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
-
 
     const [startDateStart, setStartDateStart] = useState(new Date());  
     const [startDateEnd, setStartDateEnd] = useState(new Date());  
@@ -71,7 +71,7 @@ const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
                         <label>{t('fechaInicio')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/mm/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy hh:mm:ss"
                             timeIntervals={15}
                             selected={loadDatas.Start} 
                             onChange={date => setStartDateStart(date)} />
@@ -80,7 +80,7 @@ const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
                         <label>{t('fechaFin')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/mm/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy hh:mm:ss"
                             timeIntervals={15}
                             selected={loadDatas.End} 
                             onChange={date => setStartDateEnd(date)} />
