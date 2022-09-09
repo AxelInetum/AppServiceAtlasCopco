@@ -60,10 +60,13 @@ export function GetlistOrders ({t}){
         debugger;  
          const p = Promise.resolve( new Orderservice ().createOrder(Order));
          p.then(response => {
-             if (response)
+             if (response.createdOrder >0 )
              {
+                Order.id = response.createOrder;
+                Order.start = '2022-09-09 14:09:10';
+                Order.end = '2022-09-09 14:09:10';
                  dispatch(createOrder(Order));
-                 dispatch(GetlistOrders({t}));
+                 //dispatch(GetlistOrders({t}));
                  Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
              }
              else{
@@ -89,7 +92,6 @@ export function GetlistOrders ({t}){
             {
                 debugger;
                 dispatch(editOrder(Order));
-                dispatch(GetlistOrders({t}));
                 Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
             }
             else{

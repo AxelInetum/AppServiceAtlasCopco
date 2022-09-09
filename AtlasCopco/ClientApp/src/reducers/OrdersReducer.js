@@ -54,6 +54,7 @@ export default function (state = initialState, action){
                 ListTYpesOrders2:action.payload
             }
         case CREATE_ORDER:
+            debugger;
             return {
                 ...state,
                 ListOrders: [...state.ListOrders,action.payload],

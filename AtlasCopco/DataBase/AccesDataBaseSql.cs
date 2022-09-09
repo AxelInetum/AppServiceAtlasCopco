@@ -87,5 +87,23 @@ namespace AtlasCopco.DataBase
             return rowsAffected;
         }
 
+        public async Task<int> CrudDataToSqlReturnId(string query)
+        {
+            DataTable table = new DataTable();
+            int rowsAffected = 0;
+            string sqlDataSource = _conectionString;
+            using (SqlConnection connexion = new SqlConnection(sqlDataSource))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, connexion))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    await connexion.OpenAsync();
+                    rowsAffected = Convert.ToInt32(cmd.ExecuteScalar());
+                    await connexion.CloseAsync();
+                }
+            }
+            return rowsAffected;
+        }
+
     }
 }

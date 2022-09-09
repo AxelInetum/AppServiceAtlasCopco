@@ -12,6 +12,7 @@ const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
     const dispatch = useDispatch();
     const { t} = useTranslation();
     const [CreateOrder,SetOrder] = useState({
+        id:0,
         title:'',
         Start:'',
         End:'',

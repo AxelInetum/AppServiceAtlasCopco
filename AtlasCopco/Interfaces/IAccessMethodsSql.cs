@@ -10,5 +10,6 @@ namespace AtlasCopco.Interfaces
    {
         List<T> GetListDatasFromSQL<T>(string query);
         Task<int> CrudDataToSql(string query);
-   }
+        Task<int> CrudDataToSqlReturnId(string query);     
+    }
 }
