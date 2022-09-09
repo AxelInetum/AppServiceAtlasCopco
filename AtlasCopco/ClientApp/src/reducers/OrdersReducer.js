@@ -4,7 +4,9 @@ import {
     GET_LIST_ORDERS,
     CREATE_ORDER,
     EDIT_ORDER,
-    GET_TYPES_ORDERS
+    GET_TYPES_ORDERS,
+    FILTER_ORDERS_CALENDAR_TYPE,
+    ALL_ORDERS_CALENDAR
     //EDIT_TRUCK,
     //ERROR_EDIT_TRUCK,
     //DELETE_TRUCK,
@@ -69,6 +71,16 @@ export default function (state = initialState, action){
                     ),
                     EditTruckpopup:false
                 }
+        case FILTER_ORDERS_CALENDAR_TYPE:
+                return {
+                    ...state,
+                    ListOrders:state. ListOrders.filter(order => order.value ==action.payload),
+                }
+        case ALL_ORDERS_CALENDAR:
+            return {
+                ...state,
+                ListOrders:state.ListOrders2,
+            }
          /*case SHOW_EDIT_POPUP_TRUCK:
             return {
                 ...state,

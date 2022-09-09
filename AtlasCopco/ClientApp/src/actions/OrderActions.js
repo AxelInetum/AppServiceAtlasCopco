@@ -2,7 +2,9 @@ import {
     GET_TYPES_ORDERS,
     CREATE_ORDER,
     EDIT_ORDER,
-    GET_LIST_ORDERS
+    GET_LIST_ORDERS,
+    FILTER_ORDERS_CALENDAR_TYPE,
+    ALL_ORDERS_CALENDAR
 } from '../Types';
 
 import Orderservice from '../Services/OrderService';
@@ -103,6 +105,30 @@ const editOrder= order =>({
     payload:order
 });
 
+export function FilterOrdersByType(value,{t}){
+    debugger;
+    return async (dispatch) =>{   
+        dispatch(filterOrderByType(value));                            
+    }
+ }
+ 
+ const filterOrderByType= value =>({
+     type:FILTER_ORDERS_CALENDAR_TYPE,
+     payload:value 
+ });
+
+
+ export function AllOrdersCalendar(){
+    debugger;
+    return async (dispatch) =>{   
+        dispatch(allOrdersCalendar());                            
+    }
+ }
+ 
+ const allOrdersCalendar= () =>({
+     type:ALL_ORDERS_CALENDAR,
+     payload:''
+ });
 
 
 
@@ -126,7 +152,6 @@ const showDeletePopupTruck= alerta =>({
 export function HiddenEditPopupTruck (alerta){
    return (dispatch) =>{
        dispatch(hiddenEditPopupTruck(alerta))
-
    }
 }
 
