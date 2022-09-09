@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 
 const CalendarPage = () => {
+    debugger;
     const dispatch = useDispatch();
     const {t} = useTranslation();
     const [showCreatePopup,setshowCreatePopup] = useState(false);
@@ -34,6 +35,11 @@ const CalendarPage = () => {
         }
      }
 
+     const classDiv =(color) => {
+        debugger;
+         return ' fc-event-main ' + color;
+     }
+
   return (
     <Fragment>
         <div id='external-events'>
@@ -41,11 +47,11 @@ const CalendarPage = () => {
                 <strong>Types orders</strong>
             </p>
                {ListTypesOrders ? 
-                            <div className='purple'class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-                            <div onClick={() => handleClick(0)} class='fc-event-main'>todos</div></div> : ""}
+                        <div>
+                            '<div onClick={() => handleClick(0)} class='blue fc-event-main'>todos</div></div> : ""}
                 {ListTypesOrders ? ListTypesOrders.map(typesorder => (
-                        <div className={typesorder.color} class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-                            <div onClick={() => handleClick(typesorder.value)} class='fc-event-main'>{typesorder.label}</div>
+                        <div>
+                            <div onClick={() => handleClick(typesorder.value)} class={classDiv(typesorder.color)}>{typesorder.label}</div>
                         </div> 
                 ))              
                 : <div>no hay datos</div> } 
