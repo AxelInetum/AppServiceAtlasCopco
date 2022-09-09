@@ -3,9 +3,10 @@ import {useDispatch,useSelector} from 'react-redux';
 import {ModalHeader,Modal,ModalBody} from 'reactstrap';
 import Alert from '../Alert/Alert';
 import { useTranslation } from 'react-i18next';
-import {EditOrders} from '../../actions/OrderActions';
+import {EditOrders,GetTypesOrders} from '../../actions/OrderActions';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Select from 'react-select';
 
 
 const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
@@ -14,7 +15,10 @@ const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
     const { t} = useTranslation();
 
     const [startDateStart, setStartDateStart] = useState(new Date());  
-    const [startDateEnd, setStartDateEnd] = useState(new Date());  
+    const [startDateEnd, setStartDateEnd] = useState(new Date()); 
+ 
+    const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
+
     const modalStyle=
    {
         position:"absolute",
@@ -30,10 +34,29 @@ const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
     {
         
     }
+    const colourStyles = {
+        control: styles => ({ ...styles, backgroundColor: 'white' }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+          return {
+            ...styles,
+            backgroundColor: isDisabled ? 'red' : 'blue',
+            color: '#FFF',
+            cursor: isDisabled ? 'not-allowed' : 'default',
+          };
+        },
+      };
+
+    const handleChange = e => {
+        loadDatas.value = e.value;
+    }
+
+    useEffect(() => {  
+        dispatch(GetTypesOrders({t}));
+      },[]);
+
    
     const onSubmit = e =>
     { 
-        debugger;
         e.preventDefault();
         if(loadDatas.title.trim() === '' )
         {
@@ -84,7 +107,16 @@ const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
                             timeIntervals={15}
                             selected={loadDatas.End} 
                             onChange={date => setStartDateEnd(date)} />
-                    </div>                    
+                    </div>   
+                    <div className="campo-form">
+                        <label>{t('tipopedido')}: </label>
+                        <Select 
+                        name='combovalue'
+                        id='combovalue'
+                        defaultValue={{ label: loadDatas.Label, value: loadDatas.Value}}
+                        onChange={handleChange}
+                        options={ListTipyesOrders} />
+                    </div>   
                     <div className="campo-form">
                         <input type="submit" className="btn btn-success btn-block btn-lg" value={t('editarPedido')}/>
                     </div>

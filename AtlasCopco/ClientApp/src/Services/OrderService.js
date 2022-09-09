@@ -20,6 +20,20 @@ class OrderService {
       });
   };
 
+  getOrderTypes = async () => {
+    debugger;
+    return await axios
+       .get(this.base_url+'/types' , { headers: { Authorization: `Bearer ${this.user_token}` } })
+      .then(response => {
+        debugger;
+        return response.data;
+      })
+      .catch(function (error) {
+           return null;
+      });
+  };
+
+
   createOrder = async (orderSelected) => {
     debugger;
     console.log(orderSelected);

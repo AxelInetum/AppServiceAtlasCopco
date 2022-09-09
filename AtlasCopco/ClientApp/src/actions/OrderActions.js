@@ -1,16 +1,5 @@
 import {
-    /*SHOW_EDIT_POPUP_TRUCK,
-    HIDDEN_EDIT_POPUP_TRUCK,
-    GET_LIST_TRUCKS,
-    EDIT_TRUCK,
-    DELETE_TRUCK,
-    HIDDEN_DELETE_POPUP_TRUCK,
-    SHOW_DELETE_POPUP_TRUCK,
-    CREATE_TRUCK,
-    SET_ID_SELECTED_TRUCK,
-    UPDATE_LIST_TRUCKS_FILTER,
-    SHOW_POPUP_TRUCKS_FILTER,
-    UPDATE_OBJECT_FILTER_TRUCK*/
+    GET_TYPES_ORDERS,
     CREATE_ORDER,
     EDIT_ORDER,
     GET_LIST_ORDERS
@@ -41,6 +30,28 @@ export function GetlistOrders ({t}){
      payload:listOrders
  });
 
+
+ export function GetTypesOrders ({t}){
+    debugger;
+    return async (dispatch) =>{                
+         const p = Promise.resolve(new Orderservice().getOrderTypes());
+         p.then(listTypesOrders => {
+            debugger;
+             if (listTypesOrders!=null)
+             {
+                 dispatch(getlistTypeOrders(listTypesOrders));
+             }
+             else{
+                 Alert(t('nosehapodidocargar'),t('contacteadministrador'),'error');
+             }
+         });            
+    }
+ }
+ 
+ const getlistTypeOrders = listTypesOrders =>({
+     type:GET_TYPES_ORDERS,
+     payload:listTypesOrders 
+ });
 
  export function CreateOrders(Order,{t}){
     return async (dispatch) =>{  

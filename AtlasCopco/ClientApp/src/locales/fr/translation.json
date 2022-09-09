@@ -38,7 +38,8 @@
     "tituloPedido": "Titre demandé",
     "fechaInicio": "Date de début",
     "fechaFin": "Date finale",
-    "registrocreato": "L'enregistrement a été créé avec succès"
+    "registrocreato": "L'enregistrement a été créé avec succès",
+    "tipopedido": "Type de commande"
     
 
 }

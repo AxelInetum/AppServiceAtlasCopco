@@ -10,12 +10,15 @@ import Moment from 'moment';
 export default class Calendar extends React.Component {
   
   constructor(props) {
+    debugger;
     super(props)
     this.state = { 
       id:0,     
       title:'',
       Start:'',
       End:'',
+      Label:'',
+      Value:0,
       UpdateOrder:0 ,
     };
   }
@@ -83,7 +86,9 @@ export default class Calendar extends React.Component {
     this.state.Start = event.event._instance.range.start;
     this.state.End =  event.event._instance.range.end;
     this.state.UpdateOrder = 0;
-    var axel = Moment('Fri Sep 09 2022 04:09:18 GMT+0200').format("dd/MM/yyyy hh:mm:ss");
+    this.state.Label = event.event._def.extendedProps.label;
+    this.state.Value = event.event._def.extendedProps.value;
+    //var axel = Moment('Fri Sep 09 2022 04:09:18 GMT+0200').format("dd/MM/yyyy hh:mm:ss");
           //loadDatas.End = Moment(loadDatas.End).format("dd/MM/yyyy hh:mm:ss");
       //loadDatas.Start = Moment(loadDatas.Start).format("dd/MM/yyyy hh:mm:ss");
 

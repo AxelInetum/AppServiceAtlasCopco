@@ -34,6 +34,16 @@ namespace AtlasCopco.Controllers
         }
 
         /// <summary>
+        /// Obtiene una listado de tipos de pedidos 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Order/types")]
+        public async Task<JsonResult> GetTypes()
+        {
+            return new JsonResult(await _orderService.GetListTypesOrders());
+        }
+
+        /// <summary>
         /// Guarda en base de datos un nuevo pedido
         /// </summary>
         /// <param name="CreateTruckdto"></param>

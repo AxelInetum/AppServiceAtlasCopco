@@ -2,10 +2,11 @@ import React ,{useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {useDispatch} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import Alert from '../Alert/Alert';
 import {CreateOrders} from '../../actions/OrderActions';
 import {ModalHeader,Modal,ModalBody} from 'reactstrap';
+import Select from 'react-select';
 
 const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
     const dispatch = useDispatch();
@@ -14,11 +15,12 @@ const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
         title:'',
         Start:'',
         End:'',
+        Value:0,
         createdOrder:0
     });
     const [startDateStart, setStartDateStart] = useState(new Date());  
     const [startDateEnd, setStartDateEnd] = useState(new Date());  
-    
+    const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
     const OnChange = e => 
     {
         debugger;
@@ -38,7 +40,10 @@ const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
         left: '30%'       
     }
     
-   
+    const handleChange = e => {
+        CreateOrder.value = e.value;
+    }
+    
     const onSubmit = e =>
     {    
         e.preventDefault();
@@ -79,7 +84,7 @@ const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
                         <label>{t('fechaInicio')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/mm/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy hh:mm:ss"
                             timeIntervals={15}
                             selected={startDateStart} 
                             onChange={date => setStartDateStart(date)} />
@@ -88,10 +93,18 @@ const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
                         <label>{t('fechaFin')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/mm/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy hh:mm:ss"
                             timeIntervals={15}
                             selected={startDateEnd} 
                             onChange={date => setStartDateEnd(date)} />
+                    </div> 
+                    <div className="campo-form">
+                        <label>{t('tipopedido')}: </label>
+                        <Select 
+                         name='comboCreatevalue'
+                         id='comboCreatevalue'
+                        onChange={handleChange}
+                        options={ListTipyesOrders} />
                     </div>                    
                     <div className="campo-form">
                         <input type="submit" className="btn btn-success btn-block btn-lg" value={t('crearPedido')}/>

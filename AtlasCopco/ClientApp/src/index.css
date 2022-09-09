@@ -506,3 +506,19 @@ table,tr,th,td{
   justify-content: center;
   text-align: left;
 }
+
+.red{
+  background-color: red;
+}
+.yellow{
+  background-color: yellow;
+}
+.green{
+  background-color: green;
+}
+
+
+.filter{
+ background-color:red;
+
+}

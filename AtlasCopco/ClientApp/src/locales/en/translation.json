@@ -40,7 +40,8 @@
     "fechaInicio": "Date Start",
     "fechaFin": "Date End",
     "pedidoCreado": "order created correctly",
-    "registrocreato": "the register has been created with success"
+    "registrocreato": "the register has been created with success",
+    "tipopedido": "Type order"
     
     
 }

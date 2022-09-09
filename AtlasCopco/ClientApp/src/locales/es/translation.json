@@ -40,6 +40,7 @@
     "fechaInicio": "Date Start",
     "fechaFin": "Date End",
     "pedidoCreado": "pedido creado correctamente",
-    "registrocreato": "El registro ha sido creado con exito."
+    "registrocreato": "El registro ha sido creado con exito.",
+    "tipopedido": "Tipo pedido"
     
 }

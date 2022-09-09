@@ -11,6 +11,7 @@ namespace AtlasCopco.Dto.Order
         public string title { get; set; }
         public string start { get; set; }
         public string End { get; set; }
+        public int Value { get; set; }
         public int createdOrder { get; set; }
     }
 }

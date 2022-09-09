@@ -3,7 +3,8 @@ import {
     //HIDDEN_EDIT_POPUP_TRUCK,
     GET_LIST_ORDERS,
     CREATE_ORDER,
-    EDIT_ORDER
+    EDIT_ORDER,
+    GET_TYPES_ORDERS
     //EDIT_TRUCK,
     //ERROR_EDIT_TRUCK,
     //DELETE_TRUCK,
@@ -27,6 +28,8 @@ const initialState = {
       },*/
      ListOrders:[],
      ListOrders2:[],
+     ListTypesOrders:[],
+     ListTYpesOrders2:[],
      idOrderSelected:0
 
 }
@@ -40,6 +43,13 @@ export default function (state = initialState, action){
                 ...state,
                 ListOrders:action.payload,
                 ListOrders2:action.payload
+            }
+        case GET_TYPES_ORDERS:
+            debugger;
+            return {
+                ...state,
+                ListTypesOrders:action.payload,
+                ListTYpesOrders2:action.payload
             }
         case CREATE_ORDER:
             return {
