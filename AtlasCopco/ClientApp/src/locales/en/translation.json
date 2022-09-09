@@ -26,11 +26,22 @@
     "actualizadocorrectamen":"Update correctly !",
     "credencialesnoCorrectas":"the credentials aren't correct",
     "errordeconexion":"Error of connection",
-    "registroactualizadocor":"The registe has been updated with success",
+    "registroactualizadocor":"The registe has been created with success",
     "noseactulizado": "The register hasn't been updated correctly !",
     "nosehaeliminado":" The register hasn't been delete correctly !",
     "eliminadocorrectamente":"Delete correctly!!",
-    "credencialesIncorrectas":"Credentials incorrects,Error!"
+    "credencialesIncorrectas":"Credentials incorrects,Error!",
+    "calendarioPedidoMenu": "Calendar Order",
+    "crearPedido": "Create Order",
+    "editarPedido": "Edit Order",
+    "actualizarPedido": "Update Order",
+    "borrarPedido": "Delete Order",
+    "tituloPedido": "Title Order",
+    "fechaInicio": "Date Start",
+    "fechaFin": "Date End",
+    "pedidoCreado": "order created correctly",
+    "registrocreato": "the register has been created with success",
+    "tipopedido": "Type order"
     
     
 }

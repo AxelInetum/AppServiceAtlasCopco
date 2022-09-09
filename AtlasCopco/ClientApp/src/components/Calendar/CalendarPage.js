@@ -1,53 +1,53 @@
 import Calendar from '../Calendar/Calendar';
-import React,{Fragment} from 'react';
+import React,{Fragment,useState} from 'react';
 import { useEffect } from "react";
-import {GetlistOrders} from '../../actions/OrderActions';
+import {GetlistOrders,GetTypesOrders} from '../../actions/OrderActions';
 import {useDispatch,useSelector} from 'react-redux';
 import { useTranslation } from 'react-i18next';
+
+
 const CalendarPage = () => {
-debugger;
     const dispatch = useDispatch();
     const {t} = useTranslation();
+    const [showCreatePopup,setshowCreatePopup] = useState(false);
+    const [showEditPopup,setshowEditPopup] = useState(false);
     const Orders = useSelector(state => state.OrdersReducer.ListOrders); 
-    useEffect(() => { 
-        debugger;
+    const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
+
+    useEffect(() => {  
         dispatch(GetlistOrders({t}));
+        dispatch(GetTypesOrders({t}));
       },[]);
+
+      const handleClick =(TypeOrderId) => {
+        alert(TypeOrderId);
+     }
 
   return (
     <Fragment>
         <div id='external-events'>
             <p>
-                <strong>Draggable Events</strong>
+                <strong>Types orders</strong>
             </p>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-                <div class='fc-event-main'>My Event 1</div>
-            </div>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-                <div class='fc-event-main'>My Event 2</div>
-            </div>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-                <div class='fc-event-main'>My Event 3</div>
-            </div>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-                <div class='fc-event-main'>My Event 4</div>
-            </div>
-            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-                <div class='fc-event-main'>My Event 5</div>
-            </div>
-
-            <p>
-                <input type='checkbox' id='drop-remove' />
-                <label for='drop-remove'>remove after drop</label>
-            </p>
+                {ListTipyesOrders ? ListTipyesOrders.map(typesorder => (
+                        <div>
+                            {typesorder.Name}
+                        </div> 
+                )): <div>no hay datos</div> } 
             </div>
 
             <div id='calendar-container'>
             <div id='calendar'></div>
             </div>
         <div>
-            <Calendar Orders ={Orders}></Calendar>
-        </div>
+            <Calendar Orders ={Orders} 
+            showEditPopup={showEditPopup} 
+            setshowEditPopup={setshowEditPopup} 
+            setshowCreatePopup={setshowCreatePopup} 
+            showCreatePopup={showCreatePopup}
+            dispatch={dispatch}
+            t={t}></Calendar>         
+        </div>   
     </Fragment>
   );
 }

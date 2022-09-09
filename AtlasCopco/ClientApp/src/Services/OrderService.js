@@ -3,6 +3,7 @@ import Globals from '../Global';
 
 class OrderService {
 
+  
   base_url = Globals.BASE_URL_ORDER;
   user_token = localStorage.getItem("token");
 
@@ -19,7 +20,23 @@ class OrderService {
       });
   };
 
-  orderTruck = async (orderSelected) => {
+  getOrderTypes = async () => {
+    debugger;
+    return await axios
+       .get(this.base_url+'/types' , { headers: { Authorization: `Bearer ${this.user_token}` } })
+      .then(response => {
+        debugger;
+        return response.data;
+      })
+      .catch(function (error) {
+           return null;
+      });
+  };
+
+
+  createOrder = async (orderSelected) => {
+    debugger;
+    console.log(orderSelected);
     return await axios
        .post(this.base_url, orderSelected,{ headers: { Authorization: `Bearer ${this.user_token}` } })
       .then(response => {

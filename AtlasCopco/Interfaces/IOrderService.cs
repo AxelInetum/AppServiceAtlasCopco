@@ -14,5 +14,7 @@ namespace AtlasCopco.Interfaces
         Task<bool> UpdateOrder(UpdateOrderdto updateTruckdto);
         Task<bool> DeleteOrder(int id);
         Task<List<OrderDatasDto>> GetListOrders();
+
+        Task<List<TypesOrdersDto>> GetListTypesOrders();
     }
 }

@@ -1,16 +1,7 @@
 import {
-    /*SHOW_EDIT_POPUP_TRUCK,
-    HIDDEN_EDIT_POPUP_TRUCK,
-    GET_LIST_TRUCKS,
-    EDIT_TRUCK,
-    DELETE_TRUCK,
-    HIDDEN_DELETE_POPUP_TRUCK,
-    SHOW_DELETE_POPUP_TRUCK,
-    CREATE_TRUCK,
-    SET_ID_SELECTED_TRUCK,
-    UPDATE_LIST_TRUCKS_FILTER,
-    SHOW_POPUP_TRUCKS_FILTER,
-    UPDATE_OBJECT_FILTER_TRUCK*/
+    GET_TYPES_ORDERS,
+    CREATE_ORDER,
+    EDIT_ORDER,
     GET_LIST_ORDERS
 } from '../Types';
 
@@ -40,19 +31,85 @@ export function GetlistOrders ({t}){
  });
 
 
-
-/*
-export function ShowEditPopupTruck(alerta)
-{
-    return (dispatch) => {
-        dispatch(showEditPopupTruck(alerta))
+ export function GetTypesOrders ({t}){
+    debugger;
+    return async (dispatch) =>{                
+         const p = Promise.resolve(new Orderservice().getOrderTypes());
+         p.then(listTypesOrders => {
+            debugger;
+             if (listTypesOrders!=null)
+             {
+                 dispatch(getlistTypeOrders(listTypesOrders));
+             }
+             else{
+                 Alert(t('nosehapodidocargar'),t('contacteadministrador'),'error');
+             }
+         });            
     }
+ }
+ 
+ const getlistTypeOrders = listTypesOrders =>({
+     type:GET_TYPES_ORDERS,
+     payload:listTypesOrders 
+ });
+
+ export function CreateOrders(Order,{t}){
+    return async (dispatch) =>{  
+        debugger;  
+         const p = Promise.resolve( new Orderservice ().createOrder(Order));
+         p.then(response => {
+             if (response)
+             {
+                 dispatch(createOrder(Order));
+                 dispatch(GetlistOrders({t}));
+                 Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
+             }
+             else{
+                 Alert(t('nosehaeliminado'),t('contacteadministrador'),"error");
+             }    
+         });                     
+    }
+ }
+ 
+ const createOrder = order =>({
+     type:CREATE_ORDER,
+     payload:order
+ });
+
+
+ export function EditOrders(Order,{t}){
+    debugger;
+    Order.title = Order.title + "s";
+   return async (dispatch) =>{    
+        const p = Promise.resolve( new Orderservice().updateOrder(Order));
+        p.then(response => {
+            if (response)
+            {
+                debugger;
+                dispatch(editOrder(Order));
+                dispatch(GetlistOrders({t}));
+                Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
+            }
+            else{
+              
+                Alert(t('noseactulizado'),t('contacteadministrador'),'error');
+            }    
+        });                     
+   }
 }
 
-const showEditPopupTruck= alerta =>({
-    type:SHOW_EDIT_POPUP_TRUCK,
-    payload:alerta 
-})
+const editOrder= order =>({
+    type:EDIT_ORDER,
+    payload:order
+});
+
+
+
+
+
+
+
+/*
 
 export function ShowDeletePopupTruck(alerta)
 {

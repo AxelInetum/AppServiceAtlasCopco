@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace AtlasCopco.Dto.Order
 {
-    public  class OrderDatasDto
+    public  class TypesOrdersDto
     {
-        public int id { get; set; }
-        public string title { get; set; }
-        public string start  { get; set; }
-        public string end { get; set; }
         public int Value { get; set; }
         public string Label { get; set; }
-        public string backgroundColor { get; set; }
+        public string Color { get; set; }
         //public DateTime FechaFin { get; set; }
     }
 }

@@ -2,6 +2,9 @@ import {
     //SHOW_EDIT_POPUP_TRUCK,
     //HIDDEN_EDIT_POPUP_TRUCK,
     GET_LIST_ORDERS,
+    CREATE_ORDER,
+    EDIT_ORDER,
+    GET_TYPES_ORDERS
     //EDIT_TRUCK,
     //ERROR_EDIT_TRUCK,
     //DELETE_TRUCK,
@@ -25,6 +28,8 @@ const initialState = {
       },*/
      ListOrders:[],
      ListOrders2:[],
+     ListTypesOrders:[],
+     ListTYpesOrders2:[],
      idOrderSelected:0
 
 }
@@ -33,13 +38,37 @@ export default function (state = initialState, action){
     debugger;
     switch(action.type)
     {
-
         case GET_LIST_ORDERS:
             return {
                 ...state,
                 ListOrders:action.payload,
                 ListOrders2:action.payload
             }
+        case GET_TYPES_ORDERS:
+            debugger;
+            return {
+                ...state,
+                ListTypesOrders:action.payload,
+                ListTYpesOrders2:action.payload
+            }
+        case CREATE_ORDER:
+            return {
+                ...state,
+                ListOrders: [...state.ListOrders,action.payload],
+                ListOrders2: [...state.ListOrders2,action.payload]
+            }     
+        case EDIT_ORDER:
+            debugger;
+                return {
+                    ...state,
+                    ListOrders: state.ListOrders.map(order => 
+                        order.id === action.payload.id ? order = action.payload : order
+                    ),
+                    ListOrders2: state.ListOrders2.map(order => 
+                        order.id === action.payload.id ? order = action.payload : order
+                    ),
+                    EditTruckpopup:false
+                }
          /*case SHOW_EDIT_POPUP_TRUCK:
             return {
                 ...state,
