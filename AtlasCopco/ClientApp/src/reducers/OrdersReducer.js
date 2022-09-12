@@ -4,7 +4,11 @@ import {
     GET_LIST_ORDERS,
     CREATE_ORDER,
     EDIT_ORDER,
-    GET_TYPES_ORDERS
+    GET_TYPES_ORDERS,
+    FILTER_ORDERS_CALENDAR_TYPE,
+    ALL_ORDERS_CALENDAR,
+    SHOW_EDIT_ORDER_POPUP_CALENDAR,
+    SHOW_CREATE_ORDER_POPUP_CALENDAR
     //EDIT_TRUCK,
     //ERROR_EDIT_TRUCK,
     //DELETE_TRUCK,
@@ -26,6 +30,8 @@ const initialState = {
         valueComboFilterTruck:'',
         valueFilter:''
       },*/
+     showeditpopupcalendar:false,
+     showcreatepopupcalendar:false,
      ListOrders:[],
      ListOrders2:[],
      ListTypesOrders:[],
@@ -52,6 +58,7 @@ export default function (state = initialState, action){
                 ListTYpesOrders2:action.payload
             }
         case CREATE_ORDER:
+            debugger;
             return {
                 ...state,
                 ListOrders: [...state.ListOrders,action.payload],
@@ -68,6 +75,28 @@ export default function (state = initialState, action){
                         order.id === action.payload.id ? order = action.payload : order
                     ),
                     EditTruckpopup:false
+                }
+        case FILTER_ORDERS_CALENDAR_TYPE:
+                return {
+                    ...state,
+                    ListOrders:state. ListOrders.filter(order => order.value ==action.payload),
+                }
+        case ALL_ORDERS_CALENDAR:
+            return {
+                ...state,
+                ListOrders:state.ListOrders2,
+            }
+        case SHOW_EDIT_ORDER_POPUP_CALENDAR:
+            debugger;
+                return {
+                    ...state,
+                    showeditpopupcalendar:action.payload,
+                }
+        case SHOW_CREATE_ORDER_POPUP_CALENDAR:
+            debugger;
+                return {
+                    ...state,
+                    showcreatepopupcalendar:action.payload,
                 }
          /*case SHOW_EDIT_POPUP_TRUCK:
             return {

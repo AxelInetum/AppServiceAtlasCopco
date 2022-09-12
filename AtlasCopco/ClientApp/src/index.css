@@ -517,6 +517,16 @@ table,tr,th,td{
   background-color: green;
 }
 
+.purple{
+  background-color:purple
+}
+
+.blue{
+  background-color:blue
+}
+
+
+
 
 .filter{
  background-color:red;

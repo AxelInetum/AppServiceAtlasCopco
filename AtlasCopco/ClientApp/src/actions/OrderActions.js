@@ -2,7 +2,11 @@ import {
     GET_TYPES_ORDERS,
     CREATE_ORDER,
     EDIT_ORDER,
-    GET_LIST_ORDERS
+    GET_LIST_ORDERS,
+    FILTER_ORDERS_CALENDAR_TYPE,
+    ALL_ORDERS_CALENDAR,
+    SHOW_EDIT_ORDER_POPUP_CALENDAR,
+    SHOW_CREATE_ORDER_POPUP_CALENDAR 
 } from '../Types';
 
 import Orderservice from '../Services/OrderService';
@@ -58,10 +62,13 @@ export function GetlistOrders ({t}){
         debugger;  
          const p = Promise.resolve( new Orderservice ().createOrder(Order));
          p.then(response => {
-             if (response)
+             if (response.createdOrder >0 )
              {
+                Order.id = response.createOrder;
+                Order.start = '2022-09-09 14:09:10';
+                Order.end = '2022-09-09 14:09:10';
                  dispatch(createOrder(Order));
-                 dispatch(GetlistOrders({t}));
+                 dispatch(popupCreateCalendar(false));
                  Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
              }
              else{
@@ -85,9 +92,8 @@ export function GetlistOrders ({t}){
         p.then(response => {
             if (response)
             {
-                debugger;
                 dispatch(editOrder(Order));
-                dispatch(GetlistOrders({t}));
+                dispatch(popupEditorderCalendar(false));
                 Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
             }
             else{
@@ -103,7 +109,55 @@ const editOrder= order =>({
     payload:order
 });
 
+export function FilterOrdersByType(value,{t}){
+    debugger;
+    return async (dispatch) =>{   
+        dispatch(filterOrderByType(value));                            
+    }
+ }
+ 
+ const filterOrderByType= value =>({
+     type:FILTER_ORDERS_CALENDAR_TYPE,
+     payload:value 
+ });
 
+
+ export function AllOrdersCalendar(){
+    debugger;
+    return async (dispatch) =>{   
+        dispatch(allOrdersCalendar());                            
+    }
+ }
+ 
+ const allOrdersCalendar= () =>({
+     type:ALL_ORDERS_CALENDAR,
+     payload:''
+ });
+
+ export function PopupEditorderCalendar (show){
+    return (dispatch) =>{
+        dispatch(popupEditorderCalendar (show))
+ 
+    }
+ }
+ 
+ const popupEditorderCalendar  = show =>({
+     type: SHOW_EDIT_ORDER_POPUP_CALENDAR,
+     payload:show
+ });
+
+
+ export function PopupCreateCalendar (show){
+    return (dispatch) =>{
+        dispatch(popupCreateCalendar (show))
+ 
+    }
+ }
+ 
+ const popupCreateCalendar = show =>({
+     type:SHOW_CREATE_ORDER_POPUP_CALENDAR,
+     payload:show
+ });
 
 
 
@@ -126,7 +180,6 @@ const showDeletePopupTruck= alerta =>({
 export function HiddenEditPopupTruck (alerta){
    return (dispatch) =>{
        dispatch(hiddenEditPopupTruck(alerta))
-
    }
 }
 

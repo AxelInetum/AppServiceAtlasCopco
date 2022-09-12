@@ -5,12 +5,13 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Createorder from '../Order/CreateOrder';
 import EditOrder from '../Order/EditOrder';
-import {EditOrders} from '../../actions/OrderActions';
+import {EditOrders,PopupEditorderCalendar,PopupCreateCalendar} from '../../actions/OrderActions';
 import Moment from 'moment';
 export default class Calendar extends React.Component {
   
   constructor(props) {
     debugger;
+
     super(props)
     this.state = { 
       id:0,     
@@ -39,11 +40,9 @@ export default class Calendar extends React.Component {
         eventDrop={(event,info)=>this.moveEventdropCalendar(event ,info)}
         eventClick={(info) => this.HandleEditPopupClick(info)}   
         events={this.props.Orders}/>
-        <Createorder showCreatePopup={this.props.showCreatePopup}  
-        setshowCreatePopup={this.props.setshowCreatePopup} ></Createorder>
+        <Createorder showCreatePopup={this.props.showCreatePopup} ></Createorder>
 
-        <EditOrder loadDatas={this.state} showEditPopup={this.props.showEditPopup} 
-         setshowEditPopup={this.props.setshowEditPopup} ></ EditOrder>
+        <EditOrder loadDatas={this.state} showEditPopup={this.props.showEditPopup} ></ EditOrder>
       </>
      )
    }
@@ -53,8 +52,8 @@ export default class Calendar extends React.Component {
       debugger;
       this.state.id = event.event._def.publicId;
       this.state.title = event.event.title;
-      this.state.Start =  event.event._instance.range.start;
-      this.state.End =  event.event._instance.range.end;
+      this.state.Start = new Date(event.event._instance.range.start.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
+      this.state.End =  new Date(event.event._instance.range.end.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
       this.state.UpdateOrder = 0;     
       var t = this.props.t;
       this.props.dispatch(EditOrders(this.state,{t}));
@@ -62,8 +61,8 @@ export default class Calendar extends React.Component {
   }
 
   //when click for new order (out events)
-  handleDateClick = (arg) => { 
-    this.props.setshowCreatePopup(true);
+  handleDateClick = (arg) => {  
+    this.props.dispatch(PopupCreateCalendar(true));
   }
 
   //when resize event 
@@ -71,8 +70,8 @@ export default class Calendar extends React.Component {
    
     this.state.id = event.event._def.publicId;
     this.state.title = event.event.title;
-    this.state.Start =  event.event._instance.range.start;
-    this.state.End =  event.event._instance.range.end;
+    this.state.Start = new Date(event.event._instance.range.start.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
+    this.state.End =  new Date(event.event._instance.range.end.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
     this.state.UpdateOrder = 0;     
     var t = this.props.t;
     this.props.dispatch(EditOrders(this.state,{t}));
@@ -83,8 +82,13 @@ export default class Calendar extends React.Component {
     debugger;
     this.state.id = event.event._def.publicId;
     this.state.title = event.event.title;
-    this.state.Start = event.event._instance.range.start;
-    this.state.End =  event.event._instance.range.end;
+  
+    var start2 = new Date(Moment((event.event._instance.range.start).toString().split('(')[0]).format('DD/MM/yyyy hh:mm:ss'));
+    this.state.Start = start2;
+
+    var end2 = new Date(Moment((event.event._instance.range.end).toString().split('(')[0]).format('DD/MM/yyyy hh:mm:ss'));
+    this.state.End = end2; 
+    
     this.state.UpdateOrder = 0;
     this.state.Label = event.event._def.extendedProps.label;
     this.state.Value = event.event._def.extendedProps.value;
@@ -92,10 +96,8 @@ export default class Calendar extends React.Component {
           //loadDatas.End = Moment(loadDatas.End).format("dd/MM/yyyy hh:mm:ss");
       //loadDatas.Start = Moment(loadDatas.Start).format("dd/MM/yyyy hh:mm:ss");
 
-    this.props.setshowEditPopup(true);
+      this.props.dispatch(PopupEditorderCalendar(true));
   }
-
- 
 }
 
 

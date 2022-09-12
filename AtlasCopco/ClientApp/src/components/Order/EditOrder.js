@@ -3,13 +3,13 @@ import {useDispatch,useSelector} from 'react-redux';
 import {ModalHeader,Modal,ModalBody} from 'reactstrap';
 import Alert from '../Alert/Alert';
 import { useTranslation } from 'react-i18next';
-import {EditOrders,GetTypesOrders} from '../../actions/OrderActions';
+import {EditOrders,GetTypesOrders,PopupEditorderCalendar} from '../../actions/OrderActions';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
 
 
-const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
+const EditOrder = ({loadDatas,showEditPopup}) => {
     debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
@@ -27,7 +27,7 @@ const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
    }
     const ClosePopup=() => 
     {
-        setshowEditPopup(false);
+        dispatch(PopupEditorderCalendar(false));
     }
 
     const OnChange = e => 
@@ -67,8 +67,7 @@ const EditOrder = ({loadDatas,showEditPopup,setshowEditPopup}) => {
             dispatch(EditOrders(loadDatas,{t}));                               
         }
     }
-    
-    
+     
     return (
         <Modal isOpen={showEditPopup} fade={false} style={modalStyle}>
         <ModalHeader ><a class="mover" onClick={() => ClosePopup()}>x</a></ModalHeader>
