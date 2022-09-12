@@ -19,8 +19,8 @@ const CreateOrder = ({showCreatePopup}) => {
         Value:0,
         createdOrder:0
     });
-    const [startDateStart, setStartDateStart] = useState(new Date());  
-    const [startDateEnd, setStartDateEnd] = useState(new Date());  
+    const [startDateStart, setStartDateStart] = useState();  
+    const [startDateEnd, setStartDateEnd] = useState();  
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
     const OnChange = e => 
     {

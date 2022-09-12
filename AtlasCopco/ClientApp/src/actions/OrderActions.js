@@ -64,12 +64,12 @@ export function GetlistOrders ({t}){
          p.then(response => {
              if (response.createdOrder >0 )
              {
-                Order.id = response.createdOrder;
+                response.id = response.createdOrder;
                 debugger;
-                 Order.start = FormatDate(response.start);
-                 Order.end = FormatDate(response.end);
+                response.start = FormatDate(response.start);
+                response.end = FormatDate(response.end);
                  debugger;
-                 dispatch(createOrder(Order));
+                 dispatch(createOrder(response));
                  dispatch(popupCreateCalendar(false));
                  Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
              }
@@ -87,8 +87,11 @@ export function GetlistOrders ({t}){
 
  function FormatDate(date)
  {
-     var dates = new Date(date);
-     return dates.getFullYear()  + '-' +  (dates.getDate() < 10 ? '0' + dates.getDate():dates.getDate()) + '-'+ ((dates.getMonth()+1) < 10 ? '0' + (dates.getMonth()+1):(dates.getMonth()+1)) + ' ' + (dates.getHours() < 10 ? '0' + dates.getHours():dates.getHours())  + ':' +  (dates.getMinutes() < 10 ? '0' + dates.getMinutes():dates.getMinutes());
+    debugger;
+    var axel = date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]    + '-' + date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1];
+    
+    return new Date(date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]   + '-' +  date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1]);
+      
  }
 
 
