@@ -22,7 +22,7 @@ namespace AtlasCopco.Services
 
         public async Task<CreateOrderDto> CreateOrder(CreateOrderDto createOrderdto)
         {
-            this.query = String.Format("INSERT INTO Pedido (nombre, FechaInicio,FechaFinal, id_tipo_pedido) OUTPUT INSERTED.Id VALUES('{0}','{1}','{2}',{3})", createOrderdto.title, createOrderdto.start, createOrderdto.End, createOrderdto.Value);
+            this.query = String.Format("INSERT INTO Pedido (nombre, FechaInicio,FechaFinal, id_tipo_pedido) OUTPUT INSERTED.Id VALUES('{0}','{1}','{2}',{3})", createOrderdto.title, createOrderdto.Start, createOrderdto.End, createOrderdto.Value);
             try
             {
                 createOrderdto.createdOrder = Convert.ToInt32(_AccessMethodsSql.CrudDataToSqlReturnId(this.query).Result);
