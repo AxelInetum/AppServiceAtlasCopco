@@ -4,7 +4,9 @@ import {
     EDIT_ORDER,
     GET_LIST_ORDERS,
     FILTER_ORDERS_CALENDAR_TYPE,
-    ALL_ORDERS_CALENDAR
+    ALL_ORDERS_CALENDAR,
+    SHOW_EDIT_ORDER_POPUP_CALENDAR,
+    SHOW_CREATE_ORDER_POPUP_CALENDAR 
 } from '../Types';
 
 import Orderservice from '../Services/OrderService';
@@ -66,7 +68,7 @@ export function GetlistOrders ({t}){
                 Order.start = '2022-09-09 14:09:10';
                 Order.end = '2022-09-09 14:09:10';
                  dispatch(createOrder(Order));
-                 //dispatch(GetlistOrders({t}));
+                 dispatch(popupCreateCalendar(false));
                  Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
              }
              else{
@@ -90,8 +92,8 @@ export function GetlistOrders ({t}){
         p.then(response => {
             if (response)
             {
-                debugger;
                 dispatch(editOrder(Order));
+                dispatch(popupEditorderCalendar(false));
                 Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
             }
             else{
@@ -132,6 +134,30 @@ export function FilterOrdersByType(value,{t}){
      payload:''
  });
 
+ export function PopupEditorderCalendar (show){
+    return (dispatch) =>{
+        dispatch(popupEditorderCalendar (show))
+ 
+    }
+ }
+ 
+ const popupEditorderCalendar  = show =>({
+     type: SHOW_EDIT_ORDER_POPUP_CALENDAR,
+     payload:show
+ });
+
+
+ export function PopupCreateCalendar (show){
+    return (dispatch) =>{
+        dispatch(popupCreateCalendar (show))
+ 
+    }
+ }
+ 
+ const popupCreateCalendar = show =>({
+     type:SHOW_CREATE_ORDER_POPUP_CALENDAR,
+     payload:show
+ });
 
 
 

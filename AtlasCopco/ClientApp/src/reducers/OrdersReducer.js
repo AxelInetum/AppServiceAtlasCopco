@@ -6,7 +6,9 @@ import {
     EDIT_ORDER,
     GET_TYPES_ORDERS,
     FILTER_ORDERS_CALENDAR_TYPE,
-    ALL_ORDERS_CALENDAR
+    ALL_ORDERS_CALENDAR,
+    SHOW_EDIT_ORDER_POPUP_CALENDAR,
+    SHOW_CREATE_ORDER_POPUP_CALENDAR
     //EDIT_TRUCK,
     //ERROR_EDIT_TRUCK,
     //DELETE_TRUCK,
@@ -28,6 +30,8 @@ const initialState = {
         valueComboFilterTruck:'',
         valueFilter:''
       },*/
+     showeditpopupcalendar:false,
+     showcreatepopupcalendar:false,
      ListOrders:[],
      ListOrders2:[],
      ListTypesOrders:[],
@@ -82,6 +86,18 @@ export default function (state = initialState, action){
                 ...state,
                 ListOrders:state.ListOrders2,
             }
+        case SHOW_EDIT_ORDER_POPUP_CALENDAR:
+            debugger;
+                return {
+                    ...state,
+                    showeditpopupcalendar:action.payload,
+                }
+        case SHOW_CREATE_ORDER_POPUP_CALENDAR:
+            debugger;
+                return {
+                    ...state,
+                    showcreatepopupcalendar:action.payload,
+                }
          /*case SHOW_EDIT_POPUP_TRUCK:
             return {
                 ...state,

@@ -4,11 +4,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {useDispatch,useSelector} from 'react-redux';
 import Alert from '../Alert/Alert';
-import {CreateOrders} from '../../actions/OrderActions';
+import {CreateOrders,PopupEditorderCalendar,PopupCreateCalendar} from '../../actions/OrderActions';
 import {ModalHeader,Modal,ModalBody} from 'reactstrap';
 import Select from 'react-select';
 
-const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
+const CreateOrder = ({showCreatePopup}) => {
     const dispatch = useDispatch();
     const { t} = useTranslation();
     const [CreateOrder,SetOrder] = useState({
@@ -32,7 +32,7 @@ const CreateOrder = ({showCreatePopup,setshowCreatePopup}) => {
     }
     const ClosePopup=() => 
     {
-        setshowCreatePopup(false);
+        dispatch(PopupCreateCalendar(false));
     }
     const modalStyle=
     {

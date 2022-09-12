@@ -10,8 +10,8 @@ const CalendarPage = () => {
     debugger;
     const dispatch = useDispatch();
     const {t} = useTranslation();
-    const [showCreatePopup,setshowCreatePopup] = useState(false);
-    const [showEditPopup,setshowEditPopup] = useState(false);
+    const showEditPopup = useSelector(state => state.OrdersReducer.showeditpopupcalendar); 
+    const showCreatePopup = useSelector(state => state.OrdersReducer.showcreatepopupcalendar); 
     const Orders = useSelector(state => state.OrdersReducer.ListOrders); 
     const ListTypesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
 
@@ -63,8 +63,6 @@ const CalendarPage = () => {
         <div>
             <Calendar Orders ={Orders} 
             showEditPopup={showEditPopup} 
-            setshowEditPopup={setshowEditPopup} 
-            setshowCreatePopup={setshowCreatePopup} 
             showCreatePopup={showCreatePopup}
             dispatch={dispatch}
             t={t}></Calendar>         
