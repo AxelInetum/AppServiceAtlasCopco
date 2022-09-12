@@ -66,10 +66,10 @@ export function GetlistOrders ({t}){
              {
                 Order.id = response.createdOrder;
                 debugger;
-                 //Order.start = '2022-09-05';
-                 //Order.end = '2022-09-05';
+                 Order.start = FormatDate(response.start);
+                 Order.end = FormatDate(response.end);
                  debugger;
-                 dispatch(createOrder(response));
+                 dispatch(createOrder(Order));
                  dispatch(popupCreateCalendar(false));
                  Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
              }
@@ -84,6 +84,12 @@ export function GetlistOrders ({t}){
      type:CREATE_ORDER,
      payload:order
  });
+
+ function FormatDate(date)
+ {
+     var dates = new Date(date);
+     return dates.getFullYear()  + '-' +  (dates.getDate() < 10 ? '0' + dates.getDate():dates.getDate()) + '-'+ ((dates.getMonth()+1) < 10 ? '0' + (dates.getMonth()+1):(dates.getMonth()+1)) + ' ' + (dates.getHours() < 10 ? '0' + dates.getHours():dates.getHours())  + ':' +  (dates.getMinutes() < 10 ? '0' + dates.getMinutes():dates.getMinutes());
+ }
 
 
  export function EditOrders(Order,{t}){

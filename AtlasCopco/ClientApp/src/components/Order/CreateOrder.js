@@ -54,25 +54,18 @@ const CreateOrder = ({showCreatePopup}) => {
         }
         else
         {      
-
             debugger;
             CreateOrder.Start = FormatDate(startDateStart); 
             CreateOrder.End =  FormatDate(startDateEnd);
-            //var curr_month = mydate.getMonth();
-            //var curr_year = mydate.getFullYear();
-
-            //CreateOrder.End = startDateEnd //'07-09-2022 12:52:18.000';
-            debugger;
             dispatch(CreateOrders(CreateOrder,{t}));                                             
         }    
     }
-    
+   
     function FormatDate(date)
     {
-        return date.getFullYear()  + '-' + ((date.getMonth()+1) < 10 ? '0' + (date.getMonth()+1):(date.getMonth()+1)) + '-'+ (date.getDate() < 10 ? '0' + date.getDate():date.getDate()) + ' ' + (date.getHours() < 10 ? '0' + date.getHours():date.getHours())  + ':' +  (date.getMinutes() < 10 ? '0' + date.getMinutes():date.getMinutes());
+        return date.getFullYear()  + '-' +  (date.getDate() < 10 ? '0' + date.getDate():date.getDate()) + '-'+ ((date.getMonth()+1) < 10 ? '0' + (date.getMonth()+1):(date.getMonth()+1)) + ' ' + (date.getHours() < 10 ? '0' + date.getHours():date.getHours())  + ':' +  (date.getMinutes() < 10 ? '0' + date.getMinutes():date.getMinutes());
     }
-
-
+   
     return (
         <Modal isOpen={showCreatePopup} fade={false} style={modalStyle}>
         <ModalHeader ><a class="mover" onClick={() => ClosePopup()}>x</a></ModalHeader>
