@@ -65,8 +65,9 @@ export function GetlistOrders ({t}){
              if (response.createdOrder >0 )
              {
                 Order.id = response.createOrder;
-                Order.start = '2022-09-09 14:09:10';
-                Order.end = '2022-09-09 14:09:10';
+                debugger;
+                //Order.start = '2022-09-09 14:09:10';
+                //Order.end = '2022-09-09 14:09:10';
                  dispatch(createOrder(Order));
                  dispatch(popupCreateCalendar(false));
                  Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');

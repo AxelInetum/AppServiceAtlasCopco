@@ -54,8 +54,15 @@ const CreateOrder = ({showCreatePopup}) => {
         }
         else
         {      
-            CreateOrder.Start = startDateStart //'06-09-2022 12:52:18.000';
-            CreateOrder.End = startDateEnd //'07-09-2022 12:52:18.000';
+
+            debugger;
+            CreateOrder.Start = '04' + '/' + startDateStart.getMonth() + '/' +   startDateStart.getFullYear() + ' ' +  startDateStart.getHours() + ':' + startDateStart.getMinutes() + ':' + startDateStart.getSeconds();
+            CreateOrder.End = '05' + '/' + startDateEnd.getMonth() + '/' +   startDateEnd.getFullYear() + ' ' +  startDateEnd.getHours() + ':' + startDateEnd.getMinutes() + ':' + startDateEnd.getSeconds();
+            //var curr_date = mydate.getDate();
+            //var curr_month = mydate.getMonth();
+            //var curr_year = mydate.getFullYear();
+
+            //CreateOrder.End = startDateEnd //'07-09-2022 12:52:18.000';
             debugger;
             dispatch(CreateOrders(CreateOrder,{t}));                                             
         }    
@@ -85,16 +92,19 @@ const CreateOrder = ({showCreatePopup}) => {
                         <label>{t('fechaInicio')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy hh:mm:ss aa"
+                            timeFormat="HH:mm"
                             timeIntervals={15}
                             selected={startDateStart} 
-                            onChange={date => setStartDateStart(date)} />
+                            onChange={date => setStartDateStart(date)} 
+                            />
                     </div>
                     <div className="campo-form">
                         <label>{t('fechaFin')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy hh:mm:ss aa"
+                            timeFormat="HH:mm"
                             timeIntervals={15}
                             selected={startDateEnd} 
                             onChange={date => setStartDateEnd(date)} />
