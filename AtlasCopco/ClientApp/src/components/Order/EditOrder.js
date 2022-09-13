@@ -14,8 +14,17 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
     const dispatch = useDispatch();
     const { t} = useTranslation();
 
-    const [startDateStart, setStartDateStart] = useState(new Date());  
-    const [startDateEnd, setStartDateEnd] = useState(new Date()); 
+    const [startDateStart, setStartDateStart] = useState(loadDatas.start);  
+    const [startDateEnd, setStartDateEnd] = useState(loadDatas.start); 
+    const [EditOrder,SetEditOrder] = useState({
+        id: 0,
+        title:'',
+        Start:'',
+        End:'',
+        UpdaterOrder:0,
+        Label: '',
+        Value:''
+    });
  
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
 
@@ -32,7 +41,10 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
 
     const OnChange = e => 
     {
-        
+        SetEditOrder({
+            ...EditOrder,
+            [e.target.name] : e.target.value
+        })
     }
     const colourStyles = {
         control: styles => ({ ...styles, backgroundColor: 'white' }),
@@ -51,6 +63,10 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
     }
 
     useEffect(() => {  
+        debugger;
+
+        SetEditOrder(loadDatas);
+        debugger;
         dispatch(GetTypesOrders({t}));
       },[]);
 
@@ -64,6 +80,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
         }
         else
         {
+            debugger;
             dispatch(EditOrders(loadDatas,{t}));                               
         }
     }
@@ -85,27 +102,32 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                             name="title"
                             class="form-control"
                             placeholder={t('TuNombre')}
-                            value={loadDatas.title}
+                            value={EditOrder == undefined ? "" : EditOrder.title}
                             onChange={OnChange}
                         />
                     </div>
                     <div className="campo-form">
                         <label>{t('fechaInicio')}: </label>
                         <DatePicker 
+                            name='Start'
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy hh:mm:ss aa"
+                            timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={loadDatas.Start} 
-                            onChange={date => setStartDateStart(date)} />
+                            selected={EditOrder == undefined ? "" : EditOrder.Start} 
+                            onChange={OnChange} 
+                            />
                     </div>
                     <div className="campo-form">
                         <label>{t('fechaFin')}: </label>
                         <DatePicker 
+                            name='End'
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy hh:mm:ss aa"
+                            timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={loadDatas.End} 
-                            onChange={date => setStartDateEnd(date)} />
+                            selected={EditOrder == undefined ? "" : EditOrder.End} 
+                            onChange={OnChange} />
                     </div>   
                     <div className="campo-form">
                         <label>{t('tipopedido')}: </label>

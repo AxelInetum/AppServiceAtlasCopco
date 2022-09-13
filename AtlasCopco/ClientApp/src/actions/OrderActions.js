@@ -59,19 +59,16 @@ export function GetlistOrders ({t}){
 
  export function CreateOrders(Order,{t}){
     return async (dispatch) =>{  
-        debugger;  
          const p = Promise.resolve( new Orderservice ().createOrder(Order));
          p.then(response => {
              if (response.createdOrder >0 )
              {
                 response.id = response.createdOrder;
-                debugger;
                 response.start = FormatDate(response.start);
                 response.end = FormatDate(response.end);
-                 debugger;
-                 dispatch(createOrder(response));
-                 dispatch(popupCreateCalendar(false));
-                 Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
+                dispatch(createOrder(response));
+                dispatch(popupCreateCalendar(false));
+                Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
              }
              else{
                  Alert(t('nosehaeliminado'),t('contacteadministrador'),"error");
@@ -103,6 +100,7 @@ export function GetlistOrders ({t}){
         p.then(response => {
             if (response)
             {
+                
                 dispatch(editOrder(Order));
                 dispatch(popupEditorderCalendar(false));
                 Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
