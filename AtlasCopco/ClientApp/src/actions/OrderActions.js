@@ -64,8 +64,8 @@ export function GetlistOrders ({t}){
              if (response.createdOrder >0 )
              {
                 response.id = response.createdOrder;
-                response.start = FormatDate(response.start);
-                response.end = FormatDate(response.end);
+                response.start =  FormatDateToDate(response.start);
+                response.end =  FormatDateToDate(response.end);
                 dispatch(createOrder(response));
                 dispatch(popupCreateCalendar(false));
                 Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
@@ -82,26 +82,27 @@ export function GetlistOrders ({t}){
      payload:order
  });
 
- function FormatDate(date)
+ function FormatDateToDate(date)
+ {  
+    return new Date(date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]   + '-' +  date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1]);    
+ }
+
+ function FormatDateToString(date)
  {
     debugger;
-    var axel = date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]    + '-' + date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1];
-    
-    return new Date(date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]   + '-' +  date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1]);
-      
+     return date.getFullYear()  + '-' +  (date.getDate() < 10 ? '0' + date.getDate():date.getDate()) + '-'+ ((date.getMonth()+1) < 10 ? '0' + (date.getMonth()+1):(date.getMonth()+1)) + ' ' + (date.getHours() < 10 ? '0' + date.getHours():date.getHours())  + ':' +  (date.getMinutes() < 10 ? '0' + date.getMinutes():date.getMinutes());
  }
 
 
  export function EditOrders(Order,{t}){
-    debugger;
-    Order.title = Order.title + "s";
+debugger;
    return async (dispatch) =>{    
         const p = Promise.resolve( new Orderservice().updateOrder(Order));
         p.then(response => {
-            if (response)
+            debugger;
+            if (response.updateOrder>0)
             {
-                
-                dispatch(editOrder(Order));
+                dispatch(editOrder(response));
                 dispatch(popupEditorderCalendar(false));
                 Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
             }

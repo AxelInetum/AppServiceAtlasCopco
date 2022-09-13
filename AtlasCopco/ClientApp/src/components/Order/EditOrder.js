@@ -13,9 +13,6 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
     debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
-
-    const [startDateStart, setStartDateStart] = useState(loadDatas.start);  
-    const [startDateEnd, setStartDateEnd] = useState(loadDatas.start); 
     const [EditOrder,SetEditOrder] = useState({
         id: 0,
         title:'',
@@ -59,14 +56,12 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
       };
 
     const handleChange = e => {
-        loadDatas.value = e.value;
+        EditOrder.Value = e.label;
+        EditOrder.Label = e.value;
     }
 
     useEffect(() => {  
-        debugger;
-
         SetEditOrder(loadDatas);
-        debugger;
         dispatch(GetTypesOrders({t}));
       },[]);
 
@@ -74,14 +69,15 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
     const onSubmit = e =>
     { 
         e.preventDefault();
-        if(loadDatas.title.trim() === '' )
+        if(EditOrder.title.trim() === '' )
         {
             Alert(t('camposobligatorios') ,t('nosehainsertado'),"error");
         }
         else
         {
             debugger;
-            dispatch(EditOrders(loadDatas,{t}));                               
+            
+            dispatch(EditOrders(EditOrder,{t}));                               
         }
     }
      
@@ -134,7 +130,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                         <Select 
                         name='combovalue'
                         id='combovalue'
-                        defaultValue={{ label: loadDatas.Label, value: loadDatas.Value}}
+                        defaultValue={{ label: EditOrder.Label, value: EditOrder.Value}}
                         onChange={handleChange}
                         options={ListTipyesOrders} />
                     </div>   

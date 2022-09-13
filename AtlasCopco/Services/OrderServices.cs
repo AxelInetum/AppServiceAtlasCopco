@@ -87,7 +87,7 @@ namespace AtlasCopco.Services
             return listTypesOrdersDto;
         }
 
-        public async Task<bool> UpdateOrder(UpdateOrderdto updateOrderDto)
+        public async Task<UpdateOrderdto> UpdateOrder(UpdateOrderdto updateOrderDto)
         {
             bool correctUpdateOrder = false;
             this.query = String.Format("UPDATE PedidO SET nombre = '{0}',FechaInicio = '{1}', FechaFinal = '{2}' , id_tipo_pedido = {3} where id = {4}", updateOrderDto.Title, updateOrderDto.Start, updateOrderDto.End , updateOrderDto.Value,  updateOrderDto.id);
@@ -95,14 +95,14 @@ namespace AtlasCopco.Services
             {
                 if (Convert.ToInt32(_AccessMethodsSql.CrudDataToSql(this.query).Result) >0)
                 {
-                    correctUpdateOrder = true;
+                    updateOrderDto.UpdateOrder = 1;
                 }
             }
             catch (Exception ex)
             {
                 string exception = ex.ToString();
             }
-            return correctUpdateOrder;
+            return updateOrderDto;
         }
     }
 }
