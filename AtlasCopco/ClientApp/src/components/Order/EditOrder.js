@@ -21,7 +21,8 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
         End:'',
         UpdaterOrder:0,
         Label: '',
-        Value:''
+        Value:'',
+        backgroundColor:''
     }); 
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
 
