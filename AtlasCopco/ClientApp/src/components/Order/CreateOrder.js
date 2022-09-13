@@ -53,7 +53,7 @@ const CreateOrder = ({showCreatePopup}) => {
             Alert(t('camposobligatorios'),t('nosehainsertado'),"error");
         }
         else
-        {      
+        {      debugger;
             CreateOrder.Start = FormatDate(startDateStart); 
             CreateOrder.End =  FormatDate(startDateEnd);
             dispatch(CreateOrders(CreateOrder,{t}));                                             

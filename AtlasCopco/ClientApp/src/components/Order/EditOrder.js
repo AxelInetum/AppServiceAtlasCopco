@@ -7,14 +7,13 @@ import {EditOrders,GetTypesOrders,PopupEditorderCalendar} from '../../actions/Or
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
+import { createDebuggerStatement } from 'typescript';
 
 
 const EditOrder = ({loadDatas,showEditPopup}) => {
     debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
-    const [startDateStart, setStartDateStart] = useState(loadDatas.Start);  
-    const [startDateEnd, setStartDateEnd] = useState(loadDatas.End);  
     const [EditOrder,SetEditOrder] = useState({
         id: 0,
         title:'',
@@ -23,8 +22,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
         UpdaterOrder:0,
         Label: '',
         Value:''
-    });
- 
+    }); 
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
 
     const modalStyle=
@@ -36,6 +34,22 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
     const ClosePopup=() => 
     {
         dispatch(PopupEditorderCalendar(false));
+    } 
+
+    const setStartDateStart = e => {
+        SetEditOrder({
+            ...EditOrder,
+            'Start' : e
+        })
+        debugger;
+    }
+
+    const setStartDateEnd = e => {
+        SetEditOrder({
+            ...EditOrder,
+            'End' : e
+        })
+        debugger;
     }
 
     const OnChange = e => 
@@ -63,7 +77,10 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
         EditOrder.Label = e.value;
     }
 
-    useEffect(() => {  
+    useEffect(() => { 
+        setStartDateStart(new Date("2022-08-09 00:00:00"));
+        setStartDateEnd(new Date("2022-08-09 00:00:00"));
+
         SetEditOrder(loadDatas);
         dispatch(GetTypesOrders({t}));
       },[]);
@@ -78,8 +95,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
         }
         else
         {
-            EditOrder.Start = startDateStart; 
-            EditOrder.End = startDateEnd;
+       
             dispatch(EditOrders(EditOrder,{t}));                               
         }
     }
@@ -113,18 +129,19 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                             dateFormat="dd/MM/yyyy hh:mm:ss aa"
                             timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={startDateStart}  
-                            onChange={date => setStartDateStart(date)} />
+                            selected={EditOrder.Start}  
+                            onChange={setStartDateStart} />
                     </div>
                     <div className="campo-form">
                         <label>{t('fechaFin')}: </label>
                         <DatePicker 
+                            name='End'
                             showTimeSelect
                             dateFormat="dd/MM/yyyy hh:mm:ss aa"
                             timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={startDateEnd} 
-                            onChange={date => setStartDateEnd(date)} />
+                            selected={EditOrder.End} 
+                            onChange={setStartDateEnd} />
                     </div> 
                     <div className="campo-form">
                         <label>{t('tipopedido')}: </label>

@@ -82,12 +82,17 @@ export default class Calendar extends React.Component {
     HandleEditPopupClick = (event) => {
       this.state.id = event.event._def.publicId;
       this.state.title = event.event.title;
-      this.state.Start =  event.event._instance.range.start;
-      this.state.End = event.event._instance.range.end;
+      this.state.Start =   event.event._instance.range.start;
+      this.state.End =  event.event._instance.range.end;
       this.state.UpdateOrder = 0;
       this.state.Label = event.event._def.extendedProps.label;
       this.state.Value = event.event._def.extendedProps.value;
       this.props.dispatch(PopupEditorderCalendar(true));
+    }
+
+    FormatDate(date)
+    {
+        return date.getFullYear()  + '-' +  (date.getDate() < 10 ? '0' + date.getDate():date.getDate()) + '-'+ ((date.getMonth()+1) < 10 ? '0' + (date.getMonth()+1):(date.getMonth()+1)) + ' ' + (date.getHours() < 10 ? '0' + date.getHours():date.getHours())  + ':' +  (date.getMinutes() < 10 ? '0' + date.getMinutes():date.getMinutes()) + ':' + '00';
     }
 }
 
