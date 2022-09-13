@@ -22,6 +22,7 @@ export default class Calendar extends React.Component {
       backgroundColor:'',
       UpdateOrder:0 ,
     };
+
   }
   
   render() {
@@ -41,7 +42,7 @@ export default class Calendar extends React.Component {
         eventClick={(info) => this.HandleEditPopupClick(info)}   
         events={this.props.Orders}/>
         <Createorder showCreatePopup={this.props.showCreatePopup} ></Createorder>
-        <EditOrder loadDatas={this.state} showEditPopup={this.props.showEditPopup} ></ EditOrder>
+        <EditOrder loadDatas={this.props.EditOrder} SetEditOrder={this.props.SetEditOrder} showEditPopup={this.props.showEditPopup} ></ EditOrder>
       </>
      )
    }
@@ -49,6 +50,7 @@ export default class Calendar extends React.Component {
     moveEventdropCalendar = (event,info) => 
     {
       debugger;
+      /*
       this.state.id = event.event._def.publicId;
       this.state.title = event.event.title;
       this.state.Start = event.event._instance.range.start;
@@ -57,7 +59,31 @@ export default class Calendar extends React.Component {
       this.state.Label = event.event._def.extendedProps.label;
       this.state.Value = event.event._def.extendedProps.value;
       this.state.backgroundColor = event.event._def.ui.backgroundColor;
+      */
+     debugger;
       var t = this.props.t;
+
+      var order = { 
+        id:0,     
+        title:'',
+        Start:'',
+        End:'',
+        Label:'',
+        Value:0,
+        backgroundColor:'',
+        UpdateOrder:0 ,
+      };
+
+      order.id = event.event._def.publicId;
+      order.title = event.event.title;
+      order.Start = event.event._instance.range.start;
+      order.End = event.event._instance.range.end;
+      order.UpdateOrder = 0;
+      order.Label  = event.event._def.extendedProps.label;
+      order.Value =  event.event._def.extendedProps.value;
+      order.backgroundColor = event.event._def.ui.backgroundColor;
+      this.props.SetEditOrder(order);
+
       this.props.dispatch(EditOrders(this.state,{t}));
     }
 
@@ -79,6 +105,7 @@ export default class Calendar extends React.Component {
 
     //when click event open popup edit 
     HandleEditPopupClick = (event) => {
+     /*
       debugger;
       this.state.id = event.event._def.publicId;
       this.state.title = event.event.title;
@@ -88,6 +115,30 @@ export default class Calendar extends React.Component {
       this.state.Label = event.event._def.extendedProps.label;
       this.state.Value = event.event._def.extendedProps.value;
       this.state.backgroundColor = event.event._def.ui.backgroundColor;
+*/
+debugger;
+
+        var order = { 
+        id:0,     
+        title:'',
+        Start:'',
+        End:'',
+        Label:'',
+        Value:0,
+        backgroundColor:'',
+        UpdateOrder:0 ,
+      };
+      order.id = event.event._def.publicId;
+      order.title = event.event.title;
+      order.Start = event.event._instance.range.start;
+      order.End = event.event._instance.range.end;
+      order.UpdateOrder = 0;
+      order.Label  = event.event._def.extendedProps.label;
+      order.Value =  event.event._def.extendedProps.value;
+      order.backgroundColor = event.event._def.ui.backgroundColor;
+      this.props.SetEditOrder(order);
+
+
       this.props.dispatch(PopupEditorderCalendar(true));
     }
 

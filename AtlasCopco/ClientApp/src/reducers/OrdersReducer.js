@@ -41,7 +41,6 @@ const initialState = {
 }
 
 export default function (state = initialState, action){
-    debugger;
     switch(action.type)
     {
         case GET_LIST_ORDERS:
@@ -58,14 +57,12 @@ export default function (state = initialState, action){
                 ListTYpesOrders2:action.payload
             }
         case CREATE_ORDER:
-            debugger;
             return {
                 ...state,
                 ListOrders: [...state.ListOrders,action.payload],
                 ListOrders2: [...state.ListOrders2,action.payload]
             }     
         case EDIT_ORDER:
-            debugger;
                 return {
                     ...state,
                     ListOrders: state.ListOrders.map(order => 

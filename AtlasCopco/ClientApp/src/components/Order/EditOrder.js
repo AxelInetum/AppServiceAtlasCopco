@@ -10,20 +10,11 @@ import Select from 'react-select';
 import { createDebuggerStatement } from 'typescript';
 
 
-const EditOrder = ({loadDatas,showEditPopup}) => {
+const EditOrder = ({loadDatas,SetEditOrder,showEditPopup}) => {
     debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
-    const [EditOrder,SetEditOrder] = useState({
-        id: 0,
-        title:'',
-        Start:'',
-        End:'',
-        UpdaterOrder:0,
-        Label: '',
-        Value:'',
-        backgroundColor:''
-    }); 
+
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
 
     const modalStyle=
@@ -123,7 +114,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                             name="title"
                             class="form-control"
                             placeholder={t('TuNombre')}
-                            value={EditOrder == undefined ? "" : EditOrder.title}
+                            value={loadDatas == undefined ? "" : loadDatas.title}
                             onChange={OnChange}
                         />
                     </div>
@@ -135,7 +126,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                             dateFormat="dd/MM/yyyy hh:mm:ss aa"
                             timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={EditOrder.Start}  
+                            selected={loadDatas == undefined ? "" : loadDatas.Start}  
                             onChange={setStartDateStart} />
                     </div>
                     <div className="campo-form">
@@ -146,7 +137,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                             dateFormat="dd/MM/yyyy hh:mm:ss aa"
                             timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={EditOrder.End} 
+                            selected={loadDatas == undefined ? "" : loadDatas.End} 
                             onChange={setStartDateEnd} />
                     </div> 
                     <div className="campo-form">
@@ -154,7 +145,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                         <Select 
                         name='combovalue'
                         id='combovalue'
-                        defaultValue={{ label: EditOrder.Label, value: EditOrder.Value}}
+                        defaultValue={{ label: loadDatas == undefined ? "" : loadDatas.Label, value: loadDatas == undefined ? "" : loadDatas.Value}}
                         onChange={handleChange}
                         options={ListTipyesOrders} />
                     </div>   
