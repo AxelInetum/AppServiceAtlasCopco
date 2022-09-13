@@ -6,7 +6,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Createorder from '../Order/CreateOrder';
 import EditOrder from '../Order/EditOrder';
 import {EditOrders,PopupEditorderCalendar,PopupCreateCalendar} from '../../actions/OrderActions';
-import Moment from 'moment';
 export default class Calendar extends React.Component {
   
   constructor(props) {
@@ -80,6 +79,7 @@ export default class Calendar extends React.Component {
 
     //when click event open popup edit 
     HandleEditPopupClick = (event) => {
+      debugger;
       this.state.id = event.event._def.publicId;
       this.state.title = event.event.title;
       this.state.Start =   event.event._instance.range.start;
@@ -87,6 +87,7 @@ export default class Calendar extends React.Component {
       this.state.UpdateOrder = 0;
       this.state.Label = event.event._def.extendedProps.label;
       this.state.Value = event.event._def.extendedProps.value;
+      this.state.backgroundColor = event.event._def.ui.backgroundColor;
       this.props.dispatch(PopupEditorderCalendar(true));
     }
 

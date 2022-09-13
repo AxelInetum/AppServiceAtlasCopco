@@ -73,14 +73,19 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
       };
 
     const handleChange = e => {
-        EditOrder.Value = e.label;
-        EditOrder.Label = e.value;
+        SetEditOrder({
+            ...EditOrder,
+            'Label': e.label
+            
+        })
+    
+        SetEditOrder({
+            ...EditOrder,
+            'Value' : e.value
+        })
     }
 
     useEffect(() => { 
-        setStartDateStart(new Date("2022-08-09 00:00:00"));
-        setStartDateEnd(new Date("2022-08-09 00:00:00"));
-
         SetEditOrder(loadDatas);
         dispatch(GetTypesOrders({t}));
       },[]);
