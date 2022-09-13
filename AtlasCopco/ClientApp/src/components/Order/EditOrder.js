@@ -13,6 +13,8 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
     debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
+    const [startDateStart, setStartDateStart] = useState(loadDatas.Start);  
+    const [startDateEnd, setStartDateEnd] = useState(loadDatas.End);  
     const [EditOrder,SetEditOrder] = useState({
         id: 0,
         title:'',
@@ -38,6 +40,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
 
     const OnChange = e => 
     {
+       debugger;
         SetEditOrder({
             ...EditOrder,
             [e.target.name] : e.target.value
@@ -75,8 +78,8 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
         }
         else
         {
-            debugger;
-            
+            EditOrder.Start = startDateStart; 
+            EditOrder.End = startDateEnd;
             dispatch(EditOrders(EditOrder,{t}));                               
         }
     }
@@ -110,21 +113,19 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                             dateFormat="dd/MM/yyyy hh:mm:ss aa"
                             timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={EditOrder == undefined ? "" : EditOrder.Start} 
-                            onChange={OnChange} 
-                            />
+                            selected={startDateStart}  
+                            onChange={date => setStartDateStart(date)} />
                     </div>
                     <div className="campo-form">
                         <label>{t('fechaFin')}: </label>
                         <DatePicker 
-                            name='End'
                             showTimeSelect
                             dateFormat="dd/MM/yyyy hh:mm:ss aa"
                             timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={EditOrder == undefined ? "" : EditOrder.End} 
-                            onChange={OnChange} />
-                    </div>   
+                            selected={startDateEnd} 
+                            onChange={date => setStartDateEnd(date)} />
+                    </div> 
                     <div className="campo-form">
                         <label>{t('tipopedido')}: </label>
                         <Select 

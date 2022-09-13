@@ -64,8 +64,8 @@ export function GetlistOrders ({t}){
              if (response.createdOrder >0 )
              {
                 response.id = response.createdOrder;
-                response.start =  FormatDateToDate(response.start);
-                response.end =  FormatDateToDate(response.end);
+                response.start =  FormatDate(response.start);
+                response.end = FormatDate(response.end);
                 dispatch(createOrder(response));
                 dispatch(popupCreateCalendar(false));
                 Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
@@ -82,24 +82,14 @@ export function GetlistOrders ({t}){
      payload:order
  });
 
- function FormatDateToDate(date)
+ function FormatDate(date)
  {  
     return new Date(date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]   + '-' +  date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1]);    
  }
-
- function FormatDateToString(date)
- {
-    debugger;
-     return date.getFullYear()  + '-' +  (date.getDate() < 10 ? '0' + date.getDate():date.getDate()) + '-'+ ((date.getMonth()+1) < 10 ? '0' + (date.getMonth()+1):(date.getMonth()+1)) + ' ' + (date.getHours() < 10 ? '0' + date.getHours():date.getHours())  + ':' +  (date.getMinutes() < 10 ? '0' + date.getMinutes():date.getMinutes());
- }
-
-
  export function EditOrders(Order,{t}){
-debugger;
    return async (dispatch) =>{    
         const p = Promise.resolve( new Orderservice().updateOrder(Order));
         p.then(response => {
-            debugger;
             if (response.updateOrder>0)
             {
                 dispatch(editOrder(response));

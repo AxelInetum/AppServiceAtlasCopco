@@ -20,6 +20,7 @@ export default class Calendar extends React.Component {
       End:'',
       Label:'',
       Value:0,
+      backgroundColor:'',
       UpdateOrder:0 ,
     };
   }
@@ -41,7 +42,6 @@ export default class Calendar extends React.Component {
         eventClick={(info) => this.HandleEditPopupClick(info)}   
         events={this.props.Orders}/>
         <Createorder showCreatePopup={this.props.showCreatePopup} ></Createorder>
-
         <EditOrder loadDatas={this.state} showEditPopup={this.props.showEditPopup} ></ EditOrder>
       </>
      )
@@ -54,57 +54,41 @@ export default class Calendar extends React.Component {
       this.state.title = event.event.title;
       this.state.Start = event.event._instance.range.start;
       this.state.End =  event.event._instance.range.end;
+      this.state.UpdateOrder = 0; 
+      this.state.Label = event.event._def.extendedProps.label;
+      this.state.Value = event.event._def.extendedProps.value;
+      this.state.backgroundColor = event.event._def.ui.backgroundColor;
+      var t = this.props.t;
+      this.props.dispatch(EditOrders(this.state,{t}));
+    }
+
+    //when click for new order (out events)
+    handleDateClick = (arg) => {  
+      this.props.dispatch(PopupCreateCalendar(true));
+    }
+
+    //when resize event 
+    eventResize = (event) => {    
+      this.state.id = event.event._def.publicId;
+      this.state.title = event.event.title;
+      this.state.Start = event.event._instance.range.start;
+      this.state.End =  event.event._instance.range.end;
       this.state.UpdateOrder = 0;     
       var t = this.props.t;
       this.props.dispatch(EditOrders(this.state,{t}));
+    }
 
-  }
-
-  //when click for new order (out events)
-  handleDateClick = (arg) => {  
-    this.props.dispatch(PopupCreateCalendar(true));
-  }
-
-  //when resize event 
-  eventResize = (event) => {
-   
-    this.state.id = event.event._def.publicId;
-    this.state.title = event.event.title;
-    this.state.Start = new Date(event.event._instance.range.start.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
-    this.state.End =  new Date(event.event._instance.range.end.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
-    this.state.UpdateOrder = 0;     
-    var t = this.props.t;
-    this.props.dispatch(EditOrders(this.state,{t}));
-  }
-
-
-
-
-  //when click event open popup edit 
-  HandleEditPopupClick = (event) => {
-    debugger;
-    this.state.id = event.event._def.publicId;
-    this.state.title = event.event.title;
-    this.state.Start =  event.event._instance.range.start;
-    this.state.End = event.event._instance.range.end;
-    this.state.UpdateOrder = 0;
-    this.state.Label = event.event._def.extendedProps.label;
-    this.state.Value = event.event._def.extendedProps.value;
-    
-    //var axel = Moment('Fri Sep 09 2022 04:09:18 GMT+0200').format("dd/MM/yyyy hh:mm:ss");
-          //loadDatas.End = Moment(loadDatas.End).format("dd/MM/yyyy hh:mm:ss");
-      //loadDatas.Start = Moment(loadDatas.Start).format("dd/MM/yyyy hh:mm:ss");
-
+    //when click event open popup edit 
+    HandleEditPopupClick = (event) => {
+      this.state.id = event.event._def.publicId;
+      this.state.title = event.event.title;
+      this.state.Start =  event.event._instance.range.start;
+      this.state.End = event.event._instance.range.end;
+      this.state.UpdateOrder = 0;
+      this.state.Label = event.event._def.extendedProps.label;
+      this.state.Value = event.event._def.extendedProps.value;
       this.props.dispatch(PopupEditorderCalendar(true));
-  }
-  
-  FormatDate = (date) => {
-
-
-  }
-
-
-
+    }
 }
 
 
