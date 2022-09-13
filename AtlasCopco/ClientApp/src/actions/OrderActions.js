@@ -87,6 +87,7 @@ export function GetlistOrders ({t}){
     return new Date(date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]   + '-' +  date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1]);    
  }
  export function EditOrders(Order,{t}){
+    debugger;
    return async (dispatch) =>{    
         const p = Promise.resolve( new Orderservice().updateOrder(Order));
         p.then(response => {
