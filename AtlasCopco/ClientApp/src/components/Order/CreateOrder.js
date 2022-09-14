@@ -17,7 +17,8 @@ const CreateOrder = ({showCreatePopup}) => {
         Start:'',
         End:'',
         Value:0,
-        createdOrder:0
+        createdOrder:0,
+        backgroundColor:''
     });
     const [startDateStart, setStartDateStart] = useState();  
     const [startDateEnd, setStartDateEnd] = useState();  
@@ -53,9 +54,10 @@ const CreateOrder = ({showCreatePopup}) => {
             Alert(t('camposobligatorios'),t('nosehainsertado'),"error");
         }
         else
-        {      debugger;
+        {    
             CreateOrder.Start = FormatDate(startDateStart); 
             CreateOrder.End =  FormatDate(startDateEnd);
+            CreateOrder.backgroundColor =  'red';
             dispatch(CreateOrders(CreateOrder,{t}));                                             
         }    
     }

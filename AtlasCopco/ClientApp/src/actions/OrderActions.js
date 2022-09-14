@@ -93,8 +93,9 @@ export function GetlistOrders ({t}){
         p.then(response => {
             if (response.updateOrder>0)
             {
-                dispatch(editOrder(response));
+                dispatch(editOrder(response));        
                 dispatch(popupEditorderCalendar(false));
+                dispatch(GetlistOrders(t));
                 Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
             }
             else{
