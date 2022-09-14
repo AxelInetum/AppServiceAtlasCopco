@@ -91,7 +91,7 @@ const CreateOrder = ({showCreatePopup}) => {
                         <label>{t('fechaInicio')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss aa"
+                            dateFormat="dd/MM/yyyy HH:mm"
                             timeFormat="HH:mm"
                             timeIntervals={15}
                             selected={startDateStart} 
@@ -102,7 +102,7 @@ const CreateOrder = ({showCreatePopup}) => {
                         <label>{t('fechaFin')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss aa"
+                            dateFormat="dd/MM/yyyy HH:mm"
                             timeFormat="HH:mm"
                             timeIntervals={15}
                             selected={startDateEnd} 

@@ -137,7 +137,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                         <DatePicker 
                             name='Start'
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss aa"
+                            dateFormat="dd/MM/yyyy HH:mm"
                             timeFormat="HH:mm"
                             timeIntervals={15}
                             selected={EditOrder == undefined ? "" : EditOrder.Start}  
@@ -148,7 +148,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                         <DatePicker 
                             name='End'
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss aa"
+                            dateFormat="dd/MM/yyyy HH:mm"
                             timeFormat="HH:mm"
                             timeIntervals={15}
                             selected={EditOrder == undefined ? "" : EditOrder.End} 
