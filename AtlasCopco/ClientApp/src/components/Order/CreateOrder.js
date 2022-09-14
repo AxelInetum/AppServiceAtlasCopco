@@ -25,7 +25,6 @@ const CreateOrder = ({showCreatePopup}) => {
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
     const OnChange = e => 
     {
-        debugger;
         SetOrder({
             ...CreateOrder,
             [e.target.name] : e.target.value

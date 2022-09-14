@@ -65,6 +65,7 @@ export function GetlistOrders ({t}){
                 response.end = FormatDate(response.end);
                 dispatch(createOrder(response));
                 dispatch(popupCreateCalendar(false));
+                dispatch(GetlistOrders(t));
                 Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
              }
              else{

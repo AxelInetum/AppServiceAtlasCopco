@@ -83,7 +83,6 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
     }
 
     useEffect(() => { 
-
         dispatch(GetTypesOrders({t}));
       },[]);
 
