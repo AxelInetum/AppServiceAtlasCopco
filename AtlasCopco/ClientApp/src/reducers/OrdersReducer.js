@@ -50,7 +50,6 @@ export default function (state = initialState, action){
                 ListOrders2:action.payload
             }
         case GET_TYPES_ORDERS:
-            debugger;
             return {
                 ...state,
                 ListTypesOrders:action.payload,
@@ -76,7 +75,7 @@ export default function (state = initialState, action){
         case FILTER_ORDERS_CALENDAR_TYPE:
                 return {
                     ...state,
-                    ListOrders:state. ListOrders.filter(order => order.value ==action.payload),
+                    ListOrders:state.ListOrders.filter(order => order.value ==action.payload),
                 }
         case ALL_ORDERS_CALENDAR:
             return {
@@ -84,13 +83,11 @@ export default function (state = initialState, action){
                 ListOrders:state.ListOrders2,
             }
         case SHOW_EDIT_ORDER_POPUP_CALENDAR:
-            debugger;
                 return {
                     ...state,
                     showeditpopupcalendar:action.payload,
                 }
         case SHOW_CREATE_ORDER_POPUP_CALENDAR:
-            debugger;
                 return {
                     ...state,
                     showcreatepopupcalendar:action.payload,

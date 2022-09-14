@@ -11,12 +11,9 @@ import { createDebuggerStatement } from 'typescript';
 
 
 const EditOrder = ({loadDatas,showEditPopup}) => {
-    debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
-
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
-    
     const [EditOrder,SetEditOrder] = useState({
         id: 0,
         title:'',

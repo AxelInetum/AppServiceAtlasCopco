@@ -31,7 +31,6 @@ const CalendarPage = () => {
       },[]);
 
       const handleClick =(TypeOrderId) => {
-        debugger;
         //recuperamos todos los datos 
         if(TypeOrderId == 0)
         {
@@ -46,7 +45,6 @@ const CalendarPage = () => {
      }
 
      const classDiv =(color) => {
-        debugger;
          return ' fc-event-main ' + color;
      }
 

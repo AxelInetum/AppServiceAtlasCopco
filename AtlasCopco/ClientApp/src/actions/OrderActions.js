@@ -14,7 +14,6 @@ import Alert from '../components/Alert/Alert';
 
 
 export function GetlistOrders ({t}){
-    debugger;
     return async (dispatch) =>{                
          const p = Promise.resolve(new Orderservice().getOrderList());
          p.then(listOrders => {
@@ -36,11 +35,9 @@ export function GetlistOrders ({t}){
 
 
  export function GetTypesOrders ({t}){
-    debugger;
     return async (dispatch) =>{                
          const p = Promise.resolve(new Orderservice().getOrderTypes());
          p.then(listTypesOrders => {
-            debugger;
              if (listTypesOrders!=null)
              {
                  dispatch(getlistTypeOrders(listTypesOrders));
@@ -87,12 +84,12 @@ export function GetlistOrders ({t}){
     return new Date(date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]   + '-' +  date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1]);    
  }
  export function EditOrders(Order,{t}){
-    debugger;
    return async (dispatch) =>{    
         const p = Promise.resolve( new Orderservice().updateOrder(Order));
         p.then(response => {
             if (response.updateOrder>0)
             {
+                debugger;
                 dispatch(editOrder(response));        
                 dispatch(popupEditorderCalendar(false));
                 dispatch(GetlistOrders(t));
@@ -112,7 +109,6 @@ const editOrder= order =>({
 });
 
 export function FilterOrdersByType(value,{t}){
-    debugger;
     return async (dispatch) =>{   
         dispatch(filterOrderByType(value));                            
     }
@@ -125,7 +121,6 @@ export function FilterOrdersByType(value,{t}){
 
 
  export function AllOrdersCalendar(){
-    debugger;
     return async (dispatch) =>{   
         dispatch(allOrdersCalendar());                            
     }
