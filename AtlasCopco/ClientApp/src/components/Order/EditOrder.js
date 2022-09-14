@@ -10,14 +10,25 @@ import Select from 'react-select';
 import { createDebuggerStatement } from 'typescript';
 
 
-const EditOrder = ({loadDatas,SetEditOrder,showEditPopup}) => {
+const EditOrder = ({loadDatas,showEditPopup}) => {
     debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
 
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
+    
+    const [EditOrder,SetEditOrder] = useState({
+        id: 0,
+        title:'',
+        Start:'',
+        End:'',
+        UpdaterOrder:0,
+        Label: '',
+        Value:'',
+        backgroundColor:''
+    });
 
-    const modalStyle=
+   const modalStyle=
    {
         position:"absolute",
         top: '10%',
@@ -33,7 +44,6 @@ const EditOrder = ({loadDatas,SetEditOrder,showEditPopup}) => {
             ...EditOrder,
             'Start' : e
         })
-        debugger;
     }
 
     const setStartDateEnd = e => {
@@ -41,12 +51,10 @@ const EditOrder = ({loadDatas,SetEditOrder,showEditPopup}) => {
             ...EditOrder,
             'End' : e
         })
-        debugger;
     }
 
     const OnChange = e => 
     {
-       debugger;
         SetEditOrder({
             ...EditOrder,
             [e.target.name] : e.target.value
@@ -78,11 +86,21 @@ const EditOrder = ({loadDatas,SetEditOrder,showEditPopup}) => {
     }
 
     useEffect(() => { 
-        SetEditOrder(loadDatas);
+
         dispatch(GetTypesOrders({t}));
       },[]);
 
-   
+      useEffect(() => { 
+        EditOrder.id = loadDatas.id;
+        EditOrder.title= loadDatas.title;
+        EditOrder.Start= loadDatas.Start;
+        EditOrder.End= loadDatas.End;
+        EditOrder.UpdaterOrder= 0;
+        EditOrder.Label= loadDatas.Label;
+        EditOrder.Value= loadDatas.Value;
+        EditOrder.backgroundColor= loadDatas.backgroundColor;
+      },[loadDatas.id]);
+
     const onSubmit = e =>
     { 
         e.preventDefault();
@@ -114,7 +132,7 @@ const EditOrder = ({loadDatas,SetEditOrder,showEditPopup}) => {
                             name="title"
                             class="form-control"
                             placeholder={t('TuNombre')}
-                            value={loadDatas == undefined ? "" : loadDatas.title}
+                            value={EditOrder == undefined ? "" : EditOrder.title}
                             onChange={OnChange}
                         />
                     </div>
@@ -126,7 +144,7 @@ const EditOrder = ({loadDatas,SetEditOrder,showEditPopup}) => {
                             dateFormat="dd/MM/yyyy hh:mm:ss aa"
                             timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={loadDatas == undefined ? "" : loadDatas.Start}  
+                            selected={EditOrder == undefined ? "" : EditOrder.Start}  
                             onChange={setStartDateStart} />
                     </div>
                     <div className="campo-form">
@@ -137,7 +155,7 @@ const EditOrder = ({loadDatas,SetEditOrder,showEditPopup}) => {
                             dateFormat="dd/MM/yyyy hh:mm:ss aa"
                             timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={loadDatas == undefined ? "" : loadDatas.End} 
+                            selected={EditOrder == undefined ? "" : EditOrder.End} 
                             onChange={setStartDateEnd} />
                     </div> 
                     <div className="campo-form">
@@ -145,7 +163,7 @@ const EditOrder = ({loadDatas,SetEditOrder,showEditPopup}) => {
                         <Select 
                         name='combovalue'
                         id='combovalue'
-                        defaultValue={{ label: loadDatas == undefined ? "" : loadDatas.Label, value: loadDatas == undefined ? "" : loadDatas.Value}}
+                        defaultValue={{ label: EditOrder == undefined ? "" : EditOrder.Label, value: EditOrder == undefined ? "" : EditOrder.Value}}
                         onChange={handleChange}
                         options={ListTipyesOrders} />
                     </div>   
