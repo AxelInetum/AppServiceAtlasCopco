@@ -7,11 +7,9 @@ class TruckService {
   user_token = localStorage.getItem("token");
 
   getTruckList = async () => {
-    debugger;
     return await axios
        .get(this.base_url , { headers: { Authorization: `Bearer ${this.user_token}` } })
       .then(response => {
-        debugger;
         return response.data;
       })
       .catch(function (error) {
@@ -31,8 +29,6 @@ class TruckService {
   };
 
   updateTruck = async (TruckSelected) => {
-    debugger;
-
     return await axios
        .put(this.base_url, TruckSelected,{ headers: { Authorization: `Bearer ${this.user_token}` } })
       .then(response => {

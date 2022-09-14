@@ -7,7 +7,6 @@ class UserService {
   user_token = localStorage.getItem("token");
 
   loginldap = async (userdatas) => {
-    debugger;
     return await axios
        .post(this.base_url+'LdapLoginFunction',userdatas ,{ headers: { Authorization: `Bearer ${this.user_token}` } })
       .then(response => {

@@ -41,7 +41,6 @@ nueva
                 if (containsPii) {
                     return;
                 }
-                debugger;
                 switch (level) {
                     case LogLevel.Error:
                         console.error(message);

@@ -9,8 +9,6 @@ import {EditOrders,PopupEditorderCalendar,PopupCreateCalendar} from '../../actio
 export default class Calendar extends React.Component {
   
   constructor(props) {
-    debugger;
-
     super(props)
     this.state = { 
       id:0,     
@@ -49,16 +47,36 @@ export default class Calendar extends React.Component {
   
     moveEventdropCalendar = (event,info) => 
     {
-      this.state.id = event.event._def.publicId;
-      this.state.title = event.event.title;
-      this.state.Start = event.event._instance.range.start;
-      this.state.End =  event.event._instance.range.end;
-      this.state.UpdateOrder = 0; 
-      this.state.Label = event.event._def.extendedProps.label;
-      this.state.Value = event.event._def.extendedProps.value;
-      this.state.backgroundColor = event.event._def.ui.backgroundColor;
+      var order = { 
+        id:0,     
+        title:'',
+        Start:'',
+        End:'',
+        Label:'',
+        Value:0,
+        backgroundColor:'',
+        UpdateOrder:0 ,
+      };
+      order.id = event.event._def.publicId;
+      order.title = event.event.title;
+      order.Start = event.event._instance.range.start;
+      order.End = event.event._instance.range.end;
+      order.UpdateOrder = 0;
+      order.Label  = event.event._def.extendedProps.label;
+      order.Value =  event.event._def.extendedProps.value;
+      order.backgroundColor = event.event._def.ui.backgroundColor; 
       var t = this.props.t;
-      this.props.dispatch(EditOrders(this.state,{t}));
+      this.props.SetEditOrder({
+        ...EditOrder,
+        'id': event.event._def.publicId,
+        'title': event.event.title,
+        'Start' : event.event._instance.range.start,
+        'End': event.event._instance.range.end,
+        'Label': event.event._def.extendedProps.label,
+        'Value':event.event._def.extendedProps.value,
+        'backgroundColor':  event.event._def.ui.backgroundColor
+       })
+      this.props.dispatch(EditOrders(order,{t}));
     }
 
     //when click for new order (out events)
@@ -68,17 +86,41 @@ export default class Calendar extends React.Component {
 
     //when resize event 
     eventResize = (event) => {    
-      this.state.id = event.event._def.publicId;
-      this.state.title = event.event.title;
-      this.state.Start = event.event._instance.range.start;
-      this.state.End =  event.event._instance.range.end;
-      this.state.UpdateOrder = 0;     
+      var order = { 
+        id:0,     
+        title:'',
+        Start:'',
+        End:'',
+        Label:'',
+        Value:0,
+        backgroundColor:'',
+        UpdateOrder:0 ,
+      };
+      order.id = event.event._def.publicId;
+      order.title = event.event.title;
+      order.Start = event.event._instance.range.start;
+      order.End = event.event._instance.range.end;
+      order.UpdateOrder = 0;
+      order.Label  = event.event._def.extendedProps.label;
+      order.Value =  event.event._def.extendedProps.value;
+      order.backgroundColor = event.event._def.ui.backgroundColor; 
       var t = this.props.t;
-      this.props.dispatch(EditOrders(this.state,{t}));
+      this.props.SetEditOrder({
+        ...EditOrder,
+        'id': event.event._def.publicId,
+        'title': event.event.title,
+        'Start' : event.event._instance.range.start,
+        'End': event.event._instance.range.end,
+        'Label': event.event._def.extendedProps.label,
+        'Value':event.event._def.extendedProps.value,
+        'backgroundColor':  event.event._def.ui.backgroundColor
+       })
+      this.props.dispatch(EditOrders(order,{t}));
     }
 
     //when click event open popup edit 
     HandleEditPopupClick = (event) => {
+      debugger;
       var order = { 
         id:0,     
         title:'',
@@ -97,7 +139,17 @@ export default class Calendar extends React.Component {
       order.Label  = event.event._def.extendedProps.label;
       order.Value =  event.event._def.extendedProps.value;
       order.backgroundColor = event.event._def.ui.backgroundColor;
-      this.props.SetEditOrder(order);
+
+      this.props.SetEditOrder({
+        ...EditOrder,
+        'id': event.event._def.publicId,
+        'title': event.event.title,
+        'Start' : event.event._instance.range.start,
+        'End': event.event._instance.range.end,
+        'Label': event.event._def.extendedProps.label,
+        'Value':event.event._def.extendedProps.value,
+        'backgroundColor':  event.event._def.ui.backgroundColor
+       });
       this.props.dispatch(PopupEditorderCalendar(true));
     }
 

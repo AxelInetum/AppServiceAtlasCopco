@@ -7,10 +7,10 @@ import {EditOrders,GetTypesOrders,PopupEditorderCalendar} from '../../actions/Or
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
-import { createDebuggerStatement } from 'typescript';
 
 
 const EditOrder = ({loadDatas,showEditPopup}) => {
+    debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
@@ -83,6 +83,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
     }
 
     useEffect(() => { 
+
         dispatch(GetTypesOrders({t}));
       },[]);
 
@@ -95,7 +96,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
         EditOrder.Label= loadDatas.Label;
         EditOrder.Value= loadDatas.Value;
         EditOrder.backgroundColor= loadDatas.backgroundColor;
-      },[loadDatas.id]);
+      },[loadDatas.id,loadDatas.Start,loadDatas.End]);
 
     const onSubmit = e =>
     { 

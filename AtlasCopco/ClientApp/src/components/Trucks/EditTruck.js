@@ -36,7 +36,6 @@ const EditTruck = ({listTrucks }) => {
 
     useEffect(() => 
     {    
-        debugger;
         if(idTrucksselected!=0)
         {
             SetEditarCamion(listTrucks.filter(truck => truck.id == idTrucksselected)[0]); 
@@ -46,7 +45,6 @@ const EditTruck = ({listTrucks }) => {
 
     useEffect (() =>
     {
-        debugger;
         dispatch(UpdateListTrucks(SwitchFilterTrucks(FilterTruck,ListTrucksInit))); 
     },[ListTrucksInit]);
 
@@ -71,17 +69,13 @@ const EditTruck = ({listTrucks }) => {
         }
         else
         { 
-            debugger;
-            dispatch(EditTrucks(EditarCamion,{t})); 
-            debugger;
-                                   
+            dispatch(EditTrucks(EditarCamion,{t}));                                 
         }
     }
     
     const SwitchFilterTrucks=(FilterTruck,ListTrucksInit) => 
     {
         const ListTrucks = ListTrucksInit;
-         debugger;
         if (FilterTruck.valueFilter !="")
         {
             switch (FilterTruck.valueComboFilterTruck) {

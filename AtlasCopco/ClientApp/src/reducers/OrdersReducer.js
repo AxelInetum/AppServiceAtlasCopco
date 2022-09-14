@@ -62,6 +62,7 @@ export default function (state = initialState, action){
                 ListOrders2: [...state.ListOrders2,action.payload]
             }     
         case EDIT_ORDER:
+            debugger;
                 return {
                     ...state,
                     ListOrders: state.ListOrders.map(order => 
@@ -148,13 +149,11 @@ export default function (state = initialState, action){
                     idTruckSelected: action.payload
                 }
         case UPDATE_LIST_TRUCKS_FILTER:
-            debugger;
             return {
                 ...state,
                 ListTrucks:action.payload
             }
             case UPDATE_OBJECT_FILTER_TRUCK:
-                debugger;
                 return {
                     // Copy the whole state
                     ...state,

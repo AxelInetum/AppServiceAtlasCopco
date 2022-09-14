@@ -7,7 +7,6 @@ import DeleteTruck from '../Trucks/DeleteTruck';
 import {ShowEditPopupTruck,GetlistTrucks,ShowDeletePopupTruck,SetIdTruckselected} from '../../actions/TruckActions'
 
 const DataTable = () => {
-    debugger;
     const { t} = useTranslation();
     const dispatch = useDispatch();
     const ListTrucks = useSelector(state => state.TrucksReducers.ListTrucks);

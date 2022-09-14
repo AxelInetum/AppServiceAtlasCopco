@@ -218,13 +218,11 @@ const getlistTrucks = listTrucks =>({
 });
 
 export function EditTrucks(TruckSelected,{t}){
-    debugger;
    return async (dispatch) =>{    
         const p = Promise.resolve( new TruckService().updateTruck(TruckSelected));
         p.then(response => {
             if (response)
             {
-                debugger;
                 dispatch(editTruck(TruckSelected));
                 Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
             }
@@ -242,9 +240,7 @@ const editTruck = TruckSelected =>({
 });
 
 export function DeleteTrucks(id,{t}){
-    debugger;
     return async (dispatch) =>{   
-        debugger;   
          const p = Promise.resolve( new TruckService().deleteTruck(id));
          p.then(response => {
              if (response)
@@ -267,9 +263,7 @@ export function DeleteTrucks(id,{t}){
 
 
  export function CreateTruck(Truck,history,{t}){
-    debugger;
-    return async (dispatch) =>{   
-        debugger;   
+    return async (dispatch) =>{     
          const p = Promise.resolve( new TruckService().insertTruck(Truck));
          p.then(response => {
              if (response)

@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 
 
 const CalendarPage = () => {
-    debugger;
     const dispatch = useDispatch();
     const {t} = useTranslation();
     const showEditPopup = useSelector(state => state.OrdersReducer.showeditpopupcalendar); 
