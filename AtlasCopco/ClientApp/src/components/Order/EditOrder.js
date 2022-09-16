@@ -99,7 +99,7 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
         EditOrder.Label= loadDatas.Label;
         EditOrder.Value= loadDatas.Value;
         EditOrder.backgroundColor= loadDatas.backgroundColor;
-      },[loadDatas.id]);
+      },[loadDatas.id,loadDatas.Start,loadDatas.End]);
 
     const onSubmit = e =>
     { 

@@ -49,6 +49,7 @@ export default class Calendar extends React.Component {
   
     moveEventdropCalendar = (event,info) => 
     {
+      debugger;
       var order = { 
         id:0,     
         title:'',
@@ -57,28 +58,27 @@ export default class Calendar extends React.Component {
         Label:'',
         Value:0,
         backgroundColor:'',
-        UpdateOrder:0 ,
+        UpdateOrder:0 
       };
+      var t = this.props.t;
       order.id = event.event._def.publicId;
       order.title = event.event.title;
-
-      order.Start = this.event.event._instance.range.start;
-      order.End = event.event._instance.range.end;
-      order.UpdateOrder = 0;
+      order.Start = this.FormatDate(event.event._instance.range.start);
+      order.End =this.FormatDate(event.event._instance.range.end);
       order.Label  = event.event._def.extendedProps.label;
       order.Value =  event.event._def.extendedProps.value;
-      order.backgroundColor = event.event._def.ui.backgroundColor; 
-      var t = this.props.t;
+      order.backgroundColor = event.event._def.ui.backgroundColor;
+
       this.props.SetEditOrder({
         ...EditOrder,
-        'id': event.event._def.publicId,
-        'title': event.event.title,
-        'Start' :  event.event._instance.range.start,
-        'End':  event.event._instance.range.end,
-        'Label': event.event._def.extendedProps.label,
-        'Value':event.event._def.extendedProps.value,
-        'backgroundColor':  event.event._def.ui.backgroundColor
-       })
+        'id': order.id ,
+        'title':  order.title ,
+        'Start' :order.Start,
+        'End': order.End,
+        'Label': order.Label,
+        'Value':order.Value,
+        'backgroundColor':  order.backgroundColor
+       });
         
 
 
@@ -110,6 +110,7 @@ export default class Calendar extends React.Component {
 
     //when resize event 
     eventResize = (event) => {    
+      debugger;
       var order = { 
         id:0,     
         title:'',
@@ -118,27 +119,28 @@ export default class Calendar extends React.Component {
         Label:'',
         Value:0,
         backgroundColor:'',
-        UpdateOrder:0 ,
+        UpdateOrder:0 
       };
+
       order.id = event.event._def.publicId;
       order.title = event.event.title;
-      order.Start = event.event._instance.range.start;
-      order.End = event.event._instance.range.end;
-      order.UpdateOrder = 0;
+      order.Start = this.FormatDate(event.event._instance.range.start);
+      order.End =this.FormatDate(event.event._instance.range.end);
       order.Label  = event.event._def.extendedProps.label;
       order.Value =  event.event._def.extendedProps.value;
-      order.backgroundColor = event.event._def.ui.backgroundColor; 
-      var t = this.props.t;
+      order.backgroundColor = event.event._def.ui.backgroundColor;
+
       this.props.SetEditOrder({
         ...EditOrder,
-        'id': event.event._def.publicId,
-        'title': event.event.title,
-        'Start' :  event.event._instance.range.start,
-        'End':  event.event._instance.range.end,
-        'Label': event.event._def.extendedProps.label,
-        'Value':event.event._def.extendedProps.value,
-        'backgroundColor':  event.event._def.ui.backgroundColor
-       })
+        'id': order.id ,
+        'title':  order.title ,
+        'Start' :order.Start,
+        'End': order.End,
+        'Label': order.Label,
+        'Value':order.Value,
+        'backgroundColor':  order.backgroundColor
+       });
+       var t = this.props.t;
       this.props.dispatch(EditOrders(order,{t}));
     }
 
