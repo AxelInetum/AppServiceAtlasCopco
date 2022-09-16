@@ -6,6 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Createorder from '../Order/CreateOrder';
 import EditOrder from '../Order/EditOrder';
 import {EditOrders,PopupEditorderCalendar,PopupCreateCalendar} from '../../actions/OrderActions';
+import moment from 'moment';
 export default class Calendar extends React.Component {
   
   constructor(props) {
@@ -59,8 +60,8 @@ export default class Calendar extends React.Component {
       };
       order.id = event.event._def.publicId;
       order.title = event.event.title;
-      order.Start = event.event._instance.range.start;
-      order.End = event.event._instance.range.end;
+      order.Start = moment( event.event._instance.range.start.toUTCString()).format('DD-MM-YYYY hh:mm:ss');
+      order.End = moment( event.event._instance.range.end.toUTCString()).format('DD-MM-YYYY hh:mm:ss');
       order.UpdateOrder = 0;
       order.Label  = event.event._def.extendedProps.label;
       order.Value =  event.event._def.extendedProps.value;
@@ -70,8 +71,8 @@ export default class Calendar extends React.Component {
         ...EditOrder,
         'id': event.event._def.publicId,
         'title': event.event.title,
-        'Start' : event.event._instance.range.start,
-        'End': event.event._instance.range.end,
+        'Start' :  moment(event.event._instance.range.start.toUTCString()).format('DD-MM-YYYY hh:mm:ss'),
+        'End':  moment( event.event._instance.range.end.toUTCString()).format('DD-MM-YYYY hh:mm:ss'),
         'Label': event.event._def.extendedProps.label,
         'Value':event.event._def.extendedProps.value,
         'backgroundColor':  event.event._def.ui.backgroundColor
@@ -109,8 +110,8 @@ export default class Calendar extends React.Component {
         ...EditOrder,
         'id': event.event._def.publicId,
         'title': event.event.title,
-        'Start' : event.event._instance.range.start,
-        'End': event.event._instance.range.end,
+        'Start' :  moment(event.event._instance.range.start.toUTCString()).format('dd/MM/yyyy HH:mm'),
+        'End':  moment( event.event._instance.range.end.toUTCString()).format('dd/MM/yyyy HH:mm'),
         'Label': event.event._def.extendedProps.label,
         'Value':event.event._def.extendedProps.value,
         'backgroundColor':  event.event._def.ui.backgroundColor
@@ -131,11 +132,14 @@ export default class Calendar extends React.Component {
         backgroundColor:'',
         UpdateOrder:0 ,
       };
+
       order.id = event.event._def.publicId;
       order.title = event.event.title;
       order.Start = event.event._instance.range.start;
-      order.End = event.event._instance.range.end;
-      order.UpdateOrder = 0;
+      order.End =event.event._instance.range.end;
+      debugger;
+
+
       order.Label  = event.event._def.extendedProps.label;
       order.Value =  event.event._def.extendedProps.value;
       order.backgroundColor = event.event._def.ui.backgroundColor;
@@ -144,18 +148,13 @@ export default class Calendar extends React.Component {
         ...EditOrder,
         'id': event.event._def.publicId,
         'title': event.event.title,
-        'Start' : event.event._instance.range.start,
-        'End': event.event._instance.range.end,
+        'Start' :event.event._instance.range.start,
+        'End':  event.event._instance.range.end,
         'Label': event.event._def.extendedProps.label,
         'Value':event.event._def.extendedProps.value,
         'backgroundColor':  event.event._def.ui.backgroundColor
        });
       this.props.dispatch(PopupEditorderCalendar(true));
-    }
-
-    FormatDate(date)
-    {
-        return date.getFullYear()  + '-' +  (date.getDate() < 10 ? '0' + date.getDate():date.getDate()) + '-'+ ((date.getMonth()+1) < 10 ? '0' + (date.getMonth()+1):(date.getMonth()+1)) + ' ' + (date.getHours() < 10 ? '0' + date.getHours():date.getHours())  + ':' +  (date.getMinutes() < 10 ? '0' + date.getMinutes():date.getMinutes()) + ':' + '00';
     }
 }
 

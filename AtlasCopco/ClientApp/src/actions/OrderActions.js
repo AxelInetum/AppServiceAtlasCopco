@@ -85,8 +85,34 @@ export function GetlistOrders ({t}){
     return new Date(date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]   + '-' +  date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1]);    
  }
  export function EditOrders(Order,{t}){
+    debugger;
+
+    var order = { 
+        id:0,     
+        title:'',
+        Start:'',
+        End:'',
+        Label:'',
+        Value:0,
+        backgroundColor:'',
+        UpdateOrder:0 ,
+      };
+
+      order.id = Order.id;
+      order.title = Order.title;
+      order.Start = Order.Start;
+      order.End = Order.End;
+      order.UpdateOrder = 0;
+      order.Label  = Order.Label;
+      order.Value =  Order.Value;
+      order.backgroundColor = Order.backgroundColor; 
+
+
+      order.Start = order.Start.getDate() + '-' +  (order.Start.getMonth() +1) + '-' + order.Start.getFullYear() +  ' '  + order.Start.getHours() + ':' + order.Start.getMinutes();
+      order.End = order.End.getDate() + '-' +  (order.End.getMonth() +1) + '-' + order.End.getFullYear() +  ' '  + order.End.getHours() + ':' + order.End.getMinutes();
+
    return async (dispatch) =>{    
-        const p = Promise.resolve( new Orderservice().updateOrder(Order));
+        const p = Promise.resolve( new Orderservice().updateOrder(order));
         p.then(response => {
             if (response.updateOrder>0)
             {

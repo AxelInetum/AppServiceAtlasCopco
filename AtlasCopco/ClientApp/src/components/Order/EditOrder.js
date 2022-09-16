@@ -7,6 +7,8 @@ import {EditOrders,GetTypesOrders,PopupEditorderCalendar} from '../../actions/Or
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
+import moment from 'moment';
+import { format } from 'date-fns'
 
 
 const EditOrder = ({loadDatas,showEditPopup}) => {
@@ -88,10 +90,11 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
       },[]);
 
       useEffect(() => { 
+        debugger;
         EditOrder.id = loadDatas.id;
         EditOrder.title= loadDatas.title;
-        EditOrder.Start= loadDatas.Start;
-        EditOrder.End= loadDatas.End;
+        EditOrder.Start=  FormatDate(loadDatas.Start);
+        EditOrder.End= FormatDate(loadDatas.End);
         EditOrder.UpdaterOrder= 0;
         EditOrder.Label= loadDatas.Label;
         EditOrder.Value= loadDatas.Value;
@@ -106,10 +109,27 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
             Alert(t('camposobligatorios') ,t('nosehainsertado'),"error");
         }
         else
-        {
-       
+        {  
+            debugger;
             dispatch(EditOrders(EditOrder,{t}));                               
         }
+    }
+
+    const FormatDate = (date) =>
+    {
+         debugger;
+         if (date != "" && date!= undefined)
+         {
+            var yearmonthday = (new Date(date)).toISOString().slice(0, 10).split("-");
+            var hourminutes =date.toUTCString().split(" ")[4].split(':');
+           
+            var year =parseInt(yearmonthday[0]);
+            var month = parseInt(yearmonthday[1])-1;
+            var day = parseInt(yearmonthday[2]);
+            var hour =parseInt(hourminutes[0]);
+            var minutes = parseInt(hourminutes[1]);
+            return new Date(year, month, day, hour, minutes );
+         }
     }
      
     return (
@@ -139,8 +159,9 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                             name='Start'
                             showTimeSelect
                             dateFormat="dd/MM/yyyy HH:mm"
-                            timeFormat="HH:mm"
+                            timeFormat="hh:mm"
                             timeIntervals={15}
+                            
                             selected={EditOrder == undefined ? "" : EditOrder.Start}  
                             onChange={setStartDateStart} />
                     </div>
