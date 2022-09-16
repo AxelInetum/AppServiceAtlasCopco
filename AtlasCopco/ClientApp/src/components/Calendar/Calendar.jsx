@@ -60,8 +60,8 @@ export default class Calendar extends React.Component {
       };
       order.id = event.event._def.publicId;
       order.title = event.event.title;
-      order.Start = moment( event.event._instance.range.start.toUTCString()).format('DD-MM-YYYY hh:mm:ss');
-      order.End = moment( event.event._instance.range.end.toUTCString()).format('DD-MM-YYYY hh:mm:ss');
+      order.Start = event.event._instance.range.start;
+      order.End = event.event._instance.range.end;
       order.UpdateOrder = 0;
       order.Label  = event.event._def.extendedProps.label;
       order.Value =  event.event._def.extendedProps.value;
@@ -71,8 +71,8 @@ export default class Calendar extends React.Component {
         ...EditOrder,
         'id': event.event._def.publicId,
         'title': event.event.title,
-        'Start' :  moment(event.event._instance.range.start.toUTCString()).format('DD-MM-YYYY hh:mm:ss'),
-        'End':  moment( event.event._instance.range.end.toUTCString()).format('DD-MM-YYYY hh:mm:ss'),
+        'Start' :  event.event._instance.range.start,
+        'End':  event.event._instance.range.end,
         'Label': event.event._def.extendedProps.label,
         'Value':event.event._def.extendedProps.value,
         'backgroundColor':  event.event._def.ui.backgroundColor
@@ -110,8 +110,8 @@ export default class Calendar extends React.Component {
         ...EditOrder,
         'id': event.event._def.publicId,
         'title': event.event.title,
-        'Start' :  moment(event.event._instance.range.start.toUTCString()).format('dd/MM/yyyy HH:mm'),
-        'End':  moment( event.event._instance.range.end.toUTCString()).format('dd/MM/yyyy HH:mm'),
+        'Start' :  event.event._instance.range.start,
+        'End':  event.event._instance.range.end,
         'Label': event.event._def.extendedProps.label,
         'Value':event.event._def.extendedProps.value,
         'backgroundColor':  event.event._def.ui.backgroundColor
