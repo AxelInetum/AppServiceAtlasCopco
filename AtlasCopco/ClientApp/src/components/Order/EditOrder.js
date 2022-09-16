@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
 import moment from 'moment';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 
 
 const EditOrder = ({loadDatas,showEditPopup}) => {
@@ -93,13 +93,13 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
         debugger;
         EditOrder.id = loadDatas.id;
         EditOrder.title= loadDatas.title;
-        EditOrder.Start=  FormatDate(loadDatas.Start);
-        EditOrder.End= FormatDate(loadDatas.End);
+        EditOrder.Start= loadDatas.Start;
+        EditOrder.End= loadDatas.End;
         EditOrder.UpdaterOrder= 0;
         EditOrder.Label= loadDatas.Label;
         EditOrder.Value= loadDatas.Value;
         EditOrder.backgroundColor= loadDatas.backgroundColor;
-      },[loadDatas.id,loadDatas.Start,loadDatas.End]);
+      },[loadDatas.id]);
 
     const onSubmit = e =>
     { 
@@ -121,13 +121,15 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
          if (date != "" && date!= undefined)
          {
             var yearmonthday = (new Date(date)).toISOString().slice(0, 10).split("-");
-            var hourminutes =date.toUTCString().split(" ")[4].split(':');
+            var hourminutes =date.toGMTString().split(" ")[4].split(':');
            
             var year =parseInt(yearmonthday[0]);
             var month = parseInt(yearmonthday[1])-1;
             var day = parseInt(yearmonthday[2]);
             var hour =parseInt(hourminutes[0]);
             var minutes = parseInt(hourminutes[1]);
+            debugger;
+            var axel = new Date(year, month, day, hour, minutes );
             return new Date(year, month, day, hour, minutes );
          }
     }
@@ -159,9 +161,9 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                             name='Start'
                             showTimeSelect
                             dateFormat="dd/MM/yyyy HH:mm"
-                            timeFormat="hh:mm"
-                            timeIntervals={15}
-                            
+                            timeFormat="HH:mm"
+                            timeIntervals={15} 
+                            tim                
                             selected={EditOrder == undefined ? "" : EditOrder.Start}  
                             onChange={setStartDateStart} />
                     </div>

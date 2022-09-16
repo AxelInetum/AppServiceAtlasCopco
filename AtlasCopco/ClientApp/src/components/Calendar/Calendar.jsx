@@ -36,6 +36,7 @@ export default class Calendar extends React.Component {
         editable= {true}
         selectable={true}
         droppable={true}
+        timeZone='UTC'
         eventResize={(event)=>this.eventResize(event)}  
         eventDrop={(event,info)=>this.moveEventdropCalendar(event ,info)}
         eventClick={(info) => this.HandleEditPopupClick(info)}   
@@ -60,7 +61,8 @@ export default class Calendar extends React.Component {
       };
       order.id = event.event._def.publicId;
       order.title = event.event.title;
-      order.Start = event.event._instance.range.start;
+
+      order.Start = this.event.event._instance.range.start;
       order.End = event.event._instance.range.end;
       order.UpdateOrder = 0;
       order.Label  = event.event._def.extendedProps.label;
@@ -77,7 +79,28 @@ export default class Calendar extends React.Component {
         'Value':event.event._def.extendedProps.value,
         'backgroundColor':  event.event._def.ui.backgroundColor
        })
+        
+
+
       this.props.dispatch(EditOrders(order,{t}));
+    }
+
+    FormatDate = (date) =>
+    {
+         debugger;
+         if (date != "" && date!= undefined)
+         {
+        
+            var yearmonthday = (new Date(date)).toISOString().slice(0, 10).split("-");
+            var hourminutes =date.toGMTString().split(" ")[4].split(':');
+           
+            var year =parseInt(yearmonthday[0]);
+            var month = parseInt(yearmonthday[1])-1;
+            var day = parseInt(yearmonthday[2]);
+            var hour =parseInt(hourminutes[0]);
+            var minutes = parseInt(hourminutes[1]);
+            return new Date(year, month, day, hour, minutes );
+         }
     }
 
     //when click for new order (out events)
@@ -130,29 +153,26 @@ export default class Calendar extends React.Component {
         Label:'',
         Value:0,
         backgroundColor:'',
-        UpdateOrder:0 ,
+        UpdateOrder:0 
       };
 
       order.id = event.event._def.publicId;
       order.title = event.event.title;
-      order.Start = event.event._instance.range.start;
-      order.End =event.event._instance.range.end;
-      debugger;
-
-
+      order.Start = this.FormatDate(event.event._instance.range.start);
+      order.End =this.FormatDate(event.event._instance.range.end);
       order.Label  = event.event._def.extendedProps.label;
       order.Value =  event.event._def.extendedProps.value;
       order.backgroundColor = event.event._def.ui.backgroundColor;
 
       this.props.SetEditOrder({
         ...EditOrder,
-        'id': event.event._def.publicId,
-        'title': event.event.title,
-        'Start' :event.event._instance.range.start,
-        'End':  event.event._instance.range.end,
-        'Label': event.event._def.extendedProps.label,
-        'Value':event.event._def.extendedProps.value,
-        'backgroundColor':  event.event._def.ui.backgroundColor
+        'id': order.id ,
+        'title':  order.title ,
+        'Start' :order.Start,
+        'End': order.End,
+        'Label': order.Label,
+        'Value':order.Value,
+        'backgroundColor':  order.backgroundColor
        });
       this.props.dispatch(PopupEditorderCalendar(true));
     }
