@@ -56,8 +56,8 @@ namespace AtlasCopco.Services
         public async Task<List<OrderDatasDto>> GetListOrders()
         {
             List<OrderDatasDto> listOrdersDatasDto = new List<OrderDatasDto>();
-            this.query = String.Format("SELECT Pedido.id,[nombre] as title , FORMAT([FechaInicio],'yyyy-MM-dd HH:MM:ss') as 'start' , " +
-                                        "FORMAT([FechaFinal],'yyyy-MM-dd HH:MM:ss') as 'end' ,   Tipo_Pedidos.id as Value , Tipo_Pedidos.Name as Label,   " +
+            this.query = String.Format("SELECT Pedido.id,[nombre] as title , FORMAT([FechaInicio],'yyyy-MM-dd HH:mm:ss') as 'start' , " +
+                                        "FORMAT([FechaFinal],'yyyy-MM-dd HH:mm:ss') as 'end' ,   Tipo_Pedidos.id as Value , Tipo_Pedidos.Name as Label,   " +
                                         " Tipo_Pedidos.Color as backgroundColor " +
                                         "FROM Pedido inner join Tipo_Pedidos on Pedido.id_tipo_pedido = Tipo_Pedidos.id");
             try
