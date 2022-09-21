@@ -1,4 +1,6 @@
 using AtlasCopco;
+using AtlasCopco.AzureAd;
+using Microsoft.Data.SqlClient;
 
 namespace AtlasCopco
 {
@@ -6,6 +8,7 @@ namespace AtlasCopco
     {
         public static void Main(string[] args)
         {
+            SqlAuthenticationProvider.SetProvider(SqlAuthenticationMethod.ActiveDirectoryInteractive, new SqlAppAuthenticationProvider());
             CreateHostBuilder(args).Build().Run();
         }
 

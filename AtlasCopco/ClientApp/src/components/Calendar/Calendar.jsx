@@ -6,7 +6,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Createorder from '../Order/CreateOrder';
 import EditOrder from '../Order/EditOrder';
 import {EditOrders,PopupEditorderCalendar,PopupCreateCalendar} from '../../actions/OrderActions';
-import moment from 'moment';
 export default class Calendar extends React.Component {
   
   constructor(props) {
@@ -157,7 +156,6 @@ export default class Calendar extends React.Component {
         backgroundColor:'',
         UpdateOrder:0 
       };
-debugger;
       order.id = event.event._def.publicId;
       order.title = event.event.title;
       order.Start = this.FormatDate(event.event._instance.range.start);
