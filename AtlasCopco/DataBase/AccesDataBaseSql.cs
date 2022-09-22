@@ -1,4 +1,5 @@
 ﻿using AtlasCopco.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
@@ -14,7 +15,7 @@ namespace AtlasCopco.DataBase
         public AccesDataBaseSql(IConfiguration configuration)
         {
             _configuration = configuration;
-            _conectionString = _configuration.GetConnectionString("connection_string");
+            _conectionString = _configuration.GetSection("ConnectionStrings").GetSection("connection_string").Value;
             _SqlConnection = new SqlConnection(_conectionString);
         }
 
