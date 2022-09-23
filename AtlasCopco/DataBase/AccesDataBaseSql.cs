@@ -1,4 +1,5 @@
 ﻿using AtlasCopco.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
@@ -8,10 +9,13 @@ namespace AtlasCopco.DataBase
     public class AccesDataBaseSql : IAccessMethodsSql
     {
         private SqlConnection _SqlConnection;
-        private string _conectionString = "Data Source=IBLAESBARC00789;Initial Catalog=NetCorePruevaAxel;Integrated Security = True";
+        private readonly IConfiguration _configuration;
+        private readonly string _conectionString;
 
-        public AccesDataBaseSql()
+        public AccesDataBaseSql(IConfiguration configuration)
         {
+            _configuration = configuration;
+            _conectionString = _configuration.GetSection("ConnectionStrings").GetSection("connection_string").Value;
             _SqlConnection = new SqlConnection(_conectionString);
         }
 

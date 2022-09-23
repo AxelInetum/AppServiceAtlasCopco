@@ -23,7 +23,6 @@ const FilterComboTrucks= () => {
     {
         const selectedTruckFilter = document.getElementById("comboTruckFilter"); // or this if only called onchange
         const intputTruckFilter = document.getElementById("valueFilter");
-        debugger;
         if (selectedTruckFilter != undefined && intputTruckFilter !=undefined)
         {
             let value = selectedTruckFilter.options[selectedTruckFilter.selectedIndex].value;
@@ -36,7 +35,6 @@ const FilterComboTrucks= () => {
     const SwitchFilterTrucks=(FilterTruck,ListTrucksInit) => 
     {
         const ListTrucks = ListTrucksInit;
-         debugger;
         if (FilterTruck.valueFilter !="")
         {
             switch (FilterTruck.valueComboFilterTruck) {

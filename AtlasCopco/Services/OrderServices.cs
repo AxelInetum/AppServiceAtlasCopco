@@ -22,7 +22,7 @@ namespace AtlasCopco.Services
 
         public async Task<CreateOrderDto> CreateOrder(CreateOrderDto createOrderdto)
         {
-            this.query = String.Format("INSERT INTO Pedido (nombre, FechaInicio,FechaFinal, id_tipo_pedido) OUTPUT INSERTED.Id VALUES('{0}','{1}','{2}',{3})", createOrderdto.title, createOrderdto.start, createOrderdto.End, createOrderdto.Value);
+            this.query = String.Format("INSERT INTO Pedido (nombre, FechaInicio,FechaFinal, id_tipo_pedido) OUTPUT INSERTED.Id VALUES('{0}','{1}','{2}',{3})", createOrderdto.title, createOrderdto.Start, createOrderdto.End, createOrderdto.Value);
             try
             {
                 createOrderdto.createdOrder = Convert.ToInt32(_AccessMethodsSql.CrudDataToSqlReturnId(this.query).Result);
@@ -56,8 +56,8 @@ namespace AtlasCopco.Services
         public async Task<List<OrderDatasDto>> GetListOrders()
         {
             List<OrderDatasDto> listOrdersDatasDto = new List<OrderDatasDto>();
-            this.query = String.Format("SELECT Pedido.id,[nombre] as title , FORMAT([FechaInicio],'yyyy-MM-dd HH:MM:ss') as 'start' , " +
-                                        "FORMAT([FechaFinal],'yyyy-MM-dd HH:MM:ss') as 'end' ,   Tipo_Pedidos.id as Value , Tipo_Pedidos.Name as Label,   " +
+            this.query = String.Format("SELECT Pedido.id,[nombre] as title , FORMAT([FechaInicio],'yyyy-MM-dd HH:mm:ss') as 'start' , " +
+                                        "FORMAT([FechaFinal],'yyyy-MM-dd HH:mm:ss') as 'end' ,   Tipo_Pedidos.id as Value , Tipo_Pedidos.Name as Label,   " +
                                         " Tipo_Pedidos.Color as backgroundColor " +
                                         "FROM Pedido inner join Tipo_Pedidos on Pedido.id_tipo_pedido = Tipo_Pedidos.id");
             try
@@ -87,7 +87,7 @@ namespace AtlasCopco.Services
             return listTypesOrdersDto;
         }
 
-        public async Task<bool> UpdateOrder(UpdateOrderdto updateOrderDto)
+        public async Task<UpdateOrderdto> UpdateOrder(UpdateOrderdto updateOrderDto)
         {
             bool correctUpdateOrder = false;
             this.query = String.Format("UPDATE PedidO SET nombre = '{0}',FechaInicio = '{1}', FechaFinal = '{2}' , id_tipo_pedido = {3} where id = {4}", updateOrderDto.Title, updateOrderDto.Start, updateOrderDto.End , updateOrderDto.Value,  updateOrderDto.id);
@@ -95,14 +95,14 @@ namespace AtlasCopco.Services
             {
                 if (Convert.ToInt32(_AccessMethodsSql.CrudDataToSql(this.query).Result) >0)
                 {
-                    correctUpdateOrder = true;
+                    updateOrderDto.UpdateOrder = 1;
                 }
             }
             catch (Exception ex)
             {
                 string exception = ex.ToString();
             }
-            return correctUpdateOrder;
+            return updateOrderDto;
         }
     }
 }

@@ -6,12 +6,9 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Createorder from '../Order/CreateOrder';
 import EditOrder from '../Order/EditOrder';
 import {EditOrders,PopupEditorderCalendar,PopupCreateCalendar} from '../../actions/OrderActions';
-import Moment from 'moment';
 export default class Calendar extends React.Component {
   
   constructor(props) {
-    debugger;
-
     super(props)
     this.state = { 
       id:0,     
@@ -20,8 +17,10 @@ export default class Calendar extends React.Component {
       End:'',
       Label:'',
       Value:0,
+      backgroundColor:'',
       UpdateOrder:0 ,
     };
+
   }
   
   render() {
@@ -36,13 +35,13 @@ export default class Calendar extends React.Component {
         editable= {true}
         selectable={true}
         droppable={true}
+        timeZone='UTC'
         eventResize={(event)=>this.eventResize(event)}  
         eventDrop={(event,info)=>this.moveEventdropCalendar(event ,info)}
         eventClick={(info) => this.HandleEditPopupClick(info)}   
         events={this.props.Orders}/>
         <Createorder showCreatePopup={this.props.showCreatePopup} ></Createorder>
-
-        <EditOrder loadDatas={this.state} showEditPopup={this.props.showEditPopup} ></ EditOrder>
+        <EditOrder loadDatas={this.props.EditOrder} SetEditOrder={this.props.SetEditOrder} showEditPopup={this.props.showEditPopup} ></ EditOrder>
       </>
      )
    }
@@ -50,54 +49,133 @@ export default class Calendar extends React.Component {
     moveEventdropCalendar = (event,info) => 
     {
       debugger;
-      this.state.id = event.event._def.publicId;
-      this.state.title = event.event.title;
-      this.state.Start = new Date(event.event._instance.range.start.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
-      this.state.End =  new Date(event.event._instance.range.end.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
-      this.state.UpdateOrder = 0;     
+      var order = { 
+        id:0,     
+        title:'',
+        Start:'',
+        End:'',
+        Label:'',
+        Value:0,
+        backgroundColor:'',
+        UpdateOrder:0 
+      };
       var t = this.props.t;
-      this.props.dispatch(EditOrders(this.state,{t}));
+      order.id = event.event._def.publicId;
+      order.title = event.event.title;
+      order.Start = this.FormatDate(event.event._instance.range.start);
+      order.End =this.FormatDate(event.event._instance.range.end);
+      order.Label  = event.event._def.extendedProps.label;
+      order.Value =  event.event._def.extendedProps.value;
+      order.backgroundColor = event.event._def.ui.backgroundColor;
 
-  }
+      this.props.SetEditOrder({
+        ...EditOrder,
+        'id': order.id ,
+        'title':  order.title ,
+        'Start' :order.Start,
+        'End': order.End,
+        'Label': order.Label,
+        'Value':order.Value,
+        'backgroundColor':  order.backgroundColor
+       });
+        
 
-  //when click for new order (out events)
-  handleDateClick = (arg) => {  
-    this.props.dispatch(PopupCreateCalendar(true));
-  }
 
-  //when resize event 
-  eventResize = (event) => {
-   
-    this.state.id = event.event._def.publicId;
-    this.state.title = event.event.title;
-    this.state.Start = new Date(event.event._instance.range.start.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
-    this.state.End =  new Date(event.event._instance.range.end.split('(')[0]).toISOString().format('dd/MM/yyyy hh:mm:ss');
-    this.state.UpdateOrder = 0;     
-    var t = this.props.t;
-    this.props.dispatch(EditOrders(this.state,{t}));
-  }
+      this.props.dispatch(EditOrders(order,{t}));
+    }
 
-  //when click event open popup edit 
-  HandleEditPopupClick = (event) => {
-    debugger;
-    this.state.id = event.event._def.publicId;
-    this.state.title = event.event.title;
-  
-    var start2 = new Date(Moment((event.event._instance.range.start).toString().split('(')[0]).format('DD/MM/yyyy hh:mm:ss'));
-    this.state.Start = start2;
+    FormatDate = (date) =>
+    {
+         debugger;
+         if (date != "" && date!= undefined)
+         {
+        
+            var yearmonthday = (new Date(date)).toISOString().slice(0, 10).split("-");
+            var hourminutes =date.toGMTString().split(" ")[4].split(':');
+           
+            var year =parseInt(yearmonthday[0]);
+            var month = parseInt(yearmonthday[1])-1;
+            var day = parseInt(yearmonthday[2]);
+            var hour =parseInt(hourminutes[0]);
+            var minutes = parseInt(hourminutes[1]);
+            return new Date(year, month, day, hour, minutes );
+         }
+    }
 
-    var end2 = new Date(Moment((event.event._instance.range.end).toString().split('(')[0]).format('DD/MM/yyyy hh:mm:ss'));
-    this.state.End = end2; 
-    
-    this.state.UpdateOrder = 0;
-    this.state.Label = event.event._def.extendedProps.label;
-    this.state.Value = event.event._def.extendedProps.value;
-    //var axel = Moment('Fri Sep 09 2022 04:09:18 GMT+0200').format("dd/MM/yyyy hh:mm:ss");
-          //loadDatas.End = Moment(loadDatas.End).format("dd/MM/yyyy hh:mm:ss");
-      //loadDatas.Start = Moment(loadDatas.Start).format("dd/MM/yyyy hh:mm:ss");
+    //when click for new order (out events)
+    handleDateClick = (arg) => {  
+      this.props.dispatch(PopupCreateCalendar(true));
+    }
 
+    //when resize event 
+    eventResize = (event) => {    
+      debugger;
+      var order = { 
+        id:0,     
+        title:'',
+        Start:'',
+        End:'',
+        Label:'',
+        Value:0,
+        backgroundColor:'',
+        UpdateOrder:0 
+      };
+
+      order.id = event.event._def.publicId;
+      order.title = event.event.title;
+      order.Start = this.FormatDate(event.event._instance.range.start);
+      order.End =this.FormatDate(event.event._instance.range.end);
+      order.Label  = event.event._def.extendedProps.label;
+      order.Value =  event.event._def.extendedProps.value;
+      order.backgroundColor = event.event._def.ui.backgroundColor;
+
+      this.props.SetEditOrder({
+        ...EditOrder,
+        'id': order.id ,
+        'title':  order.title ,
+        'Start' :order.Start,
+        'End': order.End,
+        'Label': order.Label,
+        'Value':order.Value,
+        'backgroundColor':  order.backgroundColor
+       });
+       var t = this.props.t;
+      this.props.dispatch(EditOrders(order,{t}));
+    }
+
+    //when click event open popup edit 
+    HandleEditPopupClick = (event) => {
+      debugger;
+      var order = { 
+        id:0,     
+        title:'',
+        Start:'',
+        End:'',
+        Label:'',
+        Value:0,
+        backgroundColor:'',
+        UpdateOrder:0 
+      };
+      order.id = event.event._def.publicId;
+      order.title = event.event.title;
+      order.Start = this.FormatDate(event.event._instance.range.start);
+      order.End =this.FormatDate(event.event._instance.range.end);
+      order.Label  = event.event._def.extendedProps.label;
+      order.Value =  event.event._def.extendedProps.value;
+      order.backgroundColor = event.event._def.ui.backgroundColor;
+
+      this.props.SetEditOrder({
+        ...EditOrder,
+        'id': order.id ,
+        'title':  order.title ,
+        'Start' :order.Start,
+        'End': order.End,
+        'Label': order.Label,
+        'Value':order.Value,
+        'backgroundColor':  order.backgroundColor
+       });
       this.props.dispatch(PopupEditorderCalendar(true));
-  }
+    }
 }
 
 

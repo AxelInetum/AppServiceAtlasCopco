@@ -20,7 +20,6 @@ const DeleteTruck = () => {
     }
     async function Delete()
     {
-        debugger;
         dispatch(DeleteTrucks(idTrucksDeleted,{t}));                 
     }
     return (

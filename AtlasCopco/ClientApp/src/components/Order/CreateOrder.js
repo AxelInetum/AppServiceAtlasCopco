@@ -17,14 +17,14 @@ const CreateOrder = ({showCreatePopup}) => {
         Start:'',
         End:'',
         Value:0,
-        createdOrder:0
+        createdOrder:0,
+        backgroundColor:''
     });
-    const [startDateStart, setStartDateStart] = useState(new Date());  
-    const [startDateEnd, setStartDateEnd] = useState(new Date());  
+    const [startDateStart, setStartDateStart] = useState();  
+    const [startDateEnd, setStartDateEnd] = useState();  
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
     const OnChange = e => 
     {
-        debugger;
         SetOrder({
             ...CreateOrder,
             [e.target.name] : e.target.value
@@ -53,13 +53,19 @@ const CreateOrder = ({showCreatePopup}) => {
             Alert(t('camposobligatorios'),t('nosehainsertado'),"error");
         }
         else
-        {      
-            CreateOrder.Start = startDateStart //'06-09-2022 12:52:18.000';
-            CreateOrder.End = startDateEnd //'07-09-2022 12:52:18.000';
-            debugger;
+        {    
+            CreateOrder.Start = FormatDate(startDateStart); 
+            CreateOrder.End =  FormatDate(startDateEnd);
+            CreateOrder.backgroundColor =  'red';
             dispatch(CreateOrders(CreateOrder,{t}));                                             
         }    
     }
+   
+    function FormatDate(date)
+    {
+        return date.getFullYear()  + '-' +  (date.getDate() < 10 ? '0' + date.getDate():date.getDate()) + '-'+ ((date.getMonth()+1) < 10 ? '0' + (date.getMonth()+1):(date.getMonth()+1)) + ' ' + (date.getHours() < 10 ? '0' + date.getHours():date.getHours())  + ':' +  (date.getMinutes() < 10 ? '0' + date.getMinutes():date.getMinutes());
+    }
+   
     return (
         <Modal isOpen={showCreatePopup} fade={false} style={modalStyle}>
         <ModalHeader ><a class="mover" onClick={() => ClosePopup()}>x</a></ModalHeader>
@@ -85,16 +91,19 @@ const CreateOrder = ({showCreatePopup}) => {
                         <label>{t('fechaInicio')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy HH:mm"
+                            timeFormat="HH:mm"
                             timeIntervals={15}
                             selected={startDateStart} 
-                            onChange={date => setStartDateStart(date)} />
+                            onChange={date => setStartDateStart(date)} 
+                            />
                     </div>
                     <div className="campo-form">
                         <label>{t('fechaFin')}: </label>
                         <DatePicker 
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy HH:mm"
+                            timeFormat="HH:mm"
                             timeIntervals={15}
                             selected={startDateEnd} 
                             onChange={date => setStartDateEnd(date)} />

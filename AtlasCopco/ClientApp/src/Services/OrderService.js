@@ -8,11 +8,9 @@ class OrderService {
   user_token = localStorage.getItem("token");
 
   getOrderList = async () => {
-    debugger;
     return await axios
        .get(this.base_url , { headers: { Authorization: `Bearer ${this.user_token}` } })
       .then(response => {
-        debugger;
         return response.data;
       })
       .catch(function (error) {
@@ -21,11 +19,9 @@ class OrderService {
   };
 
   getOrderTypes = async () => {
-    debugger;
     return await axios
        .get(this.base_url+'/types' , { headers: { Authorization: `Bearer ${this.user_token}` } })
       .then(response => {
-        debugger;
         return response.data;
       })
       .catch(function (error) {
@@ -35,7 +31,6 @@ class OrderService {
 
 
   createOrder = async (orderSelected) => {
-    debugger;
     console.log(orderSelected);
     return await axios
        .post(this.base_url, orderSelected,{ headers: { Authorization: `Bearer ${this.user_token}` } })
@@ -48,8 +43,6 @@ class OrderService {
   };
 
   updateOrder = async (OrderSelected) => {
-    debugger;
-
     return await axios
        .put(this.base_url, OrderSelected,{ headers: { Authorization: `Bearer ${this.user_token}` } })
       .then(response => {

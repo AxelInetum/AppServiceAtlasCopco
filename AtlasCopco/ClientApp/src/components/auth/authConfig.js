@@ -11,10 +11,15 @@ import { LogLevel } from "@azure/msal-browser";
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md 
  */
 export const msalConfig = {
-    auth: {
 /*
 antigua 
         clientId: "dc90d8cc-8ed1-4b93-8378-58e2282a35eb", // This is the ONLY mandatory field that you need to supply.
+        authority: "https://login.microsoftonline.com/c1697c24-bf3c-4d75-992e-e39eb31dab6d", // Defaults to "https://login.microsoftonline.com/common"
+*/
+
+/*
+antiguanuevalomap2
+        clientId: "3481eaaa-13ff-4877-a759-817a3239bac9", // This is the ONLY mandatory field that you need to supply.
         authority: "https://login.microsoftonline.com/c1697c24-bf3c-4d75-992e-e39eb31dab6d", // Defaults to "https://login.microsoftonline.com/common"
 */
 
@@ -23,16 +28,13 @@ nueva
         clientId: "1e0a3dc8-f206-4b6a-9099-ff6ca5d8b867", // This is the ONLY mandatory field that you need to supply.
         authority: "https://login.microsoftonline.com/556e6b1f-b49d-4278-8baf-db06eeefc8e9", // Defaults to "https://login.microsoftonline.com/common"
 */
-
-
-        clientId: "dc90d8cc-8ed1-4b93-8378-58e2282a35eb", // This is the ONLY mandatory field that you need to supply.
-        authority: "https://login.microsoftonline.com/c1697c24-bf3c-4d75-992e-e39eb31dab6d", // Defaults to "https://login.microsoftonline.com/common"
-        redirectUri: "/MenuInicial", // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
-        postLogoutRedirectUri: "/", // Indicates the page to navigate after logout.
-        navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
+    auth: {
+        clientId: "2fcdf4c3-bafa-4415-b28a-acd87a6fba3f",
+        authority: "https://login.microsoftonline.com/556e6b1f-b49d-4278-8baf-db06eeefc8e9",
+        redirectUri: "/MenuInicial"
     },
     cache: {
-        cacheLocation: "sessionStorage", // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
+        cacheLocation: "sessionStorage", // This configures where your cache will be stored
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
     },
     system: {
@@ -41,7 +43,6 @@ nueva
                 if (containsPii) {
                     return;
                 }
-                debugger;
                 switch (level) {
                     case LogLevel.Error:
                         console.error(message);

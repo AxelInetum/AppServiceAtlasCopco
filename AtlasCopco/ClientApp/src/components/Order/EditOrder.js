@@ -7,19 +7,27 @@ import {EditOrders,GetTypesOrders,PopupEditorderCalendar} from '../../actions/Or
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
+import moment from 'moment';
+import { format } from 'date-fns';
 
 
 const EditOrder = ({loadDatas,showEditPopup}) => {
     debugger;
     const dispatch = useDispatch();
     const { t} = useTranslation();
-
-    const [startDateStart, setStartDateStart] = useState(new Date());  
-    const [startDateEnd, setStartDateEnd] = useState(new Date()); 
- 
     const ListTipyesOrders = useSelector(state => state.OrdersReducer.ListTypesOrders); 
+    const [EditOrder,SetEditOrder] = useState({
+        id: 0,
+        title:'',
+        Start:'',
+        End:'',
+        UpdaterOrder:0,
+        Label: '',
+        Value:'',
+        backgroundColor:''
+    });
 
-    const modalStyle=
+   const modalStyle=
    {
         position:"absolute",
         top: '10%',
@@ -28,11 +36,28 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
     const ClosePopup=() => 
     {
         dispatch(PopupEditorderCalendar(false));
+    } 
+
+    const setStartDateStart = e => {
+        SetEditOrder({
+            ...EditOrder,
+            'Start' : e
+        })
+    }
+
+    const setStartDateEnd = e => {
+        SetEditOrder({
+            ...EditOrder,
+            'End' : e
+        })
     }
 
     const OnChange = e => 
     {
-        
+        SetEditOrder({
+            ...EditOrder,
+            [e.target.name] : e.target.value
+        })
     }
     const colourStyles = {
         control: styles => ({ ...styles, backgroundColor: 'white' }),
@@ -47,25 +72,66 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
       };
 
     const handleChange = e => {
-        loadDatas.value = e.value;
+        SetEditOrder({
+            ...EditOrder,
+            'Label': e.label
+            
+        })
+    
+        SetEditOrder({
+            ...EditOrder,
+            'Value' : e.value
+        })
     }
 
-    useEffect(() => {  
+    useEffect(() => { 
+
         dispatch(GetTypesOrders({t}));
       },[]);
 
-   
+      useEffect(() => { 
+        debugger;
+        EditOrder.id = loadDatas.id;
+        EditOrder.title= loadDatas.title;
+        EditOrder.Start= loadDatas.Start;
+        EditOrder.End= loadDatas.End;
+        EditOrder.UpdaterOrder= 0;
+        EditOrder.Label= loadDatas.Label;
+        EditOrder.Value= loadDatas.Value;
+        EditOrder.backgroundColor= loadDatas.backgroundColor;
+      },[loadDatas.id,loadDatas.Start,loadDatas.End]);
+
     const onSubmit = e =>
     { 
         e.preventDefault();
-        if(loadDatas.title.trim() === '' )
+        if(EditOrder.title.trim() === '' )
         {
             Alert(t('camposobligatorios') ,t('nosehainsertado'),"error");
         }
         else
-        {
-            dispatch(EditOrders(loadDatas,{t}));                               
+        {  
+            debugger;
+            dispatch(EditOrders(EditOrder,{t}));                               
         }
+    }
+
+    const FormatDate = (date) =>
+    {
+         debugger;
+         if (date != "" && date!= undefined)
+         {
+            var yearmonthday = (new Date(date)).toISOString().slice(0, 10).split("-");
+            var hourminutes =date.toGMTString().split(" ")[4].split(':');
+           
+            var year =parseInt(yearmonthday[0]);
+            var month = parseInt(yearmonthday[1])-1;
+            var day = parseInt(yearmonthday[2]);
+            var hour =parseInt(hourminutes[0]);
+            var minutes = parseInt(hourminutes[1]);
+            debugger;
+            var axel = new Date(year, month, day, hour, minutes );
+            return new Date(year, month, day, hour, minutes );
+         }
     }
      
     return (
@@ -85,34 +151,39 @@ const EditOrder = ({loadDatas,showEditPopup}) => {
                             name="title"
                             class="form-control"
                             placeholder={t('TuNombre')}
-                            value={loadDatas.title}
+                            value={EditOrder == undefined ? "" : EditOrder.title}
                             onChange={OnChange}
                         />
                     </div>
                     <div className="campo-form">
                         <label>{t('fechaInicio')}: </label>
                         <DatePicker 
+                            name='Start'
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss"
-                            timeIntervals={15}
-                            selected={loadDatas.Start} 
-                            onChange={date => setStartDateStart(date)} />
+                            dateFormat="dd/MM/yyyy HH:mm"
+                            timeFormat="HH:mm"
+                            timeIntervals={15} 
+                            tim                
+                            selected={EditOrder == undefined ? "" : EditOrder.Start}  
+                            onChange={setStartDateStart} />
                     </div>
                     <div className="campo-form">
                         <label>{t('fechaFin')}: </label>
                         <DatePicker 
+                            name='End'
                             showTimeSelect
-                            dateFormat="dd/MM/yyyy hh:mm:ss"
+                            dateFormat="dd/MM/yyyy HH:mm"
+                            timeFormat="HH:mm"
                             timeIntervals={15}
-                            selected={loadDatas.End} 
-                            onChange={date => setStartDateEnd(date)} />
-                    </div>   
+                            selected={EditOrder == undefined ? "" : EditOrder.End} 
+                            onChange={setStartDateEnd} />
+                    </div> 
                     <div className="campo-form">
                         <label>{t('tipopedido')}: </label>
                         <Select 
                         name='combovalue'
                         id='combovalue'
-                        defaultValue={{ label: loadDatas.Label, value: loadDatas.Value}}
+                        defaultValue={{ label: EditOrder == undefined ? "" : EditOrder.Label, value: EditOrder == undefined ? "" : EditOrder.Value}}
                         onChange={handleChange}
                         options={ListTipyesOrders} />
                     </div>   

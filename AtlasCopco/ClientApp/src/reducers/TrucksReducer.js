@@ -29,7 +29,6 @@ const initialState = {
 }
 
 export default function (state = initialState, action){
-    debugger;
     switch(action.type)
     {
          case SHOW_EDIT_POPUP_TRUCK:
@@ -93,13 +92,12 @@ export default function (state = initialState, action){
                     idTruckSelected: action.payload
                 }
         case UPDATE_LIST_TRUCKS_FILTER:
-            debugger;
             return {
                 ...state,
                 ListTrucks:action.payload
             }
             case UPDATE_OBJECT_FILTER_TRUCK:
-                debugger;
+
                 return {
                     // Copy the whole state
                     ...state,

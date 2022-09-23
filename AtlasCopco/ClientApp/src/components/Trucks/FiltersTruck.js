@@ -40,7 +40,6 @@ const FiltersTruck= () => {
 
     const OpenPopupFilter=() => 
     {
-        debugger;
         dispatch(PopupFilterTruck(true)); 
     } 
     return (

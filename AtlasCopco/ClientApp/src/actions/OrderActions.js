@@ -14,7 +14,6 @@ import Alert from '../components/Alert/Alert';
 
 
 export function GetlistOrders ({t}){
-    debugger;
     return async (dispatch) =>{                
          const p = Promise.resolve(new Orderservice().getOrderList());
          p.then(listOrders => {
@@ -36,11 +35,9 @@ export function GetlistOrders ({t}){
 
 
  export function GetTypesOrders ({t}){
-    debugger;
     return async (dispatch) =>{                
          const p = Promise.resolve(new Orderservice().getOrderTypes());
          p.then(listTypesOrders => {
-            debugger;
              if (listTypesOrders!=null)
              {
                  dispatch(getlistTypeOrders(listTypesOrders));
@@ -59,17 +56,17 @@ export function GetlistOrders ({t}){
 
  export function CreateOrders(Order,{t}){
     return async (dispatch) =>{  
-        debugger;  
          const p = Promise.resolve( new Orderservice ().createOrder(Order));
          p.then(response => {
              if (response.createdOrder >0 )
              {
-                Order.id = response.createOrder;
-                Order.start = '2022-09-09 14:09:10';
-                Order.end = '2022-09-09 14:09:10';
-                 dispatch(createOrder(Order));
-                 dispatch(popupCreateCalendar(false));
-                 Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
+                response.id = response.createdOrder;
+                response.start =  FormatDate(response.start);
+                response.end = FormatDate(response.end);
+                dispatch(createOrder(response));
+                dispatch(popupCreateCalendar(false));
+                dispatch(GetlistOrders(t));
+                Alert(t('pedidoCreado'),'El registro ha sido creado con exito.','success');
              }
              else{
                  Alert(t('nosehaeliminado'),t('contacteadministrador'),"error");
@@ -83,17 +80,46 @@ export function GetlistOrders ({t}){
      payload:order
  });
 
-
+ function FormatDate(date)
+ {  
+    return new Date(date.split('-')[0] + '-' + date.split('-')[2].split(" ")[0]   + '-' +  date.split('-')[1] + ' ' + date.split('-')[2].split(" ")[1]);    
+ }
  export function EditOrders(Order,{t}){
     debugger;
-    Order.title = Order.title + "s";
+
+    var order = { 
+        id:0,     
+        title:'',
+        Start:'',
+        End:'',
+        Label:'',
+        Value:0,
+        backgroundColor:'',
+        UpdateOrder:0 ,
+      };
+
+      order.id = Order.id;
+      order.title = Order.title;
+      order.Start = Order.Start;
+      order.End = Order.End;
+      order.UpdateOrder = 0;
+      order.Label  = Order.Label;
+      order.Value =  Order.Value;
+      order.backgroundColor = Order.backgroundColor; 
+
+
+      order.Start = order.Start.getDate() + '-' +  (order.Start.getMonth() +1) + '-' + order.Start.getFullYear() +  ' '  + order.Start.getHours() + ':' + order.Start.getMinutes();
+      order.End = order.End.getDate() + '-' +  (order.End.getMonth() +1) + '-' + order.End.getFullYear() +  ' '  + order.End.getHours() + ':' + order.End.getMinutes();
+
    return async (dispatch) =>{    
-        const p = Promise.resolve( new Orderservice().updateOrder(Order));
+        const p = Promise.resolve( new Orderservice().updateOrder(order));
         p.then(response => {
-            if (response)
+            if (response.updateOrder>0)
             {
-                dispatch(editOrder(Order));
+                debugger;
+                dispatch(editOrder(response));        
                 dispatch(popupEditorderCalendar(false));
+                dispatch(GetlistOrders(t));
                 Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
             }
             else{
@@ -110,7 +136,6 @@ const editOrder= order =>({
 });
 
 export function FilterOrdersByType(value,{t}){
-    debugger;
     return async (dispatch) =>{   
         dispatch(filterOrderByType(value));                            
     }
@@ -123,7 +148,6 @@ export function FilterOrdersByType(value,{t}){
 
 
  export function AllOrdersCalendar(){
-    debugger;
     return async (dispatch) =>{   
         dispatch(allOrdersCalendar());                            
     }
@@ -220,13 +244,11 @@ const getlistTrucks = listTrucks =>({
 });
 
 export function EditTrucks(TruckSelected,{t}){
-    debugger;
    return async (dispatch) =>{    
         const p = Promise.resolve( new TruckService().updateTruck(TruckSelected));
         p.then(response => {
             if (response)
             {
-                debugger;
                 dispatch(editTruck(TruckSelected));
                 Alert(t('actualizadocorrectamen'),t('registroactualizadocor'),'success'); 
             }
@@ -244,9 +266,7 @@ const editTruck = TruckSelected =>({
 });
 
 export function DeleteTrucks(id,{t}){
-    debugger;
     return async (dispatch) =>{   
-        debugger;   
          const p = Promise.resolve( new TruckService().deleteTruck(id));
          p.then(response => {
              if (response)
@@ -269,9 +289,7 @@ export function DeleteTrucks(id,{t}){
 
 
  export function CreateTruck(Truck,history,{t}){
-    debugger;
-    return async (dispatch) =>{   
-        debugger;   
+    return async (dispatch) =>{     
          const p = Promise.resolve( new TruckService().insertTruck(Truck));
          p.then(response => {
              if (response)

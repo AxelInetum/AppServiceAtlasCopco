@@ -11,7 +11,7 @@ namespace AtlasCopco.Interfaces
     public interface IOrderService
     {
         Task<CreateOrderDto> CreateOrder(CreateOrderDto createTruckdto);
-        Task<bool> UpdateOrder(UpdateOrderdto updateTruckdto);
+        Task<UpdateOrderdto> UpdateOrder(UpdateOrderdto updateOrderDto);
         Task<bool> DeleteOrder(int id);
         Task<List<OrderDatasDto>> GetListOrders();
 
