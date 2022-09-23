@@ -31,7 +31,7 @@ nueva
     auth: {
         clientId: "2fcdf4c3-bafa-4415-b28a-acd87a6fba3f",
         authority: "https://login.microsoftonline.com/556e6b1f-b49d-4278-8baf-db06eeefc8e9",
-        redirectUri: "http://localhost:3050"
+        redirectUri: "/MenuInicial"
     },
     cache: {
         cacheLocation: "sessionStorage", // This configures where your cache will be stored
